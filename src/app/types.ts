@@ -14,8 +14,10 @@ export interface DecisionRule {
 export interface SchemaField {
   name: string;
   type: 'str' | 'num' | 'int' | 'bool';
-  entity: 'User Context' | 'Transaction';
+  entity: string;
   description: string;
+  datasource?: string;
+  businessKey?: string;
 }
 
 export interface RuleCondition {
