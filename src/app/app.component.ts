@@ -10,6 +10,7 @@ import { RuleCanvasComponent } from './components/rule-canvas/rule-canvas.compon
 import { RuleConfigComponent } from './components/rule-config/rule-config.component';
 import { FunctionsComponent } from './components/functions/functions.component';
 import { HistoryLogsComponent } from './components/history-logs/history-logs.component';
+import { ShellComponent } from './components/validator/shell/shell.component';
 
 import {
   INITIAL_DECISION_RULES,
@@ -34,7 +35,8 @@ import { DecisionRule, SchemaField, CanvasNode, CanvasConnection } from './types
     RuleCanvasComponent,
     RuleConfigComponent,
     FunctionsComponent,
-    HistoryLogsComponent
+    HistoryLogsComponent,
+    ShellComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -88,6 +90,8 @@ export class AppComponent {
         if (this.rulesetsSubView === 'designer') return 'Rule Designer';
         if (this.rulesetsSubView === 'canvas') return 'Rule Orchestrator';
         return 'Rule Configuration';
+      case 'validator':
+        return 'Validator & Testing Studio';
       case 'functions':
         return 'Mathematical Functions';
       case 'history':
