@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -11,6 +11,7 @@ import { RuleConfigComponent } from './components/rule-config/rule-config.compon
 import { FunctionsComponent } from './components/functions/functions.component';
 import { HistoryLogsComponent } from './components/history-logs/history-logs.component';
 import { ShellComponent } from './components/validator/shell/shell.component';
+import { RuleStoreService } from './services/rule-store.service';
 
 import {
   INITIAL_DECISION_RULES,
@@ -73,6 +74,8 @@ export class AppComponent {
     this.triggerNotification(`Rules successfully compiled and published to ${this.activeNavGroup}!`);
   }
 
+  readonly store = inject(RuleStoreService);
+
   handleNewRule() {
     this.activeTab = 'rulesets';
     this.activeRuleType = 'general';
@@ -91,6 +94,14 @@ export class AppComponent {
         if (this.rulesetsSubView === 'canvas') return 'Rule Orchestrator';
         return 'Rule Configuration';
       case 'validator':
+        const sub = this.store.activeTab();
+        if (sub === 'overview') return 'Validator Studio — Dashboard';
+        if (sub === 'test-data') return 'Validator Studio — Test Workbench';
+        if (sub === 'generated') return 'Validator Studio — Generated Cases';
+        if (sub === 'test-runs') return 'Validator Studio — Rule Evaluation';
+        if (sub === 'coverage') return 'Validator Studio — Test Coverage';
+        if (sub === 'validate') return 'Validator Studio — Pre-flight Lint';
+        if (sub === 'library') return 'Validator Studio — Fixture Library';
         return 'Validator & Testing Studio';
       case 'functions':
         return 'Mathematical Functions';
