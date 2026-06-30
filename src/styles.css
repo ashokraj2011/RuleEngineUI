@@ -29,11 +29,88 @@
   --color-fidelty-blue: #1d3986;
   --color-surface-taupe: #F5F3F0;
   --color-border-subtle: #D1D1D1;
+
+  /* RuleValidator specific colors */
+  --color-fidelity-green-bright: #368727;
+  --color-neutral-55: #fafafa;
+  --color-neutral-150: #ececec;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-250: #d9d9d9;
+  --color-neutral-850: #1c1b1b;
+  --color-neutral-905: #111827;
 }
 
 @layer base {
   body {
     @apply bg-background text-on-surface font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  .animate-scale-up {
+    animation: scale-up 0.2s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .shadow-xs {
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.08);
+  }
+
+  .shadow-2xs {
+    box-shadow: 0 1px 1px rgb(15 23 42 / 0.06);
+  }
+
+  .shadow-card {
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 12px -2px rgb(15 23 42 / 0.06);
+  }
+
+  /* Subtle lift on interactive cards. */
+  .card-hover {
+    transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  }
+  .card-hover:hover {
+    box-shadow: 0 2px 4px rgb(15 23 42 / 0.06), 0 8px 24px -4px rgb(15 23 42 / 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 }
 
