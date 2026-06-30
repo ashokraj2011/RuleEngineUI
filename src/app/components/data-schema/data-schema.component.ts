@@ -306,11 +306,33 @@ export class DataSchemaComponent {
     return Array.from(set);
   }
 
+  async ngOnInit() {
+    try {
+      const res = await fetch('http://localhost:65421/api/glossary');
+      const list = await res.json();
+      if (list && list.length > 0) {
+        const fieldsFromDb: SchemaField[] = list.map((row: any) => ({
+          name: row.name,
+          type: row.type as any,
+          entity: row.entity,
+          description: row.description || '',
+          datasource: row.datasource,
+          businessKey: row.business_key || undefined
+        }));
+        // Overwrite initial state with db state
+        this.fields = fieldsFromDb;
+        this.fieldsChange.emit(this.fields);
+      }
+    } catch (err) {
+      console.error('Failed to load glossary from PostgreSQL:', err);
+    }
+  }
+
   getEntityFields(entity: string): SchemaField[] {
     return this.fields.filter(f => f.entity === entity);
   }
 
-  handleAddField() {
+  async handleAddField() {
     const name = this.newFieldName.trim().toLowerCase();
     if (!name) return;
 
@@ -337,6 +359,24 @@ export class DataSchemaComponent {
       datasource: this.newFieldDataSource
     };
 
+    // Save to PostgreSQL
+    try {
+      await fetch('http://localhost:65421/api/glossary', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: newField.name,
+          type: newField.type,
+          entity: newField.entity,
+          description: newField.description,
+          datasource: newField.datasource,
+          business_key: null
+        })
+      });
+    } catch (err) {
+      console.error('Failed to save glossary field to DB:', err);
+    }
+
     const updated = [...this.fields, newField];
     this.fieldsChange.emit(updated);
 
@@ -349,7 +389,16 @@ export class DataSchemaComponent {
     }
   }
 
-  handleDeleteField(name: string, entity: string) {
+  async handleDeleteField(name: string, entity: string) {
+    // Delete from PostgreSQL
+    try {
+      await fetch(`http://localhost:65421/api/glossary/${entity}/${name}`, {
+        method: 'DELETE'
+      });
+    } catch (err) {
+      console.error('Failed to delete glossary field from DB:', err);
+    }
+
     const updated = this.fields.filter(f => !(f.name === name && f.entity === entity));
     this.fieldsChange.emit(updated);
   }
@@ -409,7 +458,7 @@ export class DataSchemaComponent {
     };
   }
 
-  importGlossary() {
+  async importGlossary() {
     if (!this.uploadedGlossary) return;
 
     const newFields: SchemaField[] = [];
@@ -438,6 +487,26 @@ export class DataSchemaComponent {
         });
       }
     });
+
+    // Save each imported field to PostgreSQL
+    for (const field of newFields) {
+      try {
+        await fetch('http://localhost:65421/api/glossary', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: field.name,
+            type: field.type,
+            entity: field.entity,
+            description: field.description,
+            datasource: field.datasource,
+            business_key: field.businessKey || null
+          })
+        });
+      } catch (err) {
+        console.error('Failed to save imported field to DB:', err);
+      }
+    }
 
     // Merge with currently loaded list avoiding duplication
     const merged = [...this.fields];

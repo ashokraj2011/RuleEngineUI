@@ -81,9 +81,34 @@ const DEFAULT_SCHEDULE: ScheduleConfig = {
           <!-- Rule name -->
           <div class="flex items-center gap-2">
             <label class="text-xs font-semibold text-on-surface-variant whitespace-nowrap">Name</label>
-            <input [(ngModel)]="rule.name"
-              class="h-9 px-3 text-xs font-bold border border-outline-variant rounded-lg bg-white text-primary focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary w-48 transition-all"
-              placeholder="Rule name" />
+            <div class="relative flex items-center">
+              <input [(ngModel)]="rule.name"
+                class="h-9 pl-3 pr-8 text-xs font-bold border border-outline-variant rounded-lg bg-white text-primary focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary w-56 transition-all"
+                placeholder="Rule name" />
+              <button
+                type="button"
+                (click)="generateAIName()"
+                [disabled]="isGeneratingName"
+                class="absolute right-1 p-1.5 text-on-surface-variant hover:text-primary rounded-md hover:bg-surface-container transition-all cursor-pointer disabled:opacity-50 border-none bg-transparent"
+                title="Generate name with AI (LLM)"
+              >
+                <!-- Magic wand SVG -->
+                <svg *ngIf="!isGeneratingName" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.34 18.66a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.21 1.21 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/>
+                  <path d="m14 7 3 3"/>
+                  <path d="M5 6v4"/>
+                  <path d="M19 14v4"/>
+                  <path d="M10 2v2"/>
+                  <path d="M7 8H3"/>
+                  <path d="M21 16h-4"/>
+                  <path d="M11 3H9"/>
+                </svg>
+                <!-- Loading spinner SVG -->
+                <svg *ngIf="isGeneratingName" class="w-3.5 h-3.5 animate-spin text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-dasharray="32" stroke-linecap="round" fill="none"/>
+                </svg>
+              </button>
+            </div>
           </div>
 
           <!-- Description -->
@@ -647,7 +672,62 @@ export class RuleSetsComponent implements OnInit {
     }, null, 2);
   }
 
-  handleSave() {
-    console.log('Rule saved:', this.getJsonPreview());
+  isGeneratingName = false;
+
+  async generateAIName() {
+    this.isGeneratingName = true;
+    try {
+      const body = {
+        terms: this.rule.terms.map(t => ({
+          termType: t.termType,
+          ...(t.termType === 'general' ? {
+            operator:   t.operator,
+            conditions: t.conditions.map(c => ({ field: c.field, op: c.op, value: c.value }))
+          } : {
+            schedule: t.schedule
+          })
+        })),
+        operator: this.rule.operator
+      };
+
+      const res = await fetch('http://localhost:65421/api/generate-name', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      if (data && data.name) {
+        this.rule.name = data.name;
+      }
+    } catch (err) {
+      console.error('Failed to generate AI name:', err);
+    } finally {
+      this.isGeneratingName = false;
+    }
+  }
+
+  async handleSave() {
+    try {
+      const body = {
+        rule_id: 'rule_' + this.rule.name.toLowerCase().replace(/[^a-z0-9]/g, '_'),
+        name: this.rule.name,
+        description: this.rule.description,
+        team: this.rule.team,
+        terms: this.rule, // save the full rule configuration
+        is_active: this.rule.isActive
+      };
+
+      const res = await fetch('http://localhost:65421/api/rules', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const saved = await res.json();
+      console.log('Saved rule to PostgreSQL:', saved);
+      alert(`Rule "${this.rule.name}" successfully saved to PostgreSQL database!`);
+    } catch (err) {
+      console.error('Failed to save rule to PostgreSQL:', err);
+      alert('Failed to save rule to DB.');
+    }
   }
 }
