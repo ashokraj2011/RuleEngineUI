@@ -12,6 +12,7 @@ import { FunctionsComponent } from './components/functions/functions.component';
 import { HistoryLogsComponent } from './components/history-logs/history-logs.component';
 import { ShellComponent } from './components/validator/shell/shell.component';
 import { RuleStoreService } from './services/rule-store.service';
+import { RuleEngineService } from './services/rule-engine.service';
 
 import {
   INITIAL_DECISION_RULES,
@@ -75,6 +76,33 @@ export class AppComponent {
   }
 
   readonly store = inject(RuleStoreService);
+  readonly ruleEngine = inject(RuleEngineService);
+
+  async ngOnInit() {
+    try {
+      const res = await fetch('http://localhost:65421/api/glossary');
+      const list = await res.json();
+      if (list && list.length > 0) {
+        const fieldsFromDb: SchemaField[] = list.map((row: any) => ({
+          name: row.name,
+          type: row.type as any,
+          entity: row.entity,
+          description: row.description || '',
+          datasource: row.datasource,
+          businessKey: row.business_key || undefined
+        }));
+        this.schemaFields = fieldsFromDb;
+        this.ruleEngine.syncGlossary(this.schemaFields);
+      }
+    } catch (err) {
+      console.error('Failed to load glossary inside app component:', err);
+    }
+  }
+
+  handleFieldsChange(updatedFields: SchemaField[]) {
+    this.schemaFields = updatedFields;
+    this.ruleEngine.syncGlossary(updatedFields);
+  }
 
   handleNewRule() {
     this.activeTab = 'rulesets';

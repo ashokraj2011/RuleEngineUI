@@ -48,6 +48,14 @@ export class SchemaRegistry {
     for (const def of defs) this.byNamespace.set(def.namespace, def);
   }
 
+  registerNamespace(def: NamespaceDef) {
+    this.byNamespace.set(def.namespace, def);
+  }
+
+  clear() {
+    this.byNamespace.clear();
+  }
+
   hasNamespace(namespace: string): boolean {
     return this.byNamespace.has(namespace);
   }

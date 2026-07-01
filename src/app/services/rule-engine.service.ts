@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SchemaField } from '../types';
 import {
   ComparisonTerm,
   EvalResult,
@@ -21,6 +22,8 @@ import {
   isLogicalTerm,
   isRuleRefTerm,
   operatorDisplay,
+  AttrType,
+  NamespaceSource
 } from '../kernel';
 
 /**
@@ -35,6 +38,39 @@ export class RuleEngineService {
 
   /** The schema the kernel uses for typed coercion and linting. */
   readonly schema: SchemaRegistry = SAMPLE_SCHEMA;
+
+  syncGlossary(fields: SchemaField[]) {
+    if (!fields || fields.length === 0) return;
+
+    // Clear registry and rebuild to sync cleanly
+    this.schema.clear();
+
+    const groups = new Map<string, { source: NamespaceSource; attributes: Record<string, AttrType> }>();
+
+    fields.forEach(f => {
+      let kind: AttrType['kind'] = 'string';
+      if (f.type === 'int') kind = 'int';
+      else if (f.type === 'num') kind = 'number';
+      else if (f.type === 'bool') kind = 'bool';
+
+      const nsName = f.entity;
+      const source: NamespaceSource = f.datasource === 'session' ? 'session' : 'db';
+
+      if (!groups.has(nsName)) {
+        groups.set(nsName, { source, attributes: {} });
+      }
+      groups.get(nsName)!.attributes[f.name] = { kind };
+    });
+
+    groups.forEach((val, key) => {
+      this.schema.registerNamespace({
+        namespace: key,
+        source: val.source,
+        attributes: val.attributes
+      });
+    });
+    console.log('Synchronized Rule Validation schema registry with active glossary.');
+  }
 
   isSessionNamespace(namespace: string): boolean {
     if (this.schema.hasNamespace(namespace)) return this.schema.isSession(namespace);

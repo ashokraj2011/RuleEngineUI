@@ -114,7 +114,8 @@
     <div class="flex-1 overflow-hidden flex flex-col">
       <app-data-schema
         *ngIf="activeTab === 'schema'"
-        [(fields)]="schemaFields"
+        [fields]="schemaFields"
+        (fieldsChange)="handleFieldsChange($event)"
       ></app-data-schema>
 
       <ng-container *ngIf="activeTab === 'rulesets'">
