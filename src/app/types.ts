@@ -45,6 +45,7 @@ export interface CanvasNode {
   failSafe?: boolean;
   logic?: string;
   action?: string;
+  decisionLogic?: any;
 }
 
 export interface CanvasConnection {

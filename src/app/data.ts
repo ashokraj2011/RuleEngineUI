@@ -51,106 +51,145 @@ export const SCHEMA_FIELDS: SchemaField[] = [
 
 export const INITIAL_CANVAS_NODES: CanvasNode[] = [
   {
-    id: 'node-1',
+    id: 'tx-node-1',
     type: 'Start',
-    name: 'Transaction Received',
-    description: 'Trigger: Inbound Transaction Event',
-    x: 80,
+    name: 'Receive transactionList',
+    description: 'Trigger: Inbound transaction collection event',
+    x: 60,
     y: 240,
   },
   {
-    id: 'node-2',
-    type: 'DataLookup',
-    name: 'User Profile Lookup',
-    description: 'Fetch risk_score & account_age',
-    x: 340,
-    y: 200,
-    inputs: [
-      { key: 'Source Key', value: 'event.user_id' },
-      { key: 'Target Param', value: 'userId' },
-    ],
-    failSafe: true,
-  },
-  {
-    id: 'node-3',
+    id: 'tx-node-2',
     type: 'Decision',
-    name: 'High Risk Check',
-    description: 'IF risk_score > 80 OR amount > 10000',
-    x: 640,
-    y: 160,
+    name: 'Validate transactionList is not empty',
+    description: 'IF transactionList.length > 0',
+    x: 320,
+    y: 240,
     decisionLogic: {
       operator: 'AND',
       terms: [
         {
-          id: 'term-a',
-          operator: 'OR',
-          conditions: [
-            { id: 'cond-1', field: 'User.risk_score',       op: '>',  value: '80'    },
-            { id: 'cond-2', field: 'Transaction.amount_usd', op: '>',  value: '10000' },
-          ]
-        }
-      ]
-    }
-  } as any,
-  {
-    id: 'node-4',
-    type: 'Decision',
-    name: 'Velocity Check',
-    description: 'IF device_velocity_1h > 5',
-    x: 640,
-    y: 380,
-    decisionLogic: {
-      operator: 'AND',
-      terms: [
-        {
-          id: 'term-b',
+          id: 'term-validate',
           operator: 'AND',
           conditions: [
-            { id: 'cond-3', field: 'Transaction.device_velocity_1h', op: '>', value: '5' },
+            { id: 'cond-v1', field: 'session.transactionList_length', op: '>', value: '0' }
           ]
         }
       ]
-    }
-  } as any,
+    } as any
+  },
   {
-    id: 'node-5',
-    type: 'Route',
-    name: 'Decline',
-    description: 'Terminal: block transaction',
-    x: 960,
-    y: 100,
-    action: 'Decline Transaction',
-    actionReason: 'Critical Risk Detected',
-  } as any,
+    id: 'tx-node-3',
+    type: 'DataLookup',
+    name: 'Add original_sequence_number',
+    description: 'Attach index key tracking to each transaction',
+    x: 600,
+    y: 240,
+    inputs: [
+      { key: 'Sequence Index key', value: 'auto_increment' }
+    ]
+  },
   {
-    id: 'node-6',
-    type: 'Route',
-    name: 'Flag for Review',
-    description: 'Terminal: analyst queue',
-    x: 960,
-    y: 320,
-    action: 'Flag for Review',
-    actionReason: 'Elevated Velocity',
-  } as any,
+    id: 'tx-node-4',
+    type: 'DataLookup',
+    name: 'Derive selection_priority',
+    description: 'Map: In Progress -> 1, Under Review -> 2, Others -> 3',
+    x: 880,
+    y: 240,
+    inputs: [
+      { key: '1 (High Priority)', value: 'state == "In Progress"' },
+      { key: '2 (Medium Priority)', value: 'state == "Under Review"' },
+      { key: '3 (Low Priority)', value: 'state == "Others"' }
+    ]
+  },
   {
-    id: 'node-7',
+    id: 'tx-node-5',
+    type: 'DataLookup',
+    name: 'Group by selection_priority',
+    description: 'Partition list into priority categories',
+    x: 1160,
+    y: 240,
+  },
+  {
+    id: 'tx-node-6',
+    type: 'DataLookup',
+    name: 'Determine min priority',
+    description: 'selectedPriority = minimum(selection_priority)',
+    x: 1440,
+    y: 240,
+  },
+  {
+    id: 'tx-node-7',
+    type: 'DataLookup',
+    name: 'Filter candidateTransactions',
+    description: 'Keep transactions matching selectedPriority',
+    x: 1720,
+    y: 240,
+  },
+  {
+    id: 'tx-node-8',
+    type: 'Decision',
+    name: 'Check selectedPriority value',
+    description: 'IF selectedPriority in [1, 2]',
+    x: 2000,
+    y: 240,
+    decisionLogic: {
+      operator: 'AND',
+      terms: [
+        {
+          id: 'term-prio',
+          operator: 'OR',
+          conditions: [
+            { id: 'cond-p1', field: 'session.selectedPriority', op: '==', value: '1' },
+            { id: 'cond-p2', field: 'session.selectedPriority', op: '==', value: '2' }
+          ]
+        }
+      ]
+    } as any
+  },
+  {
+    id: 'tx-node-9',
+    type: 'DataLookup',
+    name: 'Tie breaker logic',
+    description: 'Sort desc by modified_date, created_at and asc by sequence_number',
+    x: 2280,
+    y: 380,
+    inputs: [
+      { key: 'Criterion 1', value: 'activity_last_modified_date desc' },
+      { key: 'Criterion 2', value: 'transaction_created_date desc' },
+      { key: 'Criterion 3', value: 'original_sequence_number asc' }
+    ]
+  },
+  {
+    id: 'tx-node-10',
     type: 'Route',
-    name: 'Approve',
-    description: 'Terminal: transaction approved',
-    x: 960,
-    y: 500,
-    action: 'Approve',
-    actionReason: 'No risk signals detected',
-  } as any,
+    name: 'Send selectedTransaction for enrichment',
+    description: 'Forward selected candidate record to enrichment pipe',
+    x: 2560,
+    y: 240,
+  },
+  {
+    id: 'tx-node-11',
+    type: 'Route',
+    name: 'Return selection reason',
+    description: 'Output audit details log for reference tracking',
+    x: 2840,
+    y: 240,
+  }
 ];
 
 export const INITIAL_CANVAS_CONNECTIONS: CanvasConnection[] = [
-  { fromNodeId: 'node-1', toNodeId: 'node-2',  label: ''    } as any,
-  { fromNodeId: 'node-2', toNodeId: 'node-3',  label: ''    } as any,
-  { fromNodeId: 'node-3', toNodeId: 'node-5',  label: 'YES' } as any,
-  { fromNodeId: 'node-3', toNodeId: 'node-4',  label: 'NO'  } as any,
-  { fromNodeId: 'node-4', toNodeId: 'node-6',  label: 'YES' } as any,
-  { fromNodeId: 'node-4', toNodeId: 'node-7',  label: 'NO'  } as any,
+  { fromNodeId: 'tx-node-1', toNodeId: 'tx-node-2', label: '' } as any,
+  { fromNodeId: 'tx-node-2', toNodeId: 'tx-node-3', label: 'YES' } as any,
+  { fromNodeId: 'tx-node-3', toNodeId: 'tx-node-4', label: '' } as any,
+  { fromNodeId: 'tx-node-4', toNodeId: 'tx-node-5', label: '' } as any,
+  { fromNodeId: 'tx-node-5', toNodeId: 'tx-node-6', label: '' } as any,
+  { fromNodeId: 'tx-node-6', toNodeId: 'tx-node-7', label: '' } as any,
+  { fromNodeId: 'tx-node-7', toNodeId: 'tx-node-8', label: '' } as any,
+  { fromNodeId: 'tx-node-8', toNodeId: 'tx-node-10', label: 'YES (prio 1/2)' } as any,
+  { fromNodeId: 'tx-node-8', toNodeId: 'tx-node-9', label: 'NO (prio 3)' } as any,
+  { fromNodeId: 'tx-node-9', toNodeId: 'tx-node-10', label: '' } as any,
+  { fromNodeId: 'tx-node-10', toNodeId: 'tx-node-11', label: '' } as any,
 ];
 
 export const EXECUTION_LOGS: ExecutionTraceLog[] = [
