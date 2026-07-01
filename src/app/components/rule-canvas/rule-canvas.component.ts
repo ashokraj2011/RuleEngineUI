@@ -33,6 +33,11 @@ interface ExtCanvasNode extends CanvasNode {
   actionReason?: string;
   decisionLogic?: DecisionLogic;
   portLabel?: string; // for Route nodes
+  inputSchema?: string;
+  outputSchema?: string;
+  selectionLogic?: string;
+  exitFlow?: boolean;
+  exitValue?: string;
 }
 
 interface ExtConnection extends CanvasConnection {
@@ -199,7 +204,8 @@ const NODE_HEIGHT = 100; // approx, used for port centre calc
             [style.top.px]="node.y"
             [ngClass]="{
               'border-indigo-500 ring-2 ring-indigo-100 shadow-lg scale-[1.02] z-20': node.id === selectedNodeId,
-              'border-border-subtle hover:border-indigo-400/50 hover:shadow-md z-10': node.id !== selectedNodeId
+              'border-red-500/80 ring-2 ring-red-100/50 shadow-md scale-[1.01] z-15': node.id !== selectedNodeId && node.exitFlow,
+              'border-border-subtle hover:border-indigo-400/50 hover:shadow-md z-10': node.id !== selectedNodeId && !node.exitFlow
             }"
             (mousedown)="onNodeMouseDown($event, node)"
             (click)="selectNode(node.id)"
@@ -208,6 +214,7 @@ const NODE_HEIGHT = 100; // approx, used for port centre calc
             <div class="flex items-center gap-2 px-4 py-2.5 rounded-t-[14px] border-b border-border-subtle" [ngClass]="getNodeHeaderBg(node.type)">
               <div [innerHTML]="getNodeIcon(node.type)" class="w-3.5 h-3.5 shrink-0"></div>
               <span class="font-bold text-xs truncate flex-1 tracking-tight">{{ node.name }}</span>
+              <span *ngIf="node.exitFlow" class="text-[8px] bg-red-100 text-red-800 border border-red-300 px-1.5 py-0.5 rounded font-extrabold shrink-0 animate-pulse">EXIT</span>
               <button
                 *ngIf="node.id !== 'start-fixed'"
                 (click)="$event.stopPropagation(); removeNode(node.id)"
@@ -235,6 +242,13 @@ const NODE_HEIGHT = 100; // approx, used for port centre calc
               <!-- DataLookup inputs summary -->
               <div *ngIf="node.type === 'DataLookup' && node.inputs?.length" class="mt-2 text-[10px] font-mono text-teal-800 bg-teal-500/[0.04] border border-teal-500/20 rounded-lg px-2.5 py-1 truncate">
                 {{ node.inputs![0].key }}: {{ node.inputs![0].value }}
+              </div>
+
+              <!-- Generic contract summary badges -->
+              <div *ngIf="node.inputSchema || node.outputSchema || node.selectionLogic" class="mt-2.5 flex items-center gap-1.5 flex-wrap">
+                <span *ngIf="node.inputSchema" class="text-[8px] bg-indigo-50 text-indigo-700 border border-indigo-200 px-1 rounded font-mono" title="Input Schema/Contract">In: {{ node.inputSchema.split(':')[0] }}</span>
+                <span *ngIf="node.outputSchema" class="text-[8px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1 rounded font-mono" title="Output Schema/Contract">Out: {{ node.outputSchema.split(':')[0] }}</span>
+                <span *ngIf="node.selectionLogic" class="text-[8px] bg-gray-50 text-gray-700 border border-gray-200 px-1 rounded font-mono truncate max-w-[150px]" [title]="node.selectionLogic">Select: {{ node.selectionLogic }}</span>
               </div>
             </div>
 
@@ -468,6 +482,51 @@ const NODE_HEIGHT = 100; // approx, used for port centre calc
                   </div>
                 </label>
                 <p class="text-[10px] text-on-surface-variant mt-1.5 leading-snug">If lookup fails, route to fallback queue.</p>
+              </div>
+
+              <!-- ── GENERIC CONTRACT & SELECTION LOGIC ── -->
+              <div class="border-t border-border-subtle pt-4 space-y-3">
+                <h4 class="text-[11px] font-extrabold text-indigo-700 uppercase tracking-wider">Schema & Exit Contract</h4>
+                
+                <div>
+                  <label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Input Contract</label>
+                  <input type="text" [ngModel]="node.inputSchema" (ngModelChange)="updateNodeProp('inputSchema', $event)"
+                    placeholder="e.g. transactionList: Transaction[]"
+                    class="w-full bg-white border border-border-subtle rounded-lg px-3 py-1.5 text-xs focus:border-indigo-400 outline-none font-mono" />
+                </div>
+
+                <div>
+                  <label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Output Contract</label>
+                  <input type="text" [ngModel]="node.outputSchema" (ngModelChange)="updateNodeProp('outputSchema', $event)"
+                    placeholder="e.g. selectedTx: Transaction"
+                    class="w-full bg-white border border-border-subtle rounded-lg px-3 py-1.5 text-xs focus:border-indigo-400 outline-none font-mono" />
+                </div>
+
+                <div>
+                  <label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Post-Execution Data Selection</label>
+                  <textarea [ngModel]="node.selectionLogic" (ngModelChange)="updateNodeProp('selectionLogic', $event)"
+                    placeholder="e.g. maxBy(candidates, activity_last_modified_date)"
+                    rows="3"
+                    class="w-full bg-white border border-border-subtle rounded-lg p-2.5 text-xs focus:border-indigo-400 outline-none font-mono resize-none"></textarea>
+                </div>
+
+                <div class="pt-1">
+                  <label class="flex items-center justify-between cursor-pointer">
+                    <span class="text-xs font-semibold text-red-700">Exit / Terminate Flow</span>
+                    <div class="relative">
+                      <input type="checkbox" [ngModel]="node.exitFlow ?? false" (ngModelChange)="updateNodeProp('exitFlow', $event)" class="sr-only peer" />
+                      <div class="w-9 h-5 bg-outline-variant rounded-full peer peer-checked:bg-red-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-full"></div>
+                    </div>
+                  </label>
+                  <p class="text-[9px] text-on-surface-variant mt-1 leading-snug">If enabled, halts execution and outputs final payload results.</p>
+                </div>
+
+                <div *ngIf="node.exitFlow" class="animate-fade-in">
+                  <label class="block text-[10px] font-bold text-red-700 uppercase tracking-wider mb-1">Exit Output Value</label>
+                  <input type="text" [ngModel]="node.exitValue" (ngModelChange)="updateNodeProp('exitValue', $event)"
+                    placeholder="e.g. selectedTransaction"
+                    class="w-full bg-white border border-red-300 rounded-lg px-3 py-1.5 text-xs focus:border-red-500 outline-none font-mono" />
+                </div>
               </div>
 
               <!-- Delete node -->
@@ -887,7 +946,12 @@ export class RuleCanvasComponent implements OnInit {
       name: this.flowName,
       nodes: this.nodes.map(n => ({
         id: n.id, type: n.type, name: n.name,
+        description: n.description,
         position: { x: Math.round(n.x), y: Math.round(n.y) },
+        ...(n.inputSchema ? { inputSchema: n.inputSchema } : {}),
+        ...(n.outputSchema ? { outputSchema: n.outputSchema } : {}),
+        ...(n.selectionLogic ? { selectionLogic: n.selectionLogic } : {}),
+        ...(n.exitFlow ? { exitFlow: n.exitFlow, exitValue: n.exitValue } : {}),
         ...(n.decisionLogic ? { decisionLogic: n.decisionLogic } : {}),
         ...(n.action        ? { action: n.action, reason: n.actionReason } : {}),
       })),

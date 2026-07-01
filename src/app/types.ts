@@ -46,6 +46,11 @@ export interface CanvasNode {
   logic?: string;
   action?: string;
   decisionLogic?: any;
+  inputSchema?: string;
+  outputSchema?: string;
+  selectionLogic?: string;
+  exitFlow?: boolean;
+  exitValue?: string;
 }
 
 export interface CanvasConnection {

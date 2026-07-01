@@ -57,6 +57,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Trigger: Inbound transaction collection event',
     x: 60,
     y: 240,
+    inputSchema: 'transactionList: Transaction[]',
+    outputSchema: 'transactionList: Transaction[]'
   },
   {
     id: 'tx-node-2',
@@ -65,6 +67,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'IF transactionList.length > 0',
     x: 320,
     y: 240,
+    inputSchema: 'transactionList: Transaction[]',
+    outputSchema: 'transactionList: Transaction[]',
     decisionLogic: {
       operator: 'AND',
       terms: [
@@ -85,6 +89,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Attach index key tracking to each transaction',
     x: 600,
     y: 240,
+    inputSchema: 'transactionList: Transaction[]',
+    outputSchema: 'transactionList: (Transaction & {original_sequence_number: number})[]',
     inputs: [
       { key: 'Sequence Index key', value: 'auto_increment' }
     ]
@@ -96,6 +102,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Map: In Progress -> 1, Under Review -> 2, Others -> 3',
     x: 880,
     y: 240,
+    inputSchema: 'transactionList: (Transaction & {original_sequence_number: number})[]',
+    outputSchema: 'transactionList: (Transaction & {original_sequence_number: number, selection_priority: number})[]',
     inputs: [
       { key: '1 (High Priority)', value: 'state == "In Progress"' },
       { key: '2 (Medium Priority)', value: 'state == "Under Review"' },
@@ -109,6 +117,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Partition list into priority categories',
     x: 1160,
     y: 240,
+    inputSchema: 'transactionList: (Transaction & {original_sequence_number: number, selection_priority: number})[]',
+    outputSchema: 'grouped: Record<number, Transaction[]>'
   },
   {
     id: 'tx-node-6',
@@ -117,6 +127,9 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'selectedPriority = minimum(selection_priority)',
     x: 1440,
     y: 240,
+    inputSchema: 'grouped: Record<number, Transaction[]>',
+    outputSchema: 'selectedPriority: number',
+    selectionLogic: 'minimum(selection_priority)'
   },
   {
     id: 'tx-node-7',
@@ -125,6 +138,9 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Keep transactions matching selectedPriority',
     x: 1720,
     y: 240,
+    inputSchema: 'selectedPriority: number, grouped: Record<number, Transaction[]>',
+    outputSchema: 'candidateTransactions: Transaction[]',
+    selectionLogic: 'transactions where selection_priority == selectedPriority'
   },
   {
     id: 'tx-node-8',
@@ -133,6 +149,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'IF selectedPriority in [1, 2]',
     x: 2000,
     y: 240,
+    inputSchema: 'selectedPriority: number, candidateTransactions: Transaction[]',
+    outputSchema: 'candidateTransactions: Transaction[]',
     decisionLogic: {
       operator: 'AND',
       terms: [
@@ -154,6 +172,11 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Sort desc by modified_date, created_at and asc by sequence_number',
     x: 2280,
     y: 380,
+    inputSchema: 'candidateTransactions: Transaction[]',
+    outputSchema: 'selectedTransaction: Transaction',
+    selectionLogic: 'sort desc by activity_last_modified_date, transaction_created_date and asc by original_sequence_number',
+    exitFlow: true,
+    exitValue: 'selectedTransaction',
     inputs: [
       { key: 'Criterion 1', value: 'activity_last_modified_date desc' },
       { key: 'Criterion 2', value: 'transaction_created_date desc' },
@@ -167,6 +190,10 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Forward selected candidate record to enrichment pipe',
     x: 2560,
     y: 240,
+    inputSchema: 'selectedTransaction: Transaction',
+    outputSchema: 'enrichedTransaction: Transaction',
+    exitFlow: true,
+    exitValue: 'enrichedTransaction'
   },
   {
     id: 'tx-node-11',
@@ -175,6 +202,10 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     description: 'Output audit details log for reference tracking',
     x: 2840,
     y: 240,
+    inputSchema: 'enrichedTransaction: Transaction',
+    outputSchema: 'selectionReason: string',
+    exitFlow: true,
+    exitValue: '{ enrichedTransaction, reason: "Priority selection successfully enriched" }'
   }
 ];
 
