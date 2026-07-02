@@ -91,6 +91,21 @@ app.post('/api/rules', async (req, res) => {
        RETURNING *`,
       [rule_id, name, description, team, JSON.stringify(terms), is_active !== false]
     );
+
+    // Automatically upsert saved rule as a "rulemetadata" source attribute in the glossary
+    try {
+      await pool.query(
+        `INSERT INTO glossary (name, type, entity, description, datasource, business_key)
+         VALUES ($1, $2, $3, $4, $5, $6)
+         ON CONFLICT (name, entity) 
+         DO UPDATE SET description = $4, datasource = $5
+         RETURNING *`,
+        [rule_id, 'bool', 'rulemetadata', `Rule reference to evaluate sub-rule logic: ${name}.`, 'rulemetadata', null]
+      );
+    } catch (gErr) {
+      console.error('Failed to automatically register rule inside glossary:', gErr.message);
+    }
+
     res.json(result.rows[0]);
   } catch (err) {
     console.error('Error inserting rule:', err.message);

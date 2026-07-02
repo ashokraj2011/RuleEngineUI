@@ -45,6 +45,43 @@ const initDb = async () => {
       );
     `);
 
+    // Seed default glossary if empty
+    const countRes = await client.query('SELECT COUNT(*) FROM glossary');
+    if (parseInt(countRes.rows[0].count) === 0) {
+      console.log('Seeding default glossary parameters...');
+      
+      const seeds = [
+        // Session source parameters
+        ['device_id', 'str', 'session', 'Unique identifier of user device', 'session', null],
+        ['ip_address', 'str', 'session', 'Request IP address', 'session', null],
+        ['channel', 'str', 'session', 'Interaction channel (WEB, MOBILE)', 'session', null],
+        ['authenticated', 'bool', 'session', 'True if user authentication succeeded', 'session', null],
+        
+        // Database source parameters
+        ['age', 'int', 'customer', 'Customer age in years', 'database', 'customerID'],
+        ['country', 'str', 'customer', 'Country of residence', 'database', 'customerID'],
+        ['tier', 'str', 'customer', 'Customer loyalty tier (GOLD, VIP)', 'database', 'customerID'],
+        ['balance', 'num', 'account', 'Active ledger account balance', 'database', 'accountID'],
+        
+        // API source parameters
+        ['verification_status', 'str', 'kyc_service', 'KYC compliance verification status', 'api', null],
+        ['risk_score', 'num', 'fraud_check', 'External credit score result', 'api', null],
+
+        // Rule Metadata (rules that can be used in other rules)
+        ['rule_fraud_prevention_alpha', 'bool', 'rulemetadata', 'Sub-rule checking high-risk flags', 'rulemetadata', null],
+        ['rule_vip_loyalty_eligibility', 'bool', 'rulemetadata', 'Sub-rule checking VIP qualification', 'rulemetadata', null]
+      ];
+
+      for (const s of seeds) {
+        await client.query(
+          `INSERT INTO glossary (name, type, entity, description, datasource, business_key)
+           VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING`,
+          s
+        );
+      }
+      console.log('Successfully seeded default glossary.');
+    }
+
     console.log('PostgreSQL schema migration completed successfully.');
   } catch (err) {
     console.error('Error migrating PostgreSQL schema:', err.message);
