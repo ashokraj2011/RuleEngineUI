@@ -104,6 +104,10 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     y: 240,
     inputSchema: 'transactionList: (Transaction & {original_sequence_number: number})[]',
     outputSchema: 'transactionList: (Transaction & {original_sequence_number: number, selection_priority: number})[]',
+    transformFunction: 'in_array',
+    transformArguments: 'state, ["In Progress", "Under Review"]',
+    transformTargetVariable: 'is_high_priority_state',
+    evaluationContext: 'chained',
     inputs: [
       { key: '1 (High Priority)', value: 'state == "In Progress"' },
       { key: '2 (Medium Priority)', value: 'state == "Under Review"' },
@@ -118,7 +122,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     x: 1160,
     y: 240,
     inputSchema: 'transactionList: (Transaction & {original_sequence_number: number, selection_priority: number})[]',
-    outputSchema: 'grouped: Record<number, Transaction[]>'
+    outputSchema: 'grouped: Record<number, Transaction[]>',
+    evaluationContext: 'chained'
   },
   {
     id: 'tx-node-6',
@@ -129,7 +134,11 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     y: 240,
     inputSchema: 'grouped: Record<number, Transaction[]>',
     outputSchema: 'selectedPriority: number',
-    selectionLogic: 'minimum(selection_priority)'
+    transformFunction: 'min',
+    transformArguments: 'grouped_list, selection_priority',
+    transformTargetVariable: 'selectedPriority',
+    selectionLogic: 'minimum(selection_priority)',
+    evaluationContext: 'chained'
   },
   {
     id: 'tx-node-7',
@@ -140,7 +149,8 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     y: 240,
     inputSchema: 'selectedPriority: number, grouped: Record<number, Transaction[]>',
     outputSchema: 'candidateTransactions: Transaction[]',
-    selectionLogic: 'transactions where selection_priority == selectedPriority'
+    selectionLogic: 'transactions where selection_priority == selectedPriority',
+    evaluationContext: 'chained'
   },
   {
     id: 'tx-node-8',
@@ -151,6 +161,7 @@ export const INITIAL_CANVAS_NODES: CanvasNode[] = [
     y: 240,
     inputSchema: 'selectedPriority: number, candidateTransactions: Transaction[]',
     outputSchema: 'candidateTransactions: Transaction[]',
+    evaluationContext: 'source',
     decisionLogic: {
       operator: 'AND',
       terms: [

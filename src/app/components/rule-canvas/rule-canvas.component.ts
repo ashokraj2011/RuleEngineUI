@@ -38,6 +38,10 @@ interface ExtCanvasNode extends CanvasNode {
   selectionLogic?: string;
   exitFlow?: boolean;
   exitValue?: string;
+  transformFunction?: string;
+  transformArguments?: string;
+  transformTargetVariable?: string;
+  evaluationContext?: 'chained' | 'source';
 }
 
 interface ExtConnection extends CanvasConnection {
@@ -54,6 +58,17 @@ const OP_OPTIONS = ['>', '<', '>=', '<=', '==', '!=', 'in', 'not_in', 'contains'
 const ROUTE_ACTIONS = [
   'Approve', 'Decline Transaction', 'Flag for Review',
   'Route to Analyst', 'Send Alert', 'Trigger Webhook',
+];
+const FUNCTION_OPTIONS = [
+  { id: '', name: '— Select transformation function —' },
+  { id: 'is_between', name: 'IS_BETWEEN(target_date, start_date, end_date)' },
+  { id: 'equals', name: 'EQUALS(attribute, value)' },
+  { id: 'in_array', name: 'IN_ARRAY(target, [list_values])' },
+  { id: 'sum', name: 'SUM(list, field)' },
+  { id: 'avg', name: 'AVG(list, field)' },
+  { id: 'count', name: 'COUNT(list)' },
+  { id: 'min', name: 'MIN(list, field)' },
+  { id: 'max', name: 'MAX(list, field)' },
 ];
 const NODE_WIDTH  = 224; // px — must stay in sync with w-56 (14rem = 224px)
 const NODE_HEIGHT = 100; // approx, used for port centre calc
@@ -510,6 +525,57 @@ const NODE_HEIGHT = 100; // approx, used for port centre calc
                     class="w-full bg-white border border-border-subtle rounded-lg p-2.5 text-xs focus:border-indigo-400 outline-none font-mono resize-none"></textarea>
                 </div>
 
+                <!-- Data Transformation Config -->
+                <div class="border-t border-border-subtle pt-3 space-y-2">
+                  <label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Data Transformation</label>
+                  <select [ngModel]="node.transformFunction" (ngModelChange)="updateNodeProp('transformFunction', $event)"
+                    class="w-full h-8 text-xs border border-border-subtle rounded-lg bg-white px-2 cursor-pointer focus:border-indigo-400 outline-none">
+                    <option *ngFor="let fn of functionOptions" [value]="fn.id">{{ fn.name }}</option>
+                  </select>
+
+                  <div *ngIf="node.transformFunction" class="space-y-2 animate-fade-in">
+                    <div>
+                      <label class="block text-[9px] font-bold text-on-surface-variant uppercase tracking-wider">Arguments (comma-separated)</label>
+                      <input type="text" [ngModel]="node.transformArguments" (ngModelChange)="updateNodeProp('transformArguments', $event)"
+                        placeholder="e.g. transactions, amount_usd"
+                        class="w-full bg-white border border-border-subtle rounded-lg px-2.5 py-1 text-xs focus:border-indigo-400 outline-none font-mono" />
+                    </div>
+                    <div>
+                      <label class="block text-[9px] font-bold text-on-surface-variant uppercase tracking-wider">Save Target Variable</label>
+                      <input type="text" [ngModel]="node.transformTargetVariable" (ngModelChange)="updateNodeProp('transformTargetVariable', $event)"
+                        placeholder="e.g. derived_sum"
+                        class="w-full bg-white border border-border-subtle rounded-lg px-2.5 py-1 text-xs focus:border-indigo-400 outline-none font-mono" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Next Step Evaluation Context Strategy Selection -->
+                <div class="border-t border-border-subtle pt-3">
+                  <label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-2">Next Step Evaluation Context</label>
+                  <div class="space-y-1.5">
+                    <label class="flex items-center gap-2 text-xs text-on-surface cursor-pointer select-none">
+                      <input type="radio" name="eval_ctx_{{node.id}}" value="chained"
+                        [ngModel]="node.evaluationContext || 'chained'"
+                        (ngModelChange)="updateNodeProp('evaluationContext', 'chained')"
+                        class="accent-indigo-600" />
+                      <div>
+                        <span class="font-semibold block text-[11px] leading-tight">Use Transformed/Selected Data</span>
+                        <span class="text-[9px] text-on-surface-variant block mt-0.5 leading-none">Evaluate terms on output variables from previous step</span>
+                      </div>
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-on-surface cursor-pointer select-none">
+                      <input type="radio" name="eval_ctx_{{node.id}}" value="source"
+                        [ngModel]="node.evaluationContext || 'chained'"
+                        (ngModelChange)="updateNodeProp('evaluationContext', 'source')"
+                        class="accent-indigo-600" />
+                      <div>
+                        <span class="font-semibold block text-[11px] leading-tight text-emerald-800">Fetch Fresh Data from Source</span>
+                        <span class="text-[9px] text-on-surface-variant block mt-0.5 leading-none">Query fresh backing parameters (database, API)</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
                 <div class="pt-1">
                   <label class="flex items-center justify-between cursor-pointer">
                     <span class="text-xs font-semibold text-red-700">Exit / Terminate Flow</span>
@@ -629,6 +695,7 @@ export class RuleCanvasComponent implements OnInit {
   fieldOptions = FIELD_OPTIONS;
   opOptions    = OP_OPTIONS;
   routeActions = ROUTE_ACTIONS;
+  functionOptions = FUNCTION_OPTIONS;
 
   libraryNodes = [
     { type: 'Start',      label: 'Start Node',      hint: 'Entry trigger',         iconBg: 'bg-emerald-50', icon: `<svg class="w-4 h-4 text-emerald-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>` },
@@ -952,6 +1019,10 @@ export class RuleCanvasComponent implements OnInit {
         ...(n.outputSchema ? { outputSchema: n.outputSchema } : {}),
         ...(n.selectionLogic ? { selectionLogic: n.selectionLogic } : {}),
         ...(n.exitFlow ? { exitFlow: n.exitFlow, exitValue: n.exitValue } : {}),
+        ...(n.transformFunction ? { transformFunction: n.transformFunction } : {}),
+        ...(n.transformArguments ? { transformArguments: n.transformArguments } : {}),
+        ...(n.transformTargetVariable ? { transformTargetVariable: n.transformTargetVariable } : {}),
+        ...(n.evaluationContext ? { evaluationContext: n.evaluationContext } : {}),
         ...(n.decisionLogic ? { decisionLogic: n.decisionLogic } : {}),
         ...(n.action        ? { action: n.action, reason: n.actionReason } : {}),
       })),

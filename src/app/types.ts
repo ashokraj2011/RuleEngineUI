@@ -51,6 +51,10 @@ export interface CanvasNode {
   selectionLogic?: string;
   exitFlow?: boolean;
   exitValue?: string;
+  transformFunction?: string;
+  transformArguments?: string;
+  transformTargetVariable?: string;
+  evaluationContext?: 'chained' | 'source';
 }
 
 export interface CanvasConnection {
