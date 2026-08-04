@@ -73,10 +73,10 @@
     "business": {
       "path": "views/business.md",
       "brief_path": "views/business.brief.md",
-      "generated": false,
+      "generated": true,
       "bytes": {
-        "full": 0,
-        "brief": 0
+        "full": 2986,
+        "brief": 463
       },
       "load_when": [
         "business capability analysis",
