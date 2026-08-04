@@ -64,11 +64,15 @@ Completed the repository-world-model grounding work for this chore without chang
   "workId": "WRK-456",
   "workType": "chore",
   "phase": "verification",
-  "generation": 0,
+  "generation": 1,
   "status": "in_progress",
-  "generatedBy": null,
-  "generatedAgent": null,
-  "sourceCommit": null,
+  "generatedBy": {
+    "name": "Ashok Raj",
+    "email": "88361104+ashokraj2011@users.noreply.github.com",
+    "login": "ashokraj2011"
+  },
+  "generatedAgent": "developer",
+  "sourceCommit": "b7a710de717344cc90f1e07fb9b44f8f21b4db4a",
   "generationCommit": null,
   "publicationCommit": null,
   "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
@@ -80,14 +84,42 @@ Completed the repository-world-model grounding work for this chore without chang
   "inputs": {
     "generation": 1,
     "path": "singularity/work-items/WRK-456/context/inputs-verification-gen1.json",
-    "sha256": "936bd93d3a2e25096e633f0c577244a252481fe6d46667659c2c25d45247b9bc",
+    "sha256": "24f55dd4a2a213c65aee327420b4b199b424674172405e924f48ac3bcfada393",
     "renderedSha256": "d5fcdc4f67e78c78fa6489c3d633d377222d3201d06c27d19e11a146b3c8042b",
     "mode": "record"
   },
   "remoteAgent": null,
-  "telemetry": [],
+  "telemetry": [
+    {
+      "generation": 1,
+      "path": "singularity/work-items/WRK-456/telemetry/verification-gen1.json",
+      "sha256": "0eddc0c0954380c2afd5484996158176f3a0aade09688ef582a020e4addcb82b",
+      "status": "pending",
+      "models": [],
+      "providerCost": null
+    }
+  ],
   "remoteOutputs": [],
-  "usage": [],
+  "usage": [
+    {
+      "status": "unavailable",
+      "source": "copilot-otel-unavailable",
+      "provider": null,
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "totalTokens": null,
+      "providerCost": null,
+      "costStatus": "unavailable",
+      "spans": null,
+      "startedAt": "2026-08-04T15:37:06.173Z",
+      "completedAt": "2026-08-04T15:37:06.173Z",
+      "agent": "developer",
+      "generation": 1
+    }
+  ],
   "sequenceOverrides": [],
   "approvals": [],
   "selfApproval": false,
@@ -123,6 +155,8 @@ Maintain the repository-grounding workflow for this chore by producing an eviden
 
 ### Unresolved questions
 - The repository contains sample rules and glossary data but does not define a production approval workflow or authoritative policy source; that should be confirmed by the product owner before broader policy changes.
+
+<!-- singularity-flow:inputs:end -->
 
 <!-- singularity-flow:inputs:end -->
 

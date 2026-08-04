@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "workId": "WRK-456",
+  "phase": "verification",
+  "generation": 1,
+  "agent": "developer",
+  "modelCommit": "4911635a77e43f43ef18d3002303231d6309bd4e",
+  "matchedRules": 0,
+  "mode": "append",
+  "applied": false,
+  "depth": "standard",
+  "evidence": false,
+  "requiredViews": [
+    "testing",
+    "development",
+    "security",
+    "architecture"
+  ],
+  "task": "current objective",
+  "modelSourceTreeSha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "composedSourceTreeSha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "worldModelCommit": "4911635a77e43f43ef18d3002303231d6309bd4e",
+  "manifestSha256": "960c6ea032627775dcda20ccb997ce48e7ccfff73f6cfe31d0083d6d2f454dda",
+  "fresh": true,
+  "renderedSha256": "5c6570857c2a766833556bd736d06afb276a4d59d40c67a9fea930f0c0a67f95",
+  "promptPath": "singularity/work-items/WRK-456/context/prompts/verification-gen1.md",
+  "files": [
+    {
+      "path": "singularity/world-model/core/summary.md",
+      "sha256": "a67a57199b66a023732b7d37b1b0414062e734878f2132c21574968e1c9ed828",
+      "bytes": 7681,
+      "injectedBytes": 7681,
+      "truncated": false,
+      "category": "required",
+      "level": 0,
+      "reason": "shared repository core"
+    },
+    {
+      "path": "singularity/world-model/views/testing.md",
+      "sha256": "18d28aa07adada43f7537f053f7a4cb70b67371fb5fb52ae3e314089fc03974f",
+      "bytes": 1794,
+      "injectedBytes": 1794,
+      "truncated": false,
+      "category": "required",
+      "level": 1,
+      "reason": "verification view: testing"
+    },
+    {
+      "path": "singularity/world-model/views/development.md",
+      "sha256": "299acdc61484e368d3ed8c6fb62ee8a28f786d635c10e2d73bf428bb1c038c8e",
+      "bytes": 10655,
+      "injectedBytes": 10655,
+      "truncated": false,
+      "category": "required",
+      "level": 1,
+      "reason": "verification view: development"
+    },
+    {
+      "path": "singularity/world-model/views/security.md",
+      "sha256": "f70fa6d022de92ab46ffd11c2041a777987f370cab69ca04b1e6ef2452a26d1b",
+      "bytes": 1724,
+      "injectedBytes": 1724,
+      "truncated": false,
+      "category": "required",
+      "level": 1,
+      "reason": "verification view: security"
+    },
+    {
+      "path": "singularity/world-model/views/architecture.md",
+      "sha256": "31df33a2f7eb5c44820fd13613717bafac4d350016459a8a2a824948d192d088",
+      "bytes": 912,
+      "injectedBytes": 912,
+      "truncated": false,
+      "category": "required",
+      "level": 1,
+      "reason": "verification view: architecture"
+    },
+    {
+      "path": "singularity/world-model/task-guides/current-objective.md",
+      "sha256": "275b6f9e33429cd8d944b75e384c5e364e8723c7cb2b4814fc92b94f25578485",
+      "bytes": 4245,
+      "injectedBytes": 4245,
+      "truncated": false,
+      "category": "required",
+      "level": 2,
+      "reason": "task guide: current-objective"
+    },
+    {
+      "path": "singularity/world-model/evidence/evidence.jsonl",
+      "sha256": "fccc026fae90f8ae325008f496ce35df450b403e573e9a3a2162affe72c0b3f4",
+      "bytes": 4283,
+      "injectedBytes": 4283,
+      "truncated": false,
+      "category": "required",
+      "level": 3,
+      "reason": "evidence ledger"
+    }
+  ],
+  "injectedAt": "2026-08-04T15:36:22.874Z"
+}
