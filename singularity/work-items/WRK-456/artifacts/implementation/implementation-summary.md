@@ -30,11 +30,15 @@ Completed the repository-world-model grounding work for this chore without chang
   "workId": "WRK-456",
   "workType": "chore",
   "phase": "implementation",
-  "generation": 0,
+  "generation": 1,
   "status": "in_progress",
-  "generatedBy": null,
-  "generatedAgent": null,
-  "sourceCommit": null,
+  "generatedBy": {
+    "name": "Ashok Raj",
+    "email": "88361104+ashokraj2011@users.noreply.github.com",
+    "login": "ashokraj2011"
+  },
+  "generatedAgent": "product-owner",
+  "sourceCommit": "d21c80628f726c7f1a6711bc68195ffdd69de6c2",
   "generationCommit": null,
   "publicationCommit": null,
   "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
@@ -46,14 +50,42 @@ Completed the repository-world-model grounding work for this chore without chang
   "inputs": {
     "generation": 1,
     "path": "singularity/work-items/WRK-456/context/inputs-implementation-gen1.json",
-    "sha256": "48960788328ef576ecec0eec0de03301e305e290353ac23a46b20d5f49d324d6",
+    "sha256": "478623d3abd0b068e064efbcfed94b89887c3e9d8b3e0eb5f0345180244a7aa5",
     "renderedSha256": "5c28ebe1522d2c7924c0e48facc23fd5ff8a7cbc6c2b7225d5d3e0c6e681e640",
     "mode": "record"
   },
   "remoteAgent": null,
-  "telemetry": [],
+  "telemetry": [
+    {
+      "generation": 1,
+      "path": "singularity/work-items/WRK-456/telemetry/implementation-gen1.json",
+      "sha256": "5f9600426dd15f779a9ccad83582065590de1babac3ac51a2a4444c1d11a5402",
+      "status": "pending",
+      "models": [],
+      "providerCost": null
+    }
+  ],
   "remoteOutputs": [],
-  "usage": [],
+  "usage": [
+    {
+      "status": "unavailable",
+      "source": "copilot-otel-unavailable",
+      "provider": null,
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "totalTokens": null,
+      "providerCost": null,
+      "costStatus": "unavailable",
+      "spans": null,
+      "startedAt": "2026-08-04T15:25:15.954Z",
+      "completedAt": "2026-08-04T15:25:15.954Z",
+      "agent": "product-owner",
+      "generation": 1
+    }
+  ],
   "sequenceOverrides": [],
   "approvals": [],
   "selfApproval": false,
