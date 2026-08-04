@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "workId": "WRK-456",
+  "workType": "chore",
+  "phase": "implementation",
+  "generation": 1,
+  "mode": "record",
+  "recordedAt": "2026-08-04T15:25:15.894Z",
+  "renderedSha256": "5c28ebe1522d2c7924c0e48facc23fd5ff8a7cbc6c2b7225d5d3e0c6e681e640",
+  "warnings": [],
+  "inputs": [
+    {
+      "phase": "intake",
+      "path": "artifacts/intake/intake.md",
+      "optional": false,
+      "maxBytes": null,
+      "status": "captured",
+      "producerStatus": "approved",
+      "producerGeneration": 1,
+      "approvedAt": "2026-08-04T14:59:48.971Z",
+      "approvedBy": "ashokraj2011",
+      "approvedSha256": "8b0c405fd98770a4af7f249e9e4c513ac9e135082cf5770da91c697cf3dc7004",
+      "sha256": "8b0c405fd98770a4af7f249e9e4c513ac9e135082cf5770da91c697cf3dc7004",
+      "bytes": 4727,
+      "injectedBytes": 4727,
+      "truncated": false
+    }
+  ]
+}

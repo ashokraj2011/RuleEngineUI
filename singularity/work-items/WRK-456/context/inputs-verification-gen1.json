@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "workId": "WRK-456",
+  "workType": "chore",
+  "phase": "verification",
+  "generation": 1,
+  "mode": "record",
+  "recordedAt": "2026-08-04T15:37:06.068Z",
+  "renderedSha256": "d5fcdc4f67e78c78fa6489c3d633d377222d3201d06c27d19e11a146b3c8042b",
+  "warnings": [],
+  "inputs": [
+    {
+      "phase": "implementation",
+      "path": "artifacts/implementation/implementation-summary.md",
+      "optional": false,
+      "maxBytes": null,
+      "status": "captured",
+      "producerStatus": "approved",
+      "producerGeneration": 1,
+      "approvedAt": "2026-08-04T15:34:09.103Z",
+      "approvedBy": "ashokraj2011",
+      "approvedSha256": "f591539c257bf99f3cf0bac4aa49de1e456f385c85581421a1b0f60b2131e6d0",
+      "sha256": "f591539c257bf99f3cf0bac4aa49de1e456f385c85581421a1b0f60b2131e6d0",
+      "bytes": 6826,
+      "injectedBytes": 6826,
+      "truncated": false
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "workId": "WRK-456",
+  "epicId": null,
+  "planId": null,
+  "jiraIssueId": "WRK-456",
+  "initialJiraKey": null,
+  "currentJiraKey": null,
+  "canonicalBranch": "WRK-456",
+  "submittedBranch": "WRK-456",
+  "submissionCommit": "cb0989b7f010536fb14c853039569539f7a0b1be",
+  "sourceCommit": "cb0989b7f010536fb14c853039569539f7a0b1be",
+  "sourceTreeSha256": "sha256:36ca3342ff0e22b6742f976ccd3c963c43b54a48977fe5b6e8cda62b65bfd272",
+  "phase": "conformance",
+  "generation": 1,
+  "artifacts": [
+    {
+      "path": "singularity/work-items/WRK-456/artifacts/conformance/spec-code-comparison.md",
+      "kind": "conformance-report",
+      "sha256": "d55dc5cb9d6f0c437b3fa1eff5ef853fb677f3a6855ad9c5f1fb35347e1c0569",
+      "size": 28213
+    }
+  ],
+  "checks": [],
+  "usage": [
+    {
+      "status": "unavailable",
+      "source": "copilot-otel-unavailable",
+      "provider": null,
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "totalTokens": null,
+      "providerCost": null,
+      "costStatus": "unavailable",
+      "spans": null,
+      "startedAt": "2026-08-04T15:46:51.575Z",
+      "completedAt": "2026-08-04T15:46:51.575Z",
+      "agent": "qa",
+      "generation": 1
+    }
+  ],
+  "approvals": [],
+  "submittedAt": "2026-08-04T15:51:03.237Z",
+  "submittedBy": {
+    "name": "Ashok Raj",
+    "email": "88361104+ashokraj2011@users.noreply.github.com",
+    "login": "ashokraj2011"
+  },
+  "status": "awaiting_review",
+  "packetSha256": "11e99634e8d006512eaf5dee37ac3e6782126bb9de3b800a0de0c9ea117ed8c2"
+}

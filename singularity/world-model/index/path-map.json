@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-04T15:19:35Z",
+  "repository_commit": "b4e86974ed427e76afbbd98c7403339e34b6bee9",
+  "entries": [
+    {
+      "glob": "src/app/kernel/**",
+      "component_ids": [
+        "kernel-engine"
+      ],
+      "domains": [],
+      "views": [
+        "development"
+      ],
+      "symbols": [
+        "Evaluator",
+        "Linter",
+        "Synthesizer",
+        "computeCoverage"
+      ],
+      "tests": [
+        "src/app/kernel/kernel.spec.ts"
+      ],
+      "anchors": [
+        "dev.impact",
+        "dev.hotspots"
+      ],
+      "notes": "Changes here affect rule evaluation, linting, coverage, and synthesized test data."
+    },
+    {
+      "glob": "src/app/services/**",
+      "component_ids": [
+        "validator-studio",
+        "frontend-app"
+      ],
+      "domains": [],
+      "views": [
+        "development"
+      ],
+      "symbols": [
+        "RuleStoreService",
+        "RuleEngineService",
+        "LocalStoragePort"
+      ],
+      "tests": [
+        "src/app/kernel/kernel.spec.ts"
+      ],
+      "anchors": [
+        "dev.start",
+        "dev.impact"
+      ],
+      "notes": "Service-layer changes modify validator state, persistence, and the Angular facade over the kernel."
+    },
+    {
+      "glob": "src/app/components/rule-canvas/**",
+      "component_ids": [
+        "frontend-app"
+      ],
+      "domains": [],
+      "views": [
+        "development"
+      ],
+      "symbols": [
+        "RuleCanvasComponent"
+      ],
+      "tests": [],
+      "anchors": [
+        "dev.start",
+        "dev.hotspots"
+      ],
+      "notes": "Canvas-editor changes affect the visual flow designer and the node/edge model used by the UI."
+    },
+    {
+      "glob": "server/**",
+      "component_ids": [
+        "backend-service"
+      ],
+      "domains": [],
+      "views": [
+        "development"
+      ],
+      "symbols": [
+        "initDb",
+        "/api/rules",
+        "/api/glossary"
+      ],
+      "tests": [],
+      "anchors": [
+        "dev.start",
+        "dev.hotspots"
+      ],
+      "notes": "Server changes affect rule persistence, glossary seeding, and API behavior."
+    }
+  ],
+  "fallback": {
+    "views": [
+      "development"
+    ],
+    "anchors": [
+      "core.map"
+    ]
+  }
+}
