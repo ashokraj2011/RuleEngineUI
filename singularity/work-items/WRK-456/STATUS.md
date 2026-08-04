@@ -5,17 +5,19 @@
 - Capability: **ruleux** (`rule-ux`)
 - Capability map: `d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b`
 - Overall status: **in_progress**
-- Current phase: **intake**
+- Current phase: **implementation**
 
 | # | Phase | Governed agent | Status | Generation | Approvals | Tokens |
 |---:|---|---|---|---:|---:|---:|
-| 1 | Intake (`intake`) | product-owner | **awaiting_approval** | 1 | 0 | unavailable |
-| 2 | Implementation (`implementation`) | developer | **not_started** | 0 | 0 | unavailable |
+| 1 | Intake (`intake`) | product-owner | **approved** | 1 | 1 | unavailable |
+|  | ⚠ self-approval | Ashok Raj via product-approvers; agent product-owner | **warning** |  |  |  |
+| 2 | Implementation (`implementation`) | developer | **in_progress** | 0 | 0 | unavailable |
 | 3 | Verification (`verification`) | qa | **not_started** | 0 | 0 | unavailable |
 | 4 | Spec-to-code conformance (`conformance`) | qa | **not_started** | 0 | 0 | unavailable |
 
 ## Recent history
 
+- 2026-08-04T14:59:48.971Z — **phase_self_approved** (intake) by ashokraj2011 · governed agent product-owner: threshold reached; advanced to implementation
 - 2026-08-04T14:53:21.574Z — **phase_submitted** (intake) by ashokraj2011 · governed agent product-owner: 1 artifacts
 - 2026-08-04T14:51:15.450Z — **phase_generated** (intake) by ashokraj2011 · governed agent product-owner: generation 1
 - 2026-08-04T13:28:25.373Z — **work_started** (intake) by ashokraj2011 · governed agent product-owner: Created chore branch WRK-456
