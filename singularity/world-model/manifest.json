@@ -10,7 +10,8 @@
   "analysis_depth": "standard",
   "views_generated": [
     "development",
-    "testing"
+    "testing",
+    "security"
   ],
   "core": {
     "summary": "core/summary.md",
@@ -143,10 +144,10 @@
     "security": {
       "path": "views/security.md",
       "brief_path": "views/security.brief.md",
-      "generated": false,
+      "generated": true,
       "bytes": {
-        "full": 0,
-        "brief": 0
+        "full": 2207,
+        "brief": 322
       },
       "load_when": [
         "threat analysis",
