@@ -11,7 +11,8 @@
   "views_generated": [
     "development",
     "testing",
-    "security"
+    "security",
+    "architecture"
   ],
   "core": {
     "summary": "core/summary.md",
@@ -88,10 +89,10 @@
     "architecture": {
       "path": "views/architecture.md",
       "brief_path": "views/architecture.brief.md",
-      "generated": false,
+      "generated": true,
       "bytes": {
-        "full": 0,
-        "brief": 0
+        "full": 1529,
+        "brief": 308
       },
       "load_when": [
         "system design",
