@@ -1,108 +1,92 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-08-04T15:06:58Z",
+  "generated_at": "2026-08-04T15:13:27.439Z",
   "repository_commit": "b34c514287ef4436c14ab00b964f233759334871",
   "entries": [
     {
-      "glob": "src/app/components/{rule-sets,rule-canvas,rule-config}/**",
+      "glob": "src/app/kernel/**",
       "component_ids": [
-        "rule-authoring-ui"
+        "rule-kernel"
       ],
-      "domains": [
-        "rule-testing"
-      ],
+      "domains": [],
       "views": [
         "development"
       ],
       "symbols": [
-        "RuleSetsComponent",
-        "RuleCanvasComponent",
-        "RuleConfigComponent"
+        "RuleEngineService",
+        "SchemaRegistry",
+        "SAMPLE_SCHEMA"
       ],
       "tests": [
         "src/app/kernel/kernel.spec.ts"
       ],
       "anchors": [
-        "dev.structure",
-        "dev.flows",
-        "dev.impact"
+        "dev.impact",
+        "dev.hotspots"
       ],
-      "notes": "Grounding for rule-authoring UI changes and sub-view wiring."
+      "notes": "Rule semantics, linting, synthesis, and coverage all live in the kernel and should be reviewed together."
     },
     {
-      "glob": "src/app/components/validator/**",
+      "glob": "src/app/services/**",
       "component_ids": [
-        "validator-studio"
+        "frontend-app"
       ],
-      "domains": [
-        "rule-testing"
-      ],
+      "domains": [],
       "views": [
         "development"
       ],
       "symbols": [
-        "ShellComponent",
-        "OverviewTabComponent",
-        "ValidateTabComponent"
+        "RuleStoreService",
+        "RuleEngineService"
       ],
       "tests": [
         "src/app/kernel/kernel.spec.ts"
       ],
       "anchors": [
         "dev.start",
-        "dev.validation",
-        "dev.hotspots"
+        "dev.impact"
       ],
-      "notes": "Grounding for validator, generated cases, coverage, and evaluation changes."
+      "notes": "Service-layer changes affect the validator workflow and the Angular facade around the kernel."
     },
     {
-      "glob": "src/app/kernel/**",
+      "glob": "src/app/components/validator/**",
       "component_ids": [
-        "kernel"
+        "frontend-app"
       ],
-      "domains": [
-        "rule-testing"
-      ],
+      "domains": [],
       "views": [
         "development"
       ],
       "symbols": [
-        "Evaluator",
-        "Linter",
-        "Synthesizer",
-        "computeCoverage"
+        "ShellComponent"
       ],
       "tests": [
         "src/app/kernel/kernel.spec.ts"
       ],
       "anchors": [
-        "dev.facts",
-        "dev.hotspots",
+        "dev.start",
         "dev.impact"
       ],
-      "notes": "Grounding for semantic rule changes and coverage logic."
+      "notes": "Validator UI changes often require updates in the store and shell component wiring."
     },
     {
       "glob": "server/**",
       "component_ids": [
         "backend-api"
       ],
-      "domains": [
-        "rule-testing"
-      ],
+      "domains": [],
       "views": [
         "development"
       ],
       "symbols": [
-        "initDb",
-        "pool"
+        "initDb"
       ],
       "tests": [],
       "anchors": [
         "dev.config",
-        "dev.debug"
+        "dev.hotspots"
       ],
-      "notes": "Grounding for glossary, rules, and database-backed API behavior."
+      "notes": "Backend changes affect persistence initialization and the API contract used by the frontend."
     }
   ],
   "fallback": {

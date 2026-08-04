@@ -2,8 +2,8 @@
   "schema_version": "2.0",
   "repository_commit": "b34c514287ef4436c14ab00b964f233759334871",
   "repository_branch": "WRK-456",
-  "working_tree_clean": true,
-  "generated_at": "2026-08-04T15:01:55.534Z",
+  "working_tree_clean": false,
+  "generated_at": "2026-08-04T15:07:48.149Z",
   "generated_date": "4 August 2026",
   "builder_version": "2.0",
   "builder_prompt_sha256": "d607ed17ba7e0ad45acd142b62b57c32272e21dfec50866d4bee5105f2fd9169",
@@ -14,6 +14,7 @@
     "model": "core/model.json",
     "anchors": [
       "core.tldr",
+      "core.facts",
       "core.purpose",
       "core.type",
       "core.components",
@@ -24,11 +25,12 @@
       "core.risks",
       "core.unknowns",
       "core.freshness",
-      "core.routing"
+      "core.routing",
+      "core.brief"
     ],
     "bytes": {
-      "summary": 6369,
-      "brief": 1355
+      "summary": 6692,
+      "brief": 1248
     },
     "recommended_for_all_agents": true
   },
@@ -38,21 +40,25 @@
       "brief_path": "views/development.brief.md",
       "generated": true,
       "bytes": {
-        "full": 7993,
-        "brief": 1364
+        "full": 9183,
+        "brief": 1223
       },
       "anchors": [
         "dev.tldr",
         "dev.facts",
-        "dev.start",
-        "dev.structure",
+        "dev.setup",
+        "dev.tree",
+        "dev.symbols",
+        "dev.entrypoints",
         "dev.flows",
         "dev.config",
+        "dev.errors",
         "dev.impact",
-        "dev.debug",
-        "dev.validation",
+        "dev.debugging",
         "dev.hotspots",
-        "dev.limits"
+        "dev.start",
+        "dev.limits",
+        "dev.brief"
       ],
       "load_when": [
         "implementation",
@@ -124,24 +130,25 @@
   "phase_map": {
     "intake": {
       "views": [
-        "development"
+        "business"
       ],
       "tier": "brief"
     },
     "requirements": {
       "views": [
-        "development"
+        "business"
       ],
       "tier": "full"
     },
     "design": {
       "views": [
-        "development"
+        "architecture"
       ],
       "tier": "full"
     },
     "implementation-spec": {
       "views": [
+        "architecture",
         "development"
       ],
       "tier": "full"
@@ -154,13 +161,14 @@
     },
     "verification": {
       "views": [
-        "development"
+        "testing"
       ],
       "tier": "full"
     },
     "conformance": {
       "views": [
-        "development"
+        "testing",
+        "security"
       ],
       "tier": "brief"
     }
@@ -168,19 +176,20 @@
   "agent_map": {
     "product-owner": {
       "views": [
-        "development"
+        "business"
       ],
       "tier": "brief"
     },
     "business-analyst": {
       "views": [
-        "development"
+        "business"
       ],
-      "tier": "brief"
+      "tier": "full"
     },
     "architect": {
       "views": [
-        "development"
+        "architecture",
+        "security"
       ],
       "tier": "full"
     },
@@ -192,25 +201,25 @@
     },
     "qa": {
       "views": [
-        "development"
+        "testing"
       ],
       "tier": "full"
     },
     "security": {
       "views": [
-        "development"
+        "security"
       ],
-      "tier": "brief"
+      "tier": "full"
     },
     "operations": {
       "views": [
-        "development"
+        "operations"
       ],
-      "tier": "brief"
+      "tier": "full"
     },
     "delivery-manager": {
       "views": [
-        "development"
+        "release"
       ],
       "tier": "brief"
     }
@@ -218,35 +227,7 @@
   "path_index": {
     "path": "index/path-map.json"
   },
-  "domains": [
-    {
-      "id": "rule-testing",
-      "path": "domains/rule-testing.md",
-      "summary": "Rule authoring, execution, test case generation, and coverage for the validator studio.",
-      "relevant_views": [
-        "development"
-      ],
-      "keywords": [
-        "rule",
-        "validator",
-        "test",
-        "coverage"
-      ],
-      "anchors": [
-        "domain.rule-testing.tldr",
-        "domain.rule-testing.purpose",
-        "domain.rule-testing.terminology",
-        "domain.rule-testing.components",
-        "domain.rule-testing.workflows",
-        "domain.rule-testing.data",
-        "domain.rule-testing.integrations",
-        "domain.rule-testing.invariants",
-        "domain.rule-testing.tests",
-        "domain.rule-testing.risks",
-        "domain.rule-testing.unknowns"
-      ]
-    }
-  ],
+  "domains": [],
   "task_guides": [],
   "evidence": {
     "path": "evidence/evidence.jsonl",
@@ -257,14 +238,14 @@
       "agent_type": "business",
       "load": [
         "core/summary.brief.md",
-        "views/development.brief.md"
+        "views/business.md"
       ]
     },
     {
       "agent_type": "architect",
       "load": [
         "core/summary.brief.md",
-        "views/development.md"
+        "views/architecture.md"
       ]
     },
     {
@@ -278,14 +259,14 @@
       "agent_type": "tester",
       "load": [
         "core/summary.brief.md",
-        "views/development.md"
+        "views/testing.md"
       ]
     },
     {
       "agent_type": "release",
       "load": [
         "core/summary.brief.md",
-        "views/development.brief.md"
+        "views/release.md"
       ]
     }
   ],
@@ -300,28 +281,12 @@
     "deep_investigation": [
       "core/summary.md",
       "views/development.md",
-      "domains/rule-testing.md",
       "evidence/evidence.jsonl"
     ]
   },
-  "generated_files": [
-    "core/summary.md",
-    "core/summary.brief.md",
-    "core/model.json",
-    "views/development.md",
-    "views/development.brief.md",
-    "domains/rule-testing.md",
-    "evidence/evidence.jsonl",
-    "index/path-map.json",
-    "manifest.json"
-  ],
   "views_generated": [
     "development"
   ],
-  "bytes": {
-    "summary": 6322,
-    "brief": 1355
-  },
   "source_tree_sha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
   "generation": {
     "parallel": false,

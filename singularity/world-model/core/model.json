@@ -1,23 +1,22 @@
 {
   "schema_version": "2.0",
-  "generated_at": "2026-08-04T15:06:58Z",
-  "generated_date": "04 August 2026",
+  "generated_at": "2026-08-04T15:13:27.439Z",
+  "generated_date": "4 August 2026",
   "builder_version": "2.0",
   "builder_prompt_sha256": "unknown",
   "analysis_depth": "standard",
   "repository": {
     "name": "RuleEngineUI",
-    "root": "/private/var/folders/_j/yp8zv9w91rd44ymrzfpd_kcw0000gn/T/singularity-flow-world-model-s9kgKh/repository",
-    "branch": "unknown",
+    "root": "/private/var/folders/_j/yp8zv9w91rd44ymrzfpd_kcw0000gn/T/singularity-flow-world-model-PxavrO/repository",
+    "branch": "detached-HEAD",
     "commit": "b34c514287ef4436c14ab00b964f233759334871",
     "working_tree_clean": false,
-    "repository_kind": "mixed",
+    "repository_kind": "multi-service",
     "languages": [
       "TypeScript",
-      "HTML",
-      "CSS",
       "JavaScript",
-      "SQL"
+      "HTML",
+      "CSS"
     ],
     "package_roots": [
       ".",
@@ -25,170 +24,142 @@
     ]
   },
   "purpose": {
-    "summary": "A browser-based rule-authoring and validation studio for decision logic with a small backend API for glossary and rule persistence.",
+    "summary": "A browser-based rule-authoring and validation console for decision logic, backed by a small API for rule and glossary persistence.",
     "status": "observed",
     "confidence": "high",
     "evidence_ids": [
-      "ev-01",
-      "ev-02",
-      "ev-03"
+      "evidence:repo-stack",
+      "evidence:app-shell"
     ]
   },
   "components": [
     {
-      "id": "app-shell",
-      "name": "Angular application shell",
-      "kind": "application",
-      "purpose": "Hosts the main tabs and shared state for schema, rules, validator, history, and settings.",
+      "id": "frontend-app",
+      "name": "Angular rule-console",
+      "kind": "frontend",
+      "purpose": "Renders schema, rule, validator, and history workflows.",
       "paths": [
-        "src/app/app.component.ts"
+        "src/",
+        "src/app/"
       ],
       "depends_on": [
-        "rule-authoring-ui",
-        "validator-studio"
+        "rule-kernel"
       ],
       "entrypoint_ids": [
-        "entry-angular-bootstrap"
-      ],
-      "confidence": "high",
-      "evidence_ids": [
-        "ev-01",
-        "ev-02"
-      ]
-    },
-    {
-      "id": "rule-authoring-ui",
-      "name": "Rule authoring UI",
-      "kind": "frontend",
-      "purpose": "Provides schema editing, rule designer, decision-table editing, and rule canvas workflows.",
-      "paths": [
-        "src/app/components"
-      ],
-      "depends_on": [
-        "kernel",
+        "angular-bootstrap",
         "app-shell"
       ],
-      "entrypoint_ids": [
-        "entry-angular-bootstrap"
-      ],
       "confidence": "high",
       "evidence_ids": [
-        "ev-01",
-        "ev-02",
-        "ev-04"
+        "evidence:repo-stack",
+        "evidence:app-shell"
       ]
     },
     {
-      "id": "validator-studio",
-      "name": "Validator studio",
-      "kind": "frontend",
-      "purpose": "Generates test cases, executes rules, computes coverage, and surfaces regressions.",
-      "paths": [
-        "src/app/components/validator",
-        "src/app/services/rule-store.service.ts"
-      ],
-      "depends_on": [
-        "kernel",
-        "app-shell"
-      ],
-      "entrypoint_ids": [
-        "entry-angular-bootstrap"
-      ],
-      "confidence": "high",
-      "evidence_ids": [
-        "ev-04"
-      ]
-    },
-    {
-      "id": "kernel",
-      "name": "Rule engine kernel",
+      "id": "rule-kernel",
+      "name": "Pure rule evaluation kernel",
       "kind": "library",
-      "purpose": "Evaluates, synthesizes, lints, and reasons about rules without Angular dependencies.",
+      "purpose": "Evaluates, lints, synthesizes, and computes coverage for rules.",
       "paths": [
-        "src/app/kernel"
+        "src/app/kernel/"
       ],
       "depends_on": [],
       "entrypoint_ids": [],
       "confidence": "high",
       "evidence_ids": [
-        "ev-03"
+        "evidence:kernel-boundary"
       ]
     },
     {
       "id": "backend-api",
-      "name": "Express API backend",
+      "name": "Express glossary and rule API",
       "kind": "service",
-      "purpose": "Exposes glossary and rule CRUD operations and initializes PostgreSQL schema.",
+      "purpose": "Serves rules and glossary data from PostgreSQL and supports optional AI naming.",
       "paths": [
-        "server/index.js",
-        "server/db.js"
+        "server/"
       ],
       "depends_on": [],
       "entrypoint_ids": [
-        "entry-backend-api"
+        "api-server"
       ],
       "confidence": "high",
       "evidence_ids": [
-        "ev-05"
+        "evidence:backend-api"
       ]
     }
   ],
   "entrypoints": [
     {
-      "id": "entry-angular-bootstrap",
+      "id": "angular-bootstrap",
       "name": "Angular bootstrap",
       "kind": "frontend",
       "location": "src/main.ts:1-6",
-      "invocation": "bootstrapApplication(AppComponent, appConfig)",
-      "component_id": "app-shell",
+      "invocation": "npm start",
+      "component_id": "frontend-app",
       "evidence_ids": [
-        "ev-02"
+        "evidence:repo-stack"
       ]
     },
     {
-      "id": "entry-backend-api",
-      "name": "Express API server",
+      "id": "app-shell",
+      "name": "App shell",
+      "kind": "frontend",
+      "location": "src/app/app.component.ts:27-150",
+      "invocation": "Angular app root",
+      "component_id": "frontend-app",
+      "evidence_ids": [
+        "evidence:app-shell"
+      ]
+    },
+    {
+      "id": "api-server",
+      "name": "Express server",
       "kind": "server",
-      "location": "server/index.js:1-204",
+      "location": "server/index.js:7-204",
       "invocation": "node server/index.js",
       "component_id": "backend-api",
       "evidence_ids": [
-        "ev-05"
+        "evidence:backend-api"
       ]
     }
   ],
   "standard_commands": [
     {
       "command": "npm start",
-      "purpose": "Serve the Angular app",
-      "source": "package.json:1-42"
+      "purpose": "start the Angular dev server",
+      "source": "package.json:4-9"
     },
     {
       "command": "npm run build",
-      "purpose": "Build the Angular app",
-      "source": "package.json:1-42"
+      "purpose": "build the Angular application",
+      "source": "package.json:4-9"
     },
     {
-      "command": "npm test",
-      "purpose": "Run Angular tests",
-      "source": "package.json:1-42"
+      "command": "npm test -- --watch=false --browsers=ChromeHeadless",
+      "purpose": "run the Karma suite",
+      "source": "package.json:4-9"
     },
     {
       "command": "node server/index.js",
-      "purpose": "Start the backend API",
-      "source": "server/package.json:1-16"
+      "purpose": "start the Express backend",
+      "source": "server/index.js:7-204"
     }
   ],
   "risks": [
-    "The frontend expects a glossary endpoint at localhost:65421 while the server defaults to a different port.",
-    "The backend depends on PostgreSQL and root .env configuration.",
-    "The build succeeds with Angular bundle-size and selector warnings."
+    "The frontend expects the backend at localhost:65421 and a PostgreSQL database.",
+    "The backend relies on environment variables for DB and Gemini access.",
+    "The build emits a large initial bundle and shows Tailwind-related warnings in this environment."
   ],
   "unknowns": [
-    "No production deployment manifest or environment map is checked in.",
-    "No end-to-end release workflow is present in the repo."
+    "There is no deployment or CI manifest in the inspected tree.",
+    "Production database migration and rollout steps are not grounded from source.",
+    "The repository looks like a console/demo experience rather than a deployed service."
   ],
   "available_views": [
+    "core",
+    "development"
+  ],
+  "views_generated": [
     "core",
     "development"
   ]
