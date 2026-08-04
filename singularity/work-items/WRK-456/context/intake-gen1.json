@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "workId": "WRK-456",
+  "phase": "intake",
+  "generation": 1,
+  "agent": "product-owner",
+  "modelCommit": "1d49cc742c35b8d51d8f9f47671266822ce48ef0",
+  "matchedRules": 0,
+  "mode": "append",
+  "applied": false,
+  "depth": "standard",
+  "evidence": false,
+  "requiredViews": [
+    "business"
+  ],
+  "task": "current objective",
+  "modelSourceTreeSha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "composedSourceTreeSha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "worldModelCommit": "1d49cc742c35b8d51d8f9f47671266822ce48ef0",
+  "manifestSha256": "d097e5dc5b70d33ccaaf839aeb0d679cc5e9eabd95c8679056003ad3b973f848",
+  "fresh": true,
+  "renderedSha256": "7576dfbead71008946bdfe89f203e8849972e9656811150366e6ed23d086ef1a",
+  "promptPath": "singularity/work-items/WRK-456/context/prompts/intake-gen1.md",
+  "files": [
+    {
+      "path": "singularity/world-model/core/summary.md",
+      "sha256": "3d51ec129461f44fad0cb469e90e11650e5cfa3f679ab281e2873c8836ac702d",
+      "bytes": 5313,
+      "injectedBytes": 5313,
+      "truncated": false,
+      "category": "required",
+      "level": 0,
+      "reason": "shared repository core"
+    },
+    {
+      "path": "singularity/world-model/views/business.md",
+      "sha256": "946a46bfd772cd0a119e93b7aa7e0db0c911b241c9add8b3f8c47763e8fe41f0",
+      "bytes": 7569,
+      "injectedBytes": 7569,
+      "truncated": false,
+      "category": "required",
+      "level": 1,
+      "reason": "intake view: business"
+    },
+    {
+      "path": "singularity/world-model/task-guides/current-objective.md",
+      "sha256": "275b6f9e33429cd8d944b75e384c5e364e8723c7cb2b4814fc92b94f25578485",
+      "bytes": 4245,
+      "injectedBytes": 4245,
+      "truncated": false,
+      "category": "required",
+      "level": 2,
+      "reason": "task guide: current-objective"
+    }
+  ],
+  "injectedAt": "2026-08-04T14:50:06.584Z"
+}
