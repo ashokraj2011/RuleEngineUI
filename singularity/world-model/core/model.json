@@ -1,17 +1,17 @@
 {
   "schema_version": "2.0",
-  "generated_at": "2026-08-04T15:13:27.439Z",
+  "generated_at": "2026-08-04T15:19:35Z",
   "generated_date": "4 August 2026",
   "builder_version": "2.0",
   "builder_prompt_sha256": "unknown",
   "analysis_depth": "standard",
   "repository": {
     "name": "RuleEngineUI",
-    "root": "/private/var/folders/_j/yp8zv9w91rd44ymrzfpd_kcw0000gn/T/singularity-flow-world-model-PxavrO/repository",
-    "branch": "detached-HEAD",
-    "commit": "b34c514287ef4436c14ab00b964f233759334871",
+    "root": "/private/var/folders/_j/yp8zv9w91rd44ymrzfpd_kcw0000gn/T/singularity-flow-world-model-eFuqvg/repository",
+    "branch": "HEAD",
+    "commit": "b4e86974ed427e76afbbd98c7403339e34b6bee9",
     "working_tree_clean": false,
-    "repository_kind": "multi-service",
+    "repository_kind": "mixed",
     "languages": [
       "TypeScript",
       "JavaScript",
@@ -24,142 +24,161 @@
     ]
   },
   "purpose": {
-    "summary": "A browser-based rule-authoring and validation console for decision logic, backed by a small API for rule and glossary persistence.",
+    "summary": "A rule-authoring and rule-validation workspace with an Angular console, a framework-agnostic kernel, and an Express/PostgreSQL backend.",
     "status": "observed",
     "confidence": "high",
     "evidence_ids": [
-      "evidence:repo-stack",
-      "evidence:app-shell"
+      "e1",
+      "e2",
+      "e4"
     ]
   },
   "components": [
     {
       "id": "frontend-app",
-      "name": "Angular rule-console",
+      "name": "Logic Engine UI",
       "kind": "frontend",
-      "purpose": "Renders schema, rule, validator, and history workflows.",
+      "purpose": "Angular console for rule design, schema exploration, canvas workflows, and validator studio.",
       "paths": [
-        "src/",
-        "src/app/"
+        "src/app",
+        "src/main.ts"
       ],
       "depends_on": [
-        "rule-kernel"
+        "kernel-engine",
+        "validator-studio"
       ],
       "entrypoint_ids": [
-        "angular-bootstrap",
-        "app-shell"
+        "ui-entry"
       ],
       "confidence": "high",
       "evidence_ids": [
-        "evidence:repo-stack",
-        "evidence:app-shell"
+        "e2",
+        "e5"
       ]
     },
     {
-      "id": "rule-kernel",
-      "name": "Pure rule evaluation kernel",
+      "id": "kernel-engine",
+      "name": "Rule kernel",
       "kind": "library",
-      "purpose": "Evaluates, lints, synthesizes, and computes coverage for rules.",
+      "purpose": "Framework-agnostic evaluation, linting, synthesis, coverage, and comparison logic for rules.",
       "paths": [
-        "src/app/kernel/"
-      ],
-      "depends_on": [],
-      "entrypoint_ids": [],
-      "confidence": "high",
-      "evidence_ids": [
-        "evidence:kernel-boundary"
-      ]
-    },
-    {
-      "id": "backend-api",
-      "name": "Express glossary and rule API",
-      "kind": "service",
-      "purpose": "Serves rules and glossary data from PostgreSQL and supports optional AI naming.",
-      "paths": [
-        "server/"
+        "src/app/kernel"
       ],
       "depends_on": [],
       "entrypoint_ids": [
-        "api-server"
+        "kernel-exports"
       ],
       "confidence": "high",
       "evidence_ids": [
-        "evidence:backend-api"
+        "e3",
+        "e6"
+      ]
+    },
+    {
+      "id": "validator-studio",
+      "name": "Validator Studio",
+      "kind": "frontend",
+      "purpose": "Rules-based test-case generation, execution, and coverage analysis surfaced through the frontend.",
+      "paths": [
+        "src/app/components/validator",
+        "src/app/services/rule-store.service.ts"
+      ],
+      "depends_on": [
+        "kernel-engine",
+        "frontend-app"
+      ],
+      "entrypoint_ids": [
+        "ui-entry"
+      ],
+      "confidence": "high",
+      "evidence_ids": [
+        "e5",
+        "e6"
+      ]
+    },
+    {
+      "id": "backend-service",
+      "name": "Express API service",
+      "kind": "service",
+      "purpose": "Persists rules and glossary data in PostgreSQL and provides offline/LLM-backed naming.",
+      "paths": [
+        "server/index.js",
+        "server/db.js"
+      ],
+      "depends_on": [],
+      "entrypoint_ids": [
+        "backend-entry"
+      ],
+      "confidence": "high",
+      "evidence_ids": [
+        "e4",
+        "e7"
       ]
     }
   ],
   "entrypoints": [
     {
-      "id": "angular-bootstrap",
+      "id": "ui-entry",
       "name": "Angular bootstrap",
       "kind": "frontend",
       "location": "src/main.ts:1-6",
       "invocation": "npm start",
       "component_id": "frontend-app",
       "evidence_ids": [
-        "evidence:repo-stack"
+        "e2"
       ]
     },
     {
-      "id": "app-shell",
-      "name": "App shell",
-      "kind": "frontend",
-      "location": "src/app/app.component.ts:27-150",
-      "invocation": "Angular app root",
-      "component_id": "frontend-app",
-      "evidence_ids": [
-        "evidence:app-shell"
-      ]
-    },
-    {
-      "id": "api-server",
+      "id": "backend-entry",
       "name": "Express server",
       "kind": "server",
-      "location": "server/index.js:7-204",
+      "location": "server/index.js:1-204",
       "invocation": "node server/index.js",
-      "component_id": "backend-api",
+      "component_id": "backend-service",
       "evidence_ids": [
-        "evidence:backend-api"
+        "e4"
+      ]
+    },
+    {
+      "id": "kernel-exports",
+      "name": "Kernel exports",
+      "kind": "library",
+      "location": "src/app/kernel/index.ts:1-17",
+      "invocation": "import from src/app/kernel",
+      "component_id": "kernel-engine",
+      "evidence_ids": [
+        "e3"
       ]
     }
   ],
   "standard_commands": [
     {
-      "command": "npm start",
-      "purpose": "start the Angular dev server",
-      "source": "package.json:4-9"
-    },
-    {
       "command": "npm run build",
-      "purpose": "build the Angular application",
+      "purpose": "Build the Angular application",
       "source": "package.json:4-9"
     },
     {
-      "command": "npm test -- --watch=false --browsers=ChromeHeadless",
-      "purpose": "run the Karma suite",
+      "command": "npm test",
+      "purpose": "Run the Angular/Karma test suite",
       "source": "package.json:4-9"
     },
     {
       "command": "node server/index.js",
-      "purpose": "start the Express backend",
-      "source": "server/index.js:7-204"
+      "purpose": "Launch the Express API server",
+      "source": "server/package.json:1-15"
     }
   ],
   "risks": [
-    "The frontend expects the backend at localhost:65421 and a PostgreSQL database.",
-    "The backend relies on environment variables for DB and Gemini access.",
-    "The build emits a large initial bundle and shows Tailwind-related warnings in this environment."
+    "Frontend runtime depends on a local backend and hard-coded glossary URL.",
+    "Backend configuration depends on PostgreSQL and local environment values.",
+    "Core semantics live in TypeScript modules and are validated primarily through unit tests."
   ],
   "unknowns": [
-    "There is no deployment or CI manifest in the inspected tree.",
-    "Production database migration and rollout steps are not grounded from source.",
-    "The repository looks like a console/demo experience rather than a deployed service."
+    "No production deployment or release manifest was found in the checked-in files.",
+    "The repository does not include a documented production security model beyond the code paths visible here.",
+    "The business domain is only partially visible through sample transaction data and rule examples."
   ],
   "available_views": [
-    "core",
-    "development"
-  ],
-  "views_generated": [
     "core",
     "development"
   ]
