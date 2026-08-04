@@ -5,7 +5,7 @@
 - Capability: **ruleux** (`rule-ux`)
 - Capability map: `d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b`
 - Overall status: **in_progress**
-- Current phase: **verification**
+- Current phase: **conformance**
 
 | # | Phase | Governed agent | Status | Generation | Approvals | Tokens |
 |---:|---|---|---|---:|---:|---:|
@@ -13,11 +13,13 @@
 |  | ⚠ self-approval | Ashok Raj via product-approvers; agent product-owner | **warning** |  |  |  |
 | 2 | Implementation (`implementation`) | developer | **approved** | 1 | 1 | unavailable |
 |  | ⚠ self-approval | Ashok Raj via engineering-reviewers; agent developer | **warning** |  |  |  |
-| 3 | Verification (`verification`) | qa | **awaiting_approval** | 1 | 0 | unavailable |
-| 4 | Spec-to-code conformance (`conformance`) | qa | **not_started** | 0 | 0 | unavailable |
+| 3 | Verification (`verification`) | qa | **approved** | 1 | 1 | unavailable |
+|  | ⚠ self-approval | Ashok Raj via quality-reviewers; agent qa | **warning** |  |  |  |
+| 4 | Spec-to-code conformance (`conformance`) | qa | **in_progress** | 0 | 0 | unavailable |
 
 ## Recent history
 
+- 2026-08-04T15:44:04.590Z — **phase_self_approved** (verification) by ashokraj2011 · governed agent qa: threshold reached; advanced to conformance
 - 2026-08-04T15:38:02.582Z — **phase_submitted** (verification) by ashokraj2011 · governed agent developer: 1 artifacts
 - 2026-08-04T15:37:06.204Z — **phase_generated** (verification) by ashokraj2011 · governed agent developer: generation 1
 - 2026-08-04T15:34:09.103Z — **phase_self_approved** (implementation) by ashokraj2011 · governed agent developer: threshold reached; advanced to verification

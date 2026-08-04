@@ -698,7 +698,7 @@
     ]
   },
   "status": "in_progress",
-  "currentPhase": "verification",
+  "currentPhase": "conformance",
   "phaseOrder": [
     "intake",
     "implementation",
@@ -956,7 +956,7 @@
       "label": "Verification",
       "order": 2,
       "defaultAgent": "qa",
-      "status": "awaiting_approval",
+      "status": "approved",
       "requiredArtifact": {
         "path": "artifacts/verification/test-evidence.md",
         "kind": "test-evidence",
@@ -996,8 +996,8 @@
       "qualityCommands": [],
       "startedAt": "2026-08-04T15:34:09.103Z",
       "submittedAt": "2026-08-04T15:38:02.582Z",
-      "approvedAt": null,
-      "approvedBy": null,
+      "approvedAt": "2026-08-04T15:44:04.590Z",
+      "approvedBy": "ashokraj2011",
       "rejectedAt": null,
       "rejectedBy": null,
       "rejectionReason": null,
@@ -1038,17 +1038,37 @@
           "providerCost": null
         }
       ],
-      "approvals": [],
+      "approvals": [
+        {
+          "decision": "approved",
+          "phase": "verification",
+          "at": "2026-08-04T15:44:04.590Z",
+          "actor": {
+            "name": "Ashok Raj",
+            "email": "88361104+ashokraj2011@users.noreply.github.com",
+            "login": "ashokraj2011"
+          },
+          "agent": "qa",
+          "authorityGroup": "quality-reviewers",
+          "identityAssurance": "configured-local",
+          "channel": "terminal",
+          "generation": 1,
+          "reviewPacketSha256": "bf36b95aaef08f596e8f90e39355290681d33f4d18c51e08a02e49f6eb295c20",
+          "selfApproval": true
+        }
+      ],
       "artifacts": [
         {
           "path": "singularity/work-items/WRK-456/artifacts/verification/test-evidence.md",
           "kind": "document",
-          "status": "pending",
+          "status": "approved",
           "exists": true,
-          "size": 8638,
-          "sha256": "685bf4c8f82e579b1945cde594310f145d7a1b01735aa4e208c08f8599f9eccf",
+          "size": 9186,
+          "sha256": "3370047e08e6db3d3c00e7fc8530c3c39c0a53d8f0a6a5a959bf17d7b0cfe911",
           "registeredAt": "2026-08-04T15:37:06.203Z",
-          "updatedAt": "2026-08-04T15:38:02.583Z"
+          "updatedAt": "2026-08-04T15:38:02.583Z",
+          "approvedAt": "2026-08-04T15:44:04.590Z",
+          "approvedBy": "ashokraj2011"
         }
       ],
       "checks": [],
@@ -1069,7 +1089,7 @@
       "label": "Spec-to-code conformance",
       "order": 3,
       "defaultAgent": "qa",
-      "status": "not_started",
+      "status": "in_progress",
       "requiredArtifact": {
         "path": "artifacts/conformance/spec-code-comparison.md",
         "kind": "conformance-report",
@@ -1131,7 +1151,7 @@
         "allowSelfApproval": true
       },
       "qualityCommands": [],
-      "startedAt": null,
+      "startedAt": "2026-08-04T15:44:04.590Z",
       "submittedAt": null,
       "approvedAt": null,
       "approvedBy": null,
@@ -1291,6 +1311,14 @@
       "event": "phase_submitted",
       "phase": "verification",
       "detail": "1 artifacts"
+    },
+    {
+      "at": "2026-08-04T15:44:04.590Z",
+      "actor": "ashokraj2011",
+      "agent": "qa",
+      "event": "phase_self_approved",
+      "phase": "verification",
+      "detail": "threshold reached; advanced to conformance"
     }
   ],
   "publicationProjections": [
@@ -1922,6 +1950,76 @@
           "templateSha256": "ced4ce8d532e509658558f5bf848bd6df1a03d6c278c84ed8512ac667095fd98"
         },
         "createdAt": "2026-08-04T15:38:03.744Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "event": {
+        "schemaVersion": 1,
+        "eventId": "c84ba12e-75b7-4223-9020-e70bdac1a886",
+        "type": "phase-approved",
+        "subject": {
+          "kind": "story",
+          "id": "WRK-456",
+          "branch": "WRK-456"
+        },
+        "phaseId": "verification",
+        "generation": 1,
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "login": "ashokraj2011"
+        },
+        "agent": "qa",
+        "authorityGroup": "quality-reviewers",
+        "payload": {
+          "decision": "approved",
+          "reviewPacketSha256": "bf36b95aaef08f596e8f90e39355290681d33f4d18c51e08a02e49f6eb295c20"
+        },
+        "sourceCommit": null,
+        "idempotencyKey": null,
+        "idempotencyHash": null,
+        "createdAt": "2026-08-04T15:44:04.613Z"
+      },
+      "ledgerIntent": {
+        "schemaVersion": 1,
+        "eventId": "c84ba12e-75b7-4223-9020-e70bdac1a886",
+        "eventType": "phase-approved",
+        "capabilityId": "rule-ux",
+        "subject": {
+          "branch": "WRK-456",
+          "generation": 1,
+          "phase": "verification",
+          "workId": "WRK-456",
+          "workType": "chore"
+        },
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "githubLogin": "ashokraj2011",
+          "identityAssurance": "configured-local"
+        },
+        "agent": "qa",
+        "authorityGroup": "quality-reviewers",
+        "payload": {
+          "capabilityMapSha256": "d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b",
+          "capabilityPolicy": {
+            "protectedPaths": [],
+            "qualityCommands": [],
+            "requiredAuthorityGroups": [],
+            "requiredChecks": [],
+            "requiredWorldModelViews": []
+          },
+          "configPath": "singularity/workflow.yml",
+          "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
+          "lifecycleEventId": "c84ba12e-75b7-4223-9020-e70bdac1a886",
+          "lifecyclePayload": {
+            "decision": "approved",
+            "reviewPacketSha256": "bf36b95aaef08f596e8f90e39355290681d33f4d18c51e08a02e49f6eb295c20"
+          },
+          "templateSha256": "ced4ce8d532e509658558f5bf848bd6df1a03d6c278c84ed8512ac667095fd98"
+        },
+        "createdAt": "2026-08-04T15:44:04.619Z"
       }
     }
   ]
