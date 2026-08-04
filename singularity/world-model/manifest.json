@@ -9,7 +9,8 @@
   "builder_prompt_sha256": "d607ed17ba7e0ad45acd142b62b57c32272e21dfec50866d4bee5105f2fd9169",
   "analysis_depth": "standard",
   "views_generated": [
-    "development"
+    "development",
+    "testing"
   ],
   "core": {
     "summary": "core/summary.md",
@@ -100,10 +101,10 @@
     "testing": {
       "path": "views/testing.md",
       "brief_path": "views/testing.brief.md",
-      "generated": false,
+      "generated": true,
       "bytes": {
-        "full": 0,
-        "brief": 0
+        "full": 2205,
+        "brief": 646
       },
       "load_when": [
         "test creation",
