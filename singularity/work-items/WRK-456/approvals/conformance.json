@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "phase": "conformance",
+  "decisions": [
+    {
+      "decision": "approved",
+      "phase": "conformance",
+      "at": "2026-08-04T15:54:44.170Z",
+      "actor": {
+        "name": "Ashok Raj",
+        "email": "88361104+ashokraj2011@users.noreply.github.com",
+        "login": "ashokraj2011"
+      },
+      "agent": "qa",
+      "authorityGroup": "quality-reviewers",
+      "identityAssurance": "configured-local",
+      "channel": "copilot-selection-receipt",
+      "generation": 1,
+      "reviewPacketSha256": "11e99634e8d006512eaf5dee37ac3e6782126bb9de3b800a0de0c9ea117ed8c2",
+      "selfApproval": true
+    }
+  ]
+}

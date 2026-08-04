@@ -64,7 +64,7 @@ Completed the repository-world-model grounding work for this chore without chang
   "workType": "chore",
   "phase": "conformance",
   "generation": 1,
-  "status": "awaiting_approval",
+  "status": "approved",
   "generatedBy": {
     "name": "Ashok Raj",
     "email": "88361104+ashokraj2011@users.noreply.github.com",
@@ -120,8 +120,26 @@ Completed the repository-world-model grounding work for this chore without chang
     }
   ],
   "sequenceOverrides": [],
-  "approvals": [],
-  "selfApproval": false,
+  "approvals": [
+    {
+      "decision": "approved",
+      "phase": "conformance",
+      "at": "2026-08-04T15:54:44.170Z",
+      "actor": {
+        "name": "Ashok Raj",
+        "email": "88361104+ashokraj2011@users.noreply.github.com",
+        "login": "ashokraj2011"
+      },
+      "agent": "qa",
+      "authorityGroup": "quality-reviewers",
+      "identityAssurance": "configured-local",
+      "channel": "copilot-selection-receipt",
+      "generation": 1,
+      "reviewPacketSha256": "11e99634e8d006512eaf5dee37ac3e6782126bb9de3b800a0de0c9ea117ed8c2",
+      "selfApproval": true
+    }
+  ],
+  "selfApproval": true,
   "conformanceTree": "sha256:36ca3342ff0e22b6742f976ccd3c963c43b54a48977fe5b6e8cda62b65bfd272"
 }
 -->
