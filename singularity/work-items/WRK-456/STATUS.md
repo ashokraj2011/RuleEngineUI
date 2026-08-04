@@ -15,10 +15,11 @@
 |  | ⚠ self-approval | Ashok Raj via engineering-reviewers; agent developer | **warning** |  |  |  |
 | 3 | Verification (`verification`) | qa | **approved** | 1 | 1 | unavailable |
 |  | ⚠ self-approval | Ashok Raj via quality-reviewers; agent qa | **warning** |  |  |  |
-| 4 | Spec-to-code conformance (`conformance`) | qa | **in_progress** | 0 | 0 | unavailable |
+| 4 | Spec-to-code conformance (`conformance`) | qa | **in_progress** | 1 | 0 | unavailable |
 
 ## Recent history
 
+- 2026-08-04T15:46:51.651Z — **phase_generated** (conformance) by ashokraj2011 · governed agent qa: generation 1
 - 2026-08-04T15:44:04.590Z — **phase_self_approved** (verification) by ashokraj2011 · governed agent qa: threshold reached; advanced to conformance
 - 2026-08-04T15:38:02.582Z — **phase_submitted** (verification) by ashokraj2011 · governed agent developer: 1 artifacts
 - 2026-08-04T15:37:06.204Z — **phase_generated** (verification) by ashokraj2011 · governed agent developer: generation 1
