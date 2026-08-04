@@ -64,7 +64,7 @@ Completed the repository-world-model grounding work for this chore without chang
   "workType": "chore",
   "phase": "conformance",
   "generation": 1,
-  "status": "in_progress",
+  "status": "awaiting_approval",
   "generatedBy": {
     "name": "Ashok Raj",
     "email": "88361104+ashokraj2011@users.noreply.github.com",
@@ -72,8 +72,8 @@ Completed the repository-world-model grounding work for this chore without chang
   },
   "generatedAgent": "qa",
   "sourceCommit": "c568cce814985da95d8cae5556a5c41cd91fa8d7",
-  "generationCommit": null,
-  "publicationCommit": null,
+  "generationCommit": "cb0989b7f010536fb14c853039569539f7a0b1be",
+  "publicationCommit": "cb0989b7f010536fb14c853039569539f7a0b1be",
   "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
   "sourceSha256": "6b7306d13e2a050ee10d7ca1fb39e6baac0f148073be2ea32409b1eb751a4105",
   "template": {
