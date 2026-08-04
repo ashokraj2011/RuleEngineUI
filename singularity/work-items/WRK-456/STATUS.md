@@ -11,12 +11,13 @@
 |---:|---|---|---|---:|---:|---:|
 | 1 | Intake (`intake`) | product-owner | **approved** | 1 | 1 | unavailable |
 |  | ⚠ self-approval | Ashok Raj via product-approvers; agent product-owner | **warning** |  |  |  |
-| 2 | Implementation (`implementation`) | developer | **in_progress** | 1 | 0 | unavailable |
+| 2 | Implementation (`implementation`) | developer | **awaiting_approval** | 1 | 0 | unavailable |
 | 3 | Verification (`verification`) | qa | **not_started** | 0 | 0 | unavailable |
 | 4 | Spec-to-code conformance (`conformance`) | qa | **not_started** | 0 | 0 | unavailable |
 
 ## Recent history
 
+- 2026-08-04T15:25:29.937Z — **phase_submitted** (implementation) by ashokraj2011 · governed agent product-owner: 1 artifacts
 - 2026-08-04T15:25:15.985Z — **phase_generated** (implementation) by ashokraj2011 · governed agent product-owner: generation 1
 - 2026-08-04T14:59:48.971Z — **phase_self_approved** (intake) by ashokraj2011 · governed agent product-owner: threshold reached; advanced to implementation
 - 2026-08-04T14:53:21.574Z — **phase_submitted** (intake) by ashokraj2011 · governed agent product-owner: 1 artifacts

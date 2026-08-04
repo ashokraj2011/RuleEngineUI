@@ -93,6 +93,68 @@
           },
           "status": "awaiting_review"
         }
+      },
+      {
+        "packetSha256": "e1c7c291a2f4a8f5d11696eeedcc31030f6e22641762ca1f3e352ff40d2c1ded",
+        "phase": "implementation",
+        "generation": 1,
+        "branch": "WRK-456",
+        "sourceTreeSha256": "sha256:36ca3342ff0e22b6742f976ccd3c963c43b54a48977fe5b6e8cda62b65bfd272",
+        "path": "singularity/work-items/WRK-456/submissions/implementation/e1c7c291a2f4a8f5d11696eeedcc31030f6e22641762ca1f3e352ff40d2c1ded.json",
+        "submittedAt": "2026-08-04T15:25:29.937Z",
+        "projection": {
+          "schemaVersion": 1,
+          "workId": "WRK-456",
+          "epicId": null,
+          "planId": null,
+          "jiraIssueId": "WRK-456",
+          "initialJiraKey": null,
+          "currentJiraKey": null,
+          "canonicalBranch": "WRK-456",
+          "submittedBranch": "WRK-456",
+          "submissionCommit": "cd7cf2f8ae3b6865b5b8a6e354838584c34a56bd",
+          "sourceCommit": "cd7cf2f8ae3b6865b5b8a6e354838584c34a56bd",
+          "sourceTreeSha256": "sha256:36ca3342ff0e22b6742f976ccd3c963c43b54a48977fe5b6e8cda62b65bfd272",
+          "phase": "implementation",
+          "generation": 1,
+          "artifacts": [
+            {
+              "path": "singularity/work-items/WRK-456/artifacts/implementation/implementation-summary.md",
+              "kind": "document",
+              "sha256": "a8d20c5d6bb57142d5776b4f3154bcdc5ccc25c5c4cdda08760c37cf2efd94da",
+              "size": 6265
+            }
+          ],
+          "checks": [],
+          "usage": [
+            {
+              "status": "unavailable",
+              "source": "copilot-otel-unavailable",
+              "provider": null,
+              "model": null,
+              "inputTokens": null,
+              "outputTokens": null,
+              "cachedInputTokens": null,
+              "cacheWriteInputTokens": null,
+              "totalTokens": null,
+              "providerCost": null,
+              "costStatus": "unavailable",
+              "spans": null,
+              "startedAt": "2026-08-04T15:25:15.954Z",
+              "completedAt": "2026-08-04T15:25:15.954Z",
+              "agent": "product-owner",
+              "generation": 1
+            }
+          ],
+          "approvals": [],
+          "submittedAt": "2026-08-04T15:25:29.937Z",
+          "submittedBy": {
+            "name": "Ashok Raj",
+            "email": "88361104+ashokraj2011@users.noreply.github.com",
+            "login": "ashokraj2011"
+          },
+          "status": "awaiting_review"
+        }
       }
     ]
   },
@@ -702,7 +764,7 @@
       "label": "Implementation",
       "order": 1,
       "defaultAgent": "developer",
-      "status": "in_progress",
+      "status": "awaiting_approval",
       "requiredArtifact": {
         "path": "artifacts/implementation/implementation-summary.md",
         "kind": "implementation-summary",
@@ -738,7 +800,7 @@
       },
       "qualityCommands": [],
       "startedAt": "2026-08-04T14:59:48.971Z",
-      "submittedAt": null,
+      "submittedAt": "2026-08-04T15:25:29.937Z",
       "approvedAt": null,
       "approvedBy": null,
       "rejectedAt": null,
@@ -788,10 +850,10 @@
           "kind": "document",
           "status": "pending",
           "exists": true,
-          "size": 6183,
-          "sha256": "d568f4d8e0866f40e27f44b1b7fd645e1ba846d7946c70557d611f5e1e5370f9",
+          "size": 6265,
+          "sha256": "a8d20c5d6bb57142d5776b4f3154bcdc5ccc25c5c4cdda08760c37cf2efd94da",
           "registeredAt": "2026-08-04T15:25:15.984Z",
-          "updatedAt": "2026-08-04T15:25:15.984Z"
+          "updatedAt": "2026-08-04T15:25:29.939Z"
         }
       ],
       "checks": [],
@@ -803,7 +865,9 @@
         "renderedSha256": "5c28ebe1522d2c7924c0e48facc23fd5ff8a7cbc6c2b7225d5d3e0c6e681e640",
         "mode": "record"
       },
-      "sourceCommit": "d21c80628f726c7f1a6711bc68195ffdd69de6c2"
+      "sourceCommit": "d21c80628f726c7f1a6711bc68195ffdd69de6c2",
+      "generationCommit": "cd7cf2f8ae3b6865b5b8a6e354838584c34a56bd",
+      "publicationCommit": "cd7cf2f8ae3b6865b5b8a6e354838584c34a56bd"
     },
     "verification": {
       "id": "verification",
@@ -1048,6 +1112,14 @@
       "event": "phase_generated",
       "phase": "implementation",
       "detail": "generation 1"
+    },
+    {
+      "at": "2026-08-04T15:25:29.937Z",
+      "actor": "ashokraj2011",
+      "agent": "product-owner",
+      "event": "phase_submitted",
+      "phase": "implementation",
+      "detail": "1 artifacts"
     }
   ],
   "publicationProjections": [
@@ -1399,6 +1471,76 @@
           "templateSha256": "5d0478b18c8fd14221e14c68e6238b909bccd6802a70262c416005354716c62c"
         },
         "createdAt": "2026-08-04T15:25:16.556Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "event": {
+        "schemaVersion": 1,
+        "eventId": "78a8a1f1-94b0-4baa-a5d7-596389e302bb",
+        "type": "approval-requested",
+        "subject": {
+          "kind": "story",
+          "id": "WRK-456",
+          "branch": "WRK-456"
+        },
+        "phaseId": "implementation",
+        "generation": 1,
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "login": "ashokraj2011"
+        },
+        "agent": "product-owner",
+        "authorityGroup": null,
+        "payload": {
+          "decision": null,
+          "reviewPacketSha256": null
+        },
+        "sourceCommit": null,
+        "idempotencyKey": null,
+        "idempotencyHash": null,
+        "createdAt": "2026-08-04T15:25:30.972Z"
+      },
+      "ledgerIntent": {
+        "schemaVersion": 1,
+        "eventId": "78a8a1f1-94b0-4baa-a5d7-596389e302bb",
+        "eventType": "approval-requested",
+        "capabilityId": "rule-ux",
+        "subject": {
+          "branch": "WRK-456",
+          "generation": 1,
+          "phase": "implementation",
+          "workId": "WRK-456",
+          "workType": "chore"
+        },
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "githubLogin": "ashokraj2011",
+          "identityAssurance": "configured-local"
+        },
+        "agent": "product-owner",
+        "authorityGroup": null,
+        "payload": {
+          "capabilityMapSha256": "d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b",
+          "capabilityPolicy": {
+            "protectedPaths": [],
+            "qualityCommands": [],
+            "requiredAuthorityGroups": [],
+            "requiredChecks": [],
+            "requiredWorldModelViews": []
+          },
+          "configPath": "singularity/workflow.yml",
+          "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
+          "lifecycleEventId": "78a8a1f1-94b0-4baa-a5d7-596389e302bb",
+          "lifecyclePayload": {
+            "decision": null,
+            "reviewPacketSha256": null
+          },
+          "templateSha256": "5d0478b18c8fd14221e14c68e6238b909bccd6802a70262c416005354716c62c"
+        },
+        "createdAt": "2026-08-04T15:25:30.977Z"
       }
     }
   ]
