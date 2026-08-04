@@ -1,0 +1,222 @@
+{
+  "schema_version": "2.0",
+  "repository_commit": "c9680d4f78d1cc34be385f6629b9be0df4b3c31d",
+  "repository_branch": "WRK-456",
+  "working_tree_clean": true,
+  "generated_at": "2026-08-04T14:40:14.087Z",
+  "generated_date": "4 August 2026",
+  "builder_version": "2.0",
+  "builder_prompt_sha256": "d607ed17ba7e0ad45acd142b62b57c32272e21dfec50866d4bee5105f2fd9169",
+  "analysis_depth": "quick",
+  "core": {
+    "summary": "core/summary.md",
+    "brief": "core/summary.brief.md",
+    "model": "core/model.json",
+    "anchors": [
+      "core.tldr",
+      "core.facts",
+      "core.purpose",
+      "core.type",
+      "core.components",
+      "core.map",
+      "core.entrypoints",
+      "core.tech",
+      "core.commands",
+      "core.risks",
+      "core.unknowns",
+      "core.freshness",
+      "core.routing"
+    ],
+    "bytes": {
+      "summary": 5313,
+      "brief": 1191
+    },
+    "recommended_for_all_agents": true
+  },
+  "views": {
+    "business": {
+      "path": "views/business.md",
+      "brief_path": "views/business.brief.md",
+      "generated": true,
+      "bytes": {
+        "full": 7569,
+        "brief": 1220
+      },
+      "anchors": [
+        "biz.tldr",
+        "biz.facts",
+        "biz.capabilities",
+        "biz.actors",
+        "biz.workflows",
+        "biz.entities",
+        "biz.rules",
+        "biz.failures",
+        "biz.compliance",
+        "biz.impact",
+        "biz.unknowns",
+        "biz.questions",
+        "biz.start",
+        "biz.limits"
+      ],
+      "load_when": [
+        "business capability analysis",
+        "product behavior analysis",
+        "business impact assessment"
+      ]
+    },
+    "architecture": {
+      "path": "views/architecture.md",
+      "brief_path": "views/architecture.brief.md",
+      "generated": false,
+      "load_when": [
+        "system design",
+        "dependency analysis",
+        "cross-component change"
+      ]
+    },
+    "development": {
+      "path": "views/development.md",
+      "brief_path": "views/development.brief.md",
+      "generated": false,
+      "load_when": [
+        "implementation",
+        "debugging",
+        "refactoring",
+        "code review"
+      ]
+    },
+    "testing": {
+      "path": "views/testing.md",
+      "brief_path": "views/testing.brief.md",
+      "generated": false,
+      "load_when": [
+        "test creation",
+        "regression analysis",
+        "quality validation"
+      ]
+    },
+    "release": {
+      "path": "views/release.md",
+      "brief_path": "views/release.brief.md",
+      "generated": false,
+      "load_when": [
+        "build",
+        "packaging",
+        "deployment",
+        "rollback"
+      ]
+    },
+    "operations": {
+      "path": "views/operations.md",
+      "brief_path": "views/operations.brief.md",
+      "generated": false,
+      "load_when": [
+        "runtime diagnosis",
+        "monitoring and incident response"
+      ]
+    },
+    "security": {
+      "path": "views/security.md",
+      "brief_path": "views/security.brief.md",
+      "generated": false,
+      "load_when": [
+        "threat analysis",
+        "authentication or authorization change"
+      ]
+    }
+  },
+  "phase_map": {
+    "intake": {
+      "views": [
+        "business"
+      ],
+      "tier": "brief"
+    },
+    "requirements": {
+      "views": [
+        "business"
+      ],
+      "tier": "full"
+    }
+  },
+  "agent_map": {
+    "product-owner": {
+      "views": [
+        "business"
+      ],
+      "tier": "brief"
+    },
+    "business-analyst": {
+      "views": [
+        "business"
+      ],
+      "tier": "full"
+    }
+  },
+  "path_index": {
+    "path": "index/path-map.json"
+  },
+  "domains": [],
+  "task_guides": [
+    {
+      "id": "current-objective",
+      "path": "task-guides/current-objective.md",
+      "task": "current objective",
+      "required_views": [
+        "business"
+      ],
+      "required_domains": []
+    }
+  ],
+  "evidence": {
+    "path": "evidence/evidence.jsonl",
+    "load_only_when_verification_is_needed": true
+  },
+  "recommended_loading_rules": [
+    {
+      "agent_type": "business",
+      "load": [
+        "core/summary.brief.md",
+        "views/business.md"
+      ]
+    },
+    {
+      "agent_type": "developer",
+      "load": [
+        "core/summary.brief.md",
+        "core/summary.md"
+      ]
+    }
+  ],
+  "budget_hints": {
+    "orientation_only": [
+      "core/summary.brief.md"
+    ],
+    "single_phase_typical": [
+      "core/summary.brief.md",
+      "views/business.md"
+    ],
+    "deep_investigation": [
+      "core/summary.md",
+      "views/business.md",
+      "evidence/evidence.jsonl"
+    ]
+  },
+  "views_generated": [
+    "business"
+  ],
+  "source_tree_sha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "generation": {
+    "parallel": false,
+    "strategy": "view",
+    "max_workers": 1,
+    "discovery_views": [],
+    "degraded_views": [],
+    "resumed_views": [],
+    "pending_views_at_start": []
+  },
+  "generated_for_phase": "intake",
+  "requested_views": [
+    "business"
+  ]
+}
