@@ -251,8 +251,19 @@
   "path_index": {
     "path": "index/path-map.json"
   },
-  "domains": [],
-  "task_guides": [],
+  "domains": [
+    {
+      "id": "rule-testing",
+      "path": "domains/rule-testing.md"
+    }
+  ],
+  "task_guides": [
+    {
+      "id": "current-objective",
+      "path": "task-guides/current-objective.md",
+      "task": "current objective"
+    }
+  ],
   "evidence": {
     "path": "evidence/evidence.jsonl",
     "load_only_when_verification_is_needed": true
