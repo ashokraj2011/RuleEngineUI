@@ -1,69 +1,72 @@
-> **Grounding** · logic-engine @ `c9680d4f78d1cc34be385f6629b9be0df4b3c31d` · view: `core` · tier: `full`
-> **Generated** 04 August 2026 (2026-08-04T14:48:37Z) · depth: `quick` · builder `2.0`
+> **Grounding** · RuleEngineUI @ `b34c514287ef4436c14ab00b964f233759334871` · view: `core` · tier: `full`
+> **Generated** 04 August 2026 (2026-08-04T15:06:58Z) · depth: `standard` · builder `2.0`
 > **Authoritative for:** file locations, entry points, commands, structural relationships as of the commit above.
 > **Not authoritative for:** current file contents. If this document conflicts with code you have read, trust the code and say so explicitly in your output.
 > **Unknowns are marked.** Do not resolve them by inference. If the repository has changed since the date above, treat locations as hints, not facts.
 
-## TL;DR {#core.tldr}
-This repository is a browser-based rule-authoring and validation studio for decision logic. The active surface is an Angular frontend, a framework-agnostic rule kernel under `src/app/kernel/`, and a small Express API in `server/` for rule and glossary persistence. The app exposes schema design, rule editing, validator workflows, and execution history. Start with `src/main.ts`, `src/app/app.component.ts`, `src/app/services/rule-engine.service.ts`, and `server/index.js`.
 
-## Facts {#core.facts}
-```yaml
-repository_kind: mixed
-languages: [TypeScript, JavaScript, HTML, CSS]
-package_roots: [., server]
-components:
-  - { id: ui-console, path: src/app, role: Angular app shell and UI }
-  - { id: rule-kernel, path: src/app/kernel, role: evaluation, synthesis, linting, coverage }
-  - { id: rule-api, path: server, role: Express persistence API }
-entrypoints:
-  - { id: app-bootstrap, path: src/main.ts:1-6, invocation: "npm start" }
-  - { id: server-api, path: server/index.js:1-204, invocation: "cd server && npm start" }
-standard_commands:
-  - { command: "npm start", purpose: "launch Angular dev server", source: "package.json:1-42" }
-  - { command: "npm run build", purpose: "compile the Angular app", source: "package.json:1-42" }
-  - { command: "npm test", purpose: "run Angular tests", source: "package.json:1-42" }
-```
+## TL;DR {#core.tldr}
+
+Evidence: `ev-01`, `ev-02`, `ev-03`, `ev-06`.
+
+This repository is a browser-based rule-authoring and validation studio for decision logic, not a traditional CRUD web app. The frontend is an Angular 17 application with a rule designer, decision-table editor, schema explorer, and a validator studio that evaluates sample rules against synthetic data. A small Node/Express backend exists for glossary and rule persistence, but the app also works with local browser state when the backend is unavailable. The main implementation surface is in `src/app`, while the reusable rule engine lives in `src/app/kernel`. The repo builds successfully, but the backend depends on PostgreSQL and optional Gemini credentials, and the app’s live glossary call targets a localhost endpoint that may be absent in a fresh environment.
 
 ## Repository purpose {#core.purpose}
-The repository appears to be a decision-rule studio for fraud or risk-style scenarios. The visible domain vocabulary includes user context, transactions, balances, risk scores, and KYC/geo signals, as shown in `src/app/data.ts` and `server/db.js`.
+
+The repo appears to be a productized rule-engine UI for authoring, testing, and validating business rules. The visible domain examples are around customer-risk and fraud-style logic, but the implementation is generic enough to support other decision systems. The strongest evidence is the rule grammar, validator studio, and sample rules under `src/app/validator-data` and `src/app/kernel`.
 
 ## Repository type and languages {#core.type}
-This is a mixed frontend/backend application. The UI is Angular 17 with TypeScript, HTML, CSS, and Tailwind-style styling. The backend is a small Express service using JavaScript and PostgreSQL. The kernel under `src/app/kernel/` is pure TypeScript and explicitly framework-agnostic `src/app/kernel/index.ts:1-17`.
+
+This is a mixed frontend/backend application. The client is Angular 17 with TypeScript, HTML, CSS, and Tailwind-style utility classes. The server is Node.js with Express and PostgreSQL access through `pg`. The repository also contains a package-lock and typical Angular build config.
 
 ## Main applications, packages, or services {#core.components}
-- `src/app/` is the main Angular application shell for schema editing, rule design, validator workflows, and history views `src/app/app.component.ts:27-150`.
-- `src/app/kernel/` is the rule-engine core with evaluation, synthesis, linting, coverage, and diff logic `src/app/services/rule-engine.service.ts:119-156`.
-- `server/` is the backend API for rules and glossary persistence `server/index.js:72-195` and `server/db.js:1-96`.
+
+- `src/app` — Angular shell and UI for schema, rules, functions, history, and validator workflows.
+- `src/app/kernel` — framework-agnostic rule engine for parsing, evaluating, synthesizing, linting, and coverage analysis.
+- `server` — Express API for glossary/rule CRUD and database initialization.
+- `src/app/validator-data` — seed rules and generated sample test cases that make the validator experience runnable out of the box.
 
 ## High-level component map {#core.map}
-The Angular app boots from `src/main.ts` and drives the main workflow through `AppComponent`. Services in `src/app/services/` expose the rule-engine interface, while the kernel implements the actual logic. The backend is a separate persistence layer that the frontend can query over HTTP.
+
+The app bootstraps through `src/main.ts`, which loads `AppComponent` and `appConfig`. `AppComponent` owns the main navigation and switches between schema, rules, functions, validator, history, settings, and support views. The actual rule-authoring experience is implemented in components under `src/app/components`, while state and evaluation behavior are orchestrated by `RuleStoreService` and `RuleEngineService`. The backend API is separate and does not directly participate in the Angular render path unless the browser calls it.
 
 ## Main entry points {#core.entrypoints}
-- `src/main.ts:1-6` bootstraps the Angular app.
-- `src/app/app.component.ts:27-150` defines the main UI state and tab workflow.
-- `server/index.js:1-204` starts the Express server and registers API endpoints.
+
+- `src/main.ts:1-6` — Angular bootstrap entry.
+- `src/app/app.component.ts:27-150` — top-level shell and view routing.
+- `server/index.js:1-204` — Express API server and endpoints.
+- `server/db.js:12-91` — PostgreSQL schema setup and glossary seeding.
 
 ## Primary technologies {#core.tech}
-Angular 17, TypeScript, RxJS, Tailwind/PostCSS, Express, PostgreSQL, and the Google Generative AI SDK are present in `package.json` and `server/package.json`. The test stack uses Jasmine and Karma.
+
+Observed technologies include Angular 17, TypeScript 5.4, RxJS, Tailwind/PostCSS, Angular CLI, Node.js/Express, PostgreSQL via `pg`, and optional Google Gemini for rule-name generation. The repository does not expose a container or deployment manifest in the top level.
 
 ## Standard build and test commands {#core.commands}
-- `npm start` launches the Angular dev server.
-- `npm run build` compiles the Angular app.
-- `npm test` runs the Angular test harness.
-- `cd server && npm start` runs the Express API.
+
+- `npm start` or `npm run start` — serves the Angular frontend in development. Observed from `package.json:1-42`.
+- `npm run build` — builds the Angular app to `dist/logic-engine`. Observed from `package.json:1-42` and `angular.json:38-98`.
+- `npm test` — launches the Angular test runner. Observed from `package.json:1-42` and `angular.json:106-123`.
+- `node server/index.js` — starts the backend API server. Observed from `server/package.json:1-16`.
 
 ## Important risks {#core.risks}
-The main risk is drift between the UI, kernel, and backend layers because the repository spans three separate implementation surfaces. The backend also depends on PostgreSQL and optional Gemini credentials, and no production deployment manifest was observed.
+
+- The frontend fetches glossary data from `http://localhost:65421/api/glossary`, but the server defaults to `PORT=3000` and may not be running on that port. That mismatch is a likely runtime integration issue.
+- The backend requires PostgreSQL and an environment file at the repo root; if the database is unavailable, the API and glossary features may fail.
+- The build completes but generated warnings show the app is close to Angular’s size budgets and uses a Tailwind/PostCSS stack that produced selector warnings.
+- The repository is currently checked out at a detached HEAD and the worktree is not clean because this session removed singularity-generated files.
 
 ## Important unknowns {#core.unknowns}
-- No explicit product owner or target industry was found in the repository.
-- The current branch was not available as a named branch from Git at inspection time, so the branch field is recorded as `unknown`.
+
+- There is no evidence of a production deployment pipeline or environment map in the checked-in files.
+- The repository does not show a formal CI workflow beyond the Angular CLI scripts.
+- The runtime data model for the backend is inferred from the server and frontend contracts rather than from a dedicated API schema document.
 
 ## Commit, generation date, and freshness warning {#core.freshness}
-Inspected commit: `c9680d4f78d1cc34be385f6629b9be0df4b3c31d`. Generated at `2026-08-04T14:48:37Z`. Treat this as grounding for that commit, not as a live view of the repository if it changes later.
+
+Inspected commit: `b34c514287ef4436c14ab00b964f233759334871`. Generated: `04 August 2026` at `2026-08-04T15:03:46Z`. The repository state is not fresh relative to the worktree because this run observed removed files under `singularity/` and a detached HEAD. Treat the grounding below as a snapshot of the inspected commit, not a live view of the repository after this run.
 
 ## Recommended next view for each common task {#core.routing}
-- Product or business impact: `views/business.md`.
-- Implementation or debugging: inspect `src/app/services/rule-engine.service.ts` and `src/app/kernel/`.
-- Test creation or validation: start with `src/app/kernel/kernel.spec.ts` and `src/app/services/rule-store.service.ts`.
+
+- For implementation, debugging, refactoring, or review work: use `views/development.md`.
+- For a broader product or business-impact question: start with `views/development.md` because this run did not generate a dedicated business view.
+- For runtime or backend issues: use the development view and the server/API evidence in `evidence/evidence.jsonl`.
