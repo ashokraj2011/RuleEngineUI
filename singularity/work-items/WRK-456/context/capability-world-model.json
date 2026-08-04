@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "capabilityId": "rule-ux",
+  "capabilityPath": [
+    "rule-ux"
+  ],
+  "capabilityMapSha256": "d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b",
+  "requiredViews": [
+    "business",
+    "development",
+    "testing",
+    "security",
+    "architecture"
+  ],
+  "maxBytes": 262144,
+  "bytes": 0,
+  "repositories": [
+    {
+      "id": "ruleengineui",
+      "status": "local-grounding"
+    }
+  ],
+  "files": [],
+  "warnings": [],
+  "recordedAt": "2026-08-04T13:28:25.429Z"
+}

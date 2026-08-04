@@ -1,0 +1,874 @@
+{
+  "schemaVersion": 2,
+  "workItem": {
+    "id": "WRK-456",
+    "title": "change the color",
+    "workType": "chore",
+    "workTypeLabel": "Chore",
+    "branch": "WRK-456",
+    "baseBranch": "main",
+    "createdAt": "2026-08-04T13:28:25.373Z",
+    "createdBy": {
+      "name": "Ashok Raj",
+      "email": "88361104+ashokraj2011@users.noreply.github.com",
+      "login": "ashokraj2011"
+    },
+    "source": {
+      "type": "manual",
+      "key": null,
+      "url": null
+    }
+  },
+  "lineage": {
+    "schemaVersion": 1,
+    "canonicalBranch": "WRK-456",
+    "parentStoryId": "WRK-456",
+    "epicId": null,
+    "planId": null,
+    "jiraIssueId": "WRK-456",
+    "initialJiraKey": null,
+    "currentJiraKey": null,
+    "branchCompletionPolicy": "pr",
+    "requiredChecks": [],
+    "childBranches": []
+  },
+  "resolution": {
+    "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
+    "inputsMode": "record",
+    "worldModelGrounding": "enforce",
+    "approvalAuthorities": {
+      "product-approvers": {
+        "label": "Product approvers",
+        "allowAnyGitIdentity": true,
+        "githubTeams": [],
+        "members": []
+      },
+      "architecture-reviewers": {
+        "label": "Architecture reviewers",
+        "allowAnyGitIdentity": true,
+        "githubTeams": [],
+        "members": []
+      },
+      "engineering-reviewers": {
+        "label": "Engineering reviewers",
+        "allowAnyGitIdentity": true,
+        "githubTeams": [],
+        "members": []
+      },
+      "quality-reviewers": {
+        "label": "Quality reviewers",
+        "allowAnyGitIdentity": true,
+        "githubTeams": [],
+        "members": []
+      },
+      "design-reviewers": {
+        "label": "Design reviewers",
+        "allowAnyGitIdentity": true,
+        "githubTeams": [],
+        "members": []
+      }
+    },
+    "sequenceGates": {
+      "default": "soft",
+      "completion": "hard",
+      "currentPhase": "hard",
+      "phaseStatus": "soft",
+      "freshGeneration": "hard",
+      "generationCommit": "hard",
+      "remoteGeneration": "hard",
+      "publicationPending": "hard",
+      "documentPhase": "soft",
+      "binding": "soft"
+    },
+    "contextPolicy": {
+      "onApproval": "new",
+      "onRejection": "keep",
+      "phaseOverrides": {}
+    },
+    "ledger": {
+      "enabled": true,
+      "branch": "state",
+      "remote": "origin",
+      "behind": "warn",
+      "enforcement": "shadow",
+      "signing": "off",
+      "trustTier": "T0",
+      "maxRetries": 4,
+      "pinTransport": "refs",
+      "publication": "warn",
+      "retentionDays": 2555
+    },
+    "agents": {
+      "architect": {
+        "source": ".github/agents/architect.agent.md",
+        "sha256": "d7aa40fde49e3111836cc478b20d9cef03bb403512d48f8fee8b620c6f2af878",
+        "phases": [
+          "design",
+          "implementation-spec",
+          "fix-design",
+          "fix-spec"
+        ],
+        "defaultFor": [
+          "design",
+          "implementation-spec",
+          "fix-design",
+          "fix-spec"
+        ],
+        "worldModelViews": [
+          "architecture",
+          "security",
+          "operations"
+        ]
+      },
+      "developer": {
+        "source": ".github/agents/developer.agent.md",
+        "sha256": "08a26b9ab8dfed985a6bce5d470c1cb1732f8546a1c3c49360005aa42a728105",
+        "phases": [
+          "implementation"
+        ],
+        "defaultFor": [
+          "implementation"
+        ],
+        "worldModelViews": [
+          "development",
+          "testing",
+          "architecture"
+        ]
+      },
+      "mobile-architect": {
+        "source": ".github/agents/mobile-architect.agent.md",
+        "sha256": "25c97dee212791eaeff956b0b32c756272c1e0b9a8bf94819a4bb70c81956a00",
+        "phases": [
+          "component-mapping",
+          "mobile-spec"
+        ],
+        "defaultFor": [
+          "component-mapping",
+          "mobile-spec"
+        ],
+        "worldModelViews": [
+          "architecture",
+          "development",
+          "testing",
+          "security"
+        ]
+      },
+      "product-designer": {
+        "source": ".github/agents/product-designer.agent.md",
+        "sha256": "e71a3a77592c53010b2de7f107d64f8e401514215e891e37af9660a7ef8fc945",
+        "phases": [
+          "design-intake",
+          "design-inventory"
+        ],
+        "defaultFor": [
+          "design-intake",
+          "design-inventory"
+        ],
+        "worldModelViews": [
+          "business",
+          "architecture",
+          "testing"
+        ]
+      },
+      "product-owner": {
+        "source": ".github/agents/product-owner.agent.md",
+        "sha256": "fcd6757dbc695423e0df1a9bd906e88569c7e000cd84c35f1a1b532bfcd822e2",
+        "phases": [
+          "intake",
+          "requirements"
+        ],
+        "defaultFor": [
+          "intake",
+          "requirements"
+        ],
+        "worldModelViews": [
+          "business"
+        ]
+      },
+      "qa": {
+        "source": ".github/agents/qa.agent.md",
+        "sha256": "6a5f1ed504e6acfe0990c59e977de0f7bc4fa9afbc1f578466f723f238e342ee",
+        "phases": [
+          "reproduction",
+          "verification",
+          "visual-verification",
+          "conformance"
+        ],
+        "defaultFor": [
+          "reproduction",
+          "verification",
+          "visual-verification",
+          "conformance"
+        ],
+        "worldModelViews": [
+          "testing",
+          "development",
+          "security"
+        ]
+      },
+      "sflow-workflow": {
+        "source": "../../../../../.vscode/extensions/singularityflow.singularity-flow-vscode-0.9.0/cli/plugin/agents/sflow-workflow.agent.md",
+        "sha256": "9534ae67274aa898c876367432831cee4440f0c409247f9b89c6a3b46e6ef4f2",
+        "phases": [
+          "intake",
+          "requirements",
+          "design",
+          "implementation-spec",
+          "reproduction",
+          "fix-design",
+          "fix-spec",
+          "design-intake",
+          "design-inventory",
+          "component-mapping",
+          "mobile-spec",
+          "implementation",
+          "verification",
+          "visual-verification",
+          "conformance"
+        ],
+        "defaultFor": [],
+        "worldModelViews": []
+      }
+    },
+    "templates": {
+      "intake": {
+        "path": "singularity/templates/chore/intake.md",
+        "sha256": "6e84e6cee5c5c25c7bad11809f245126b646ad9e4c76503876bd77cfaf08112d"
+      },
+      "implementation": {
+        "path": "singularity/templates/common/implementation.md",
+        "sha256": "5d0478b18c8fd14221e14c68e6238b909bccd6802a70262c416005354716c62c"
+      },
+      "verification": {
+        "path": "singularity/templates/common/verification.md",
+        "sha256": "ced4ce8d532e509658558f5bf848bd6df1a03d6c278c84ed8512ac667095fd98"
+      },
+      "conformance": {
+        "path": "singularity/templates/common/conformance.md",
+        "sha256": "fd9ee36f53342f21e71d408bc17141894fbb56315f7dbd14a0db53b2ea5a1b14"
+      }
+    },
+    "worldModelStaleness": "warn",
+    "storage": null,
+    "capability": {
+      "schemaVersion": 1,
+      "id": "rule-ux",
+      "name": "ruleux",
+      "kind": "delivery",
+      "path": [
+        "rule-ux"
+      ],
+      "repositoryId": "ruleengineui",
+      "deliveries": [
+        {
+          "id": "rule-ux",
+          "name": "ruleux",
+          "repository": "ruleengineui",
+          "repositories": [
+            "ruleengineui"
+          ]
+        }
+      ],
+      "map": {
+        "path": "singularity/capabilities.yml",
+        "sha256": "d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b",
+        "repository": "https://github.com/ashokraj2011/RuleEngineUI",
+        "branch": "WRK-456"
+      },
+      "basePolicy": {
+        "requiredChecks": [],
+        "requiredAuthorityGroups": [],
+        "protectedPaths": [],
+        "requiredWorldModelViews": [],
+        "qualityCommands": []
+      },
+      "policy": {
+        "requiredChecks": [],
+        "requiredAuthorityGroups": [],
+        "protectedPaths": [],
+        "requiredWorldModelViews": [],
+        "qualityCommands": []
+      },
+      "leases": [],
+      "warnings": [],
+      "context": {
+        "path": "singularity/work-items/WRK-456/context/capability-world-model.json",
+        "sha256": "d8949391c1f0a42502fb4d68051c2d7e58379cf49058af1199b660da09acced4",
+        "bytes": 511,
+        "warnings": []
+      }
+    },
+    "workType": "chore",
+    "workTypeLabel": "Chore",
+    "documents": {
+      "allowedPhases": [
+        "intake"
+      ],
+      "maxFileBytes": 26214400,
+      "maxPreviewBytes": 1048576,
+      "allowedMimeTypes": []
+    },
+    "collaboration": {
+      "assignmentMode": "suggested",
+      "approvalReminderAfterHours": 24,
+      "notifications": [
+        "terminal"
+      ]
+    },
+    "session": {
+      "workItemSelection": "prompt",
+      "requireBeforeTools": false
+    },
+    "sourceSha256": "6b7306d13e2a050ee10d7ca1fb39e6baac0f148073be2ea32409b1eb751a4105",
+    "phases": [
+      {
+        "id": "intake",
+        "order": 0,
+        "label": "Intake",
+        "defaultTemplate": "common/intake.md",
+        "artifact": {
+          "path": "artifacts/intake/intake.md",
+          "kind": "intake",
+          "minimumBytes": 200
+        },
+        "worldModel": {
+          "views": [
+            "business"
+          ],
+          "depth": "quick"
+        },
+        "writeScope": "artifact-only",
+        "approval": {
+          "authorities": [
+            "product-approvers"
+          ],
+          "minimum": 1,
+          "rejectTo": [
+            "intake"
+          ],
+          "allowSelfApproval": true
+        },
+        "comparison": {},
+        "inputs": [],
+        "template": "chore/intake.md",
+        "defaultAgent": "product-owner",
+        "qualityCommands": []
+      },
+      {
+        "id": "implementation",
+        "order": 1,
+        "label": "Implementation",
+        "defaultTemplate": "common/implementation.md",
+        "artifact": {
+          "path": "artifacts/implementation/implementation-summary.md",
+          "kind": "implementation-summary",
+          "minimumBytes": 250
+        },
+        "worldModel": {
+          "views": [
+            "development",
+            "testing"
+          ],
+          "depth": "standard"
+        },
+        "writeScope": "source-and-artifact",
+        "approval": {
+          "authorities": [
+            "engineering-reviewers"
+          ],
+          "minimum": 1,
+          "rejectTo": [
+            "implementation"
+          ],
+          "allowSelfApproval": true
+        },
+        "qualityCommands": [],
+        "inputs": [
+          {
+            "phase": "intake",
+            "optional": false,
+            "maxBytes": null,
+            "path": "artifacts/intake/intake.md"
+          }
+        ],
+        "comparison": {},
+        "template": "common/implementation.md",
+        "defaultAgent": "developer"
+      },
+      {
+        "id": "verification",
+        "order": 2,
+        "label": "Verification",
+        "defaultTemplate": "common/verification.md",
+        "artifact": {
+          "path": "artifacts/verification/test-evidence.md",
+          "kind": "test-evidence",
+          "minimumBytes": 300
+        },
+        "worldModel": {
+          "views": [
+            "testing",
+            "development",
+            "security"
+          ],
+          "depth": "standard",
+          "evidence": true
+        },
+        "writeScope": "source-and-artifact",
+        "approval": {
+          "authorities": [
+            "quality-reviewers"
+          ],
+          "minimum": 1,
+          "rejectTo": [
+            "implementation",
+            "verification"
+          ],
+          "allowSelfApproval": true
+        },
+        "qualityCommands": [],
+        "inputs": [
+          {
+            "phase": "implementation",
+            "optional": false,
+            "maxBytes": null,
+            "path": "artifacts/implementation/implementation-summary.md"
+          }
+        ],
+        "comparison": {},
+        "template": "common/verification.md",
+        "defaultAgent": "qa"
+      },
+      {
+        "id": "conformance",
+        "order": 3,
+        "label": "Spec-to-code conformance",
+        "defaultTemplate": "common/conformance.md",
+        "artifact": {
+          "path": "artifacts/conformance/spec-code-comparison.md",
+          "kind": "conformance-report",
+          "minimumBytes": 400
+        },
+        "worldModel": {
+          "views": [
+            "architecture",
+            "development",
+            "testing",
+            "security"
+          ],
+          "depth": "deep",
+          "evidence": true
+        },
+        "writeScope": "artifact-only",
+        "comparison": {
+          "identifiers": [
+            "acceptance-criteria",
+            "specification"
+          ],
+          "verdicts": [
+            "matched",
+            "partial",
+            "missing",
+            "deviated",
+            "unplanned"
+          ],
+          "exactFileLineEvidence": true
+        },
+        "approval": {
+          "authorities": [
+            "quality-reviewers",
+            "architecture-reviewers"
+          ],
+          "minimum": 1,
+          "rejectTo": [
+            "implementation-spec",
+            "fix-spec",
+            "implementation",
+            "verification",
+            "conformance"
+          ],
+          "allowSelfApproval": true
+        },
+        "inputs": [
+          {
+            "phase": "implementation",
+            "optional": false,
+            "maxBytes": null,
+            "path": "artifacts/implementation/implementation-summary.md"
+          },
+          {
+            "phase": "verification",
+            "optional": false,
+            "maxBytes": null,
+            "path": "artifacts/verification/test-evidence.md"
+          }
+        ],
+        "template": "common/conformance.md",
+        "defaultAgent": "qa",
+        "qualityCommands": []
+      }
+    ]
+  },
+  "status": "in_progress",
+  "currentPhase": "intake",
+  "phaseOrder": [
+    "intake",
+    "implementation",
+    "verification",
+    "conformance"
+  ],
+  "phases": {
+    "intake": {
+      "id": "intake",
+      "label": "Intake",
+      "order": 0,
+      "defaultAgent": "product-owner",
+      "status": "in_progress",
+      "requiredArtifact": {
+        "path": "artifacts/intake/intake.md",
+        "kind": "intake",
+        "minimumBytes": 200
+      },
+      "template": "chore/intake.md",
+      "worldModel": {
+        "views": [
+          "business"
+        ],
+        "depth": "quick"
+      },
+      "writeScope": "artifact-only",
+      "comparison": {},
+      "inputs": [],
+      "approvalPolicy": {
+        "authorities": [
+          "product-approvers"
+        ],
+        "minimum": 1,
+        "rejectTo": [
+          "intake"
+        ],
+        "allowSelfApproval": true
+      },
+      "qualityCommands": [],
+      "startedAt": "2026-08-04T13:28:25.373Z",
+      "submittedAt": null,
+      "approvedAt": null,
+      "approvedBy": null,
+      "rejectedAt": null,
+      "rejectedBy": null,
+      "rejectionReason": null,
+      "generation": 0,
+      "generatedBy": null,
+      "generatedAgent": null,
+      "usage": [],
+      "telemetry": [],
+      "approvals": [],
+      "artifacts": [],
+      "checks": []
+    },
+    "implementation": {
+      "id": "implementation",
+      "label": "Implementation",
+      "order": 1,
+      "defaultAgent": "developer",
+      "status": "not_started",
+      "requiredArtifact": {
+        "path": "artifacts/implementation/implementation-summary.md",
+        "kind": "implementation-summary",
+        "minimumBytes": 250
+      },
+      "template": "common/implementation.md",
+      "worldModel": {
+        "views": [
+          "development",
+          "testing"
+        ],
+        "depth": "standard"
+      },
+      "writeScope": "source-and-artifact",
+      "comparison": {},
+      "inputs": [
+        {
+          "phase": "intake",
+          "optional": false,
+          "maxBytes": null,
+          "path": "artifacts/intake/intake.md"
+        }
+      ],
+      "approvalPolicy": {
+        "authorities": [
+          "engineering-reviewers"
+        ],
+        "minimum": 1,
+        "rejectTo": [
+          "implementation"
+        ],
+        "allowSelfApproval": true
+      },
+      "qualityCommands": [],
+      "startedAt": null,
+      "submittedAt": null,
+      "approvedAt": null,
+      "approvedBy": null,
+      "rejectedAt": null,
+      "rejectedBy": null,
+      "rejectionReason": null,
+      "generation": 0,
+      "generatedBy": null,
+      "generatedAgent": null,
+      "usage": [],
+      "telemetry": [],
+      "approvals": [],
+      "artifacts": [],
+      "checks": []
+    },
+    "verification": {
+      "id": "verification",
+      "label": "Verification",
+      "order": 2,
+      "defaultAgent": "qa",
+      "status": "not_started",
+      "requiredArtifact": {
+        "path": "artifacts/verification/test-evidence.md",
+        "kind": "test-evidence",
+        "minimumBytes": 300
+      },
+      "template": "common/verification.md",
+      "worldModel": {
+        "views": [
+          "testing",
+          "development",
+          "security"
+        ],
+        "depth": "standard",
+        "evidence": true
+      },
+      "writeScope": "source-and-artifact",
+      "comparison": {},
+      "inputs": [
+        {
+          "phase": "implementation",
+          "optional": false,
+          "maxBytes": null,
+          "path": "artifacts/implementation/implementation-summary.md"
+        }
+      ],
+      "approvalPolicy": {
+        "authorities": [
+          "quality-reviewers"
+        ],
+        "minimum": 1,
+        "rejectTo": [
+          "implementation",
+          "verification"
+        ],
+        "allowSelfApproval": true
+      },
+      "qualityCommands": [],
+      "startedAt": null,
+      "submittedAt": null,
+      "approvedAt": null,
+      "approvedBy": null,
+      "rejectedAt": null,
+      "rejectedBy": null,
+      "rejectionReason": null,
+      "generation": 0,
+      "generatedBy": null,
+      "generatedAgent": null,
+      "usage": [],
+      "telemetry": [],
+      "approvals": [],
+      "artifacts": [],
+      "checks": []
+    },
+    "conformance": {
+      "id": "conformance",
+      "label": "Spec-to-code conformance",
+      "order": 3,
+      "defaultAgent": "qa",
+      "status": "not_started",
+      "requiredArtifact": {
+        "path": "artifacts/conformance/spec-code-comparison.md",
+        "kind": "conformance-report",
+        "minimumBytes": 400
+      },
+      "template": "common/conformance.md",
+      "worldModel": {
+        "views": [
+          "architecture",
+          "development",
+          "testing",
+          "security"
+        ],
+        "depth": "deep",
+        "evidence": true
+      },
+      "writeScope": "artifact-only",
+      "comparison": {
+        "identifiers": [
+          "acceptance-criteria",
+          "specification"
+        ],
+        "verdicts": [
+          "matched",
+          "partial",
+          "missing",
+          "deviated",
+          "unplanned"
+        ],
+        "exactFileLineEvidence": true
+      },
+      "inputs": [
+        {
+          "phase": "implementation",
+          "optional": false,
+          "maxBytes": null,
+          "path": "artifacts/implementation/implementation-summary.md"
+        },
+        {
+          "phase": "verification",
+          "optional": false,
+          "maxBytes": null,
+          "path": "artifacts/verification/test-evidence.md"
+        }
+      ],
+      "approvalPolicy": {
+        "authorities": [
+          "quality-reviewers",
+          "architecture-reviewers"
+        ],
+        "minimum": 1,
+        "rejectTo": [
+          "implementation-spec",
+          "fix-spec",
+          "implementation",
+          "verification",
+          "conformance"
+        ],
+        "allowSelfApproval": true
+      },
+      "qualityCommands": [],
+      "startedAt": null,
+      "submittedAt": null,
+      "approvedAt": null,
+      "approvedBy": null,
+      "rejectedAt": null,
+      "rejectedBy": null,
+      "rejectionReason": null,
+      "generation": 0,
+      "generatedBy": null,
+      "generatedAgent": null,
+      "usage": [],
+      "telemetry": [],
+      "approvals": [],
+      "artifacts": [],
+      "checks": []
+    }
+  },
+  "usage": {
+    "mode": "exact-or-unavailable",
+    "totalTokens": 0,
+    "records": 0,
+    "exactRecords": 0,
+    "unavailableRecords": 0,
+    "byPhase": {},
+    "byAgent": {},
+    "byWorkType": {},
+    "byWorkItem": {}
+  },
+  "telemetry": {
+    "schemaVersion": 1,
+    "mode": "work-item-sanitized"
+  },
+  "documents": {
+    "count": 0,
+    "updatedAt": null
+  },
+  "collaboration": {
+    "assignments": {},
+    "notifications": []
+  },
+  "sequenceOverrides": [],
+  "history": [
+    {
+      "at": "2026-08-04T13:28:25.373Z",
+      "actor": "ashokraj2011",
+      "agent": "product-owner",
+      "event": "work_started",
+      "phase": "intake",
+      "detail": "Created chore branch WRK-456"
+    }
+  ],
+  "publicationProjections": [
+    {
+      "schemaVersion": 1,
+      "event": {
+        "schemaVersion": 1,
+        "eventId": "46ce7e58-27bf-4f7a-a6cb-2f817a460ab8",
+        "type": "binding",
+        "subject": {
+          "kind": "story",
+          "id": "WRK-456",
+          "branch": "WRK-456"
+        },
+        "phaseId": "intake",
+        "generation": 0,
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "login": "ashokraj2011"
+        },
+        "agent": null,
+        "authorityGroup": null,
+        "payload": {
+          "decision": null,
+          "reviewPacketSha256": null
+        },
+        "sourceCommit": null,
+        "idempotencyKey": null,
+        "idempotencyHash": null,
+        "createdAt": "2026-08-04T13:28:25.906Z"
+      },
+      "ledgerIntent": {
+        "schemaVersion": 1,
+        "eventId": "46ce7e58-27bf-4f7a-a6cb-2f817a460ab8",
+        "eventType": "binding",
+        "capabilityId": "rule-ux",
+        "subject": {
+          "branch": "WRK-456",
+          "generation": 0,
+          "phase": "intake",
+          "workId": "WRK-456",
+          "workType": "chore"
+        },
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "githubLogin": "ashokraj2011",
+          "identityAssurance": "configured-local"
+        },
+        "agent": null,
+        "authorityGroup": null,
+        "payload": {
+          "capabilityMapSha256": "d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b",
+          "capabilityPolicy": {
+            "protectedPaths": [],
+            "qualityCommands": [],
+            "requiredAuthorityGroups": [],
+            "requiredChecks": [],
+            "requiredWorldModelViews": []
+          },
+          "configPath": "singularity/workflow.yml",
+          "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
+          "lifecycleEventId": "46ce7e58-27bf-4f7a-a6cb-2f817a460ab8",
+          "lifecyclePayload": {
+            "decision": null,
+            "reviewPacketSha256": null
+          },
+          "templateSha256": "6e84e6cee5c5c25c7bad11809f245126b646ad9e4c76503876bd77cfaf08112d"
+        },
+        "createdAt": "2026-08-04T13:28:25.912Z"
+      }
+    }
+  ]
+}
