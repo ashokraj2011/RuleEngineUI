@@ -1,40 +1,70 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-08-04T14:48:37Z",
-  "repository_commit": "c9680d4f78d1cc34be385f6629b9be0df4b3c31d",
+  "generated_at": "2026-08-04T15:06:58Z",
+  "repository_commit": "b34c514287ef4436c14ab00b964f233759334871",
   "entries": [
     {
-      "glob": "src/app/components/**",
+      "glob": "src/app/components/{rule-sets,rule-canvas,rule-config}/**",
       "component_ids": [
-        "ui-console"
+        "rule-authoring-ui"
       ],
-      "domains": [],
+      "domains": [
+        "rule-testing"
+      ],
       "views": [
-        "business"
+        "development"
       ],
       "symbols": [
-        "AppComponent",
         "RuleSetsComponent",
-        "DecisionTableComponent"
+        "RuleCanvasComponent",
+        "RuleConfigComponent"
       ],
       "tests": [
         "src/app/kernel/kernel.spec.ts"
       ],
       "anchors": [
-        "biz.capabilities",
-        "biz.rules",
-        "biz.entities"
+        "dev.structure",
+        "dev.flows",
+        "dev.impact"
       ],
-      "notes": "Changes in the UI shell and component tree affect the visible business workflow and the implementation entry points."
+      "notes": "Grounding for rule-authoring UI changes and sub-view wiring."
+    },
+    {
+      "glob": "src/app/components/validator/**",
+      "component_ids": [
+        "validator-studio"
+      ],
+      "domains": [
+        "rule-testing"
+      ],
+      "views": [
+        "development"
+      ],
+      "symbols": [
+        "ShellComponent",
+        "OverviewTabComponent",
+        "ValidateTabComponent"
+      ],
+      "tests": [
+        "src/app/kernel/kernel.spec.ts"
+      ],
+      "anchors": [
+        "dev.start",
+        "dev.validation",
+        "dev.hotspots"
+      ],
+      "notes": "Grounding for validator, generated cases, coverage, and evaluation changes."
     },
     {
       "glob": "src/app/kernel/**",
       "component_ids": [
-        "rule-kernel"
+        "kernel"
       ],
-      "domains": [],
+      "domains": [
+        "rule-testing"
+      ],
       "views": [
-        "business"
+        "development"
       ],
       "symbols": [
         "Evaluator",
@@ -46,38 +76,38 @@
         "src/app/kernel/kernel.spec.ts"
       ],
       "anchors": [
-        "biz.capabilities",
-        "biz.rules",
-        "biz.entities"
+        "dev.facts",
+        "dev.hotspots",
+        "dev.impact"
       ],
-      "notes": "The kernel is the implementation core for rule evaluation, validation, and coverage."
+      "notes": "Grounding for semantic rule changes and coverage logic."
     },
     {
       "glob": "server/**",
       "component_ids": [
-        "rule-api"
+        "backend-api"
       ],
-      "domains": [],
+      "domains": [
+        "rule-testing"
+      ],
       "views": [
-        "business"
+        "development"
       ],
       "symbols": [
         "initDb",
-        "app.post",
-        "app.get"
+        "pool"
       ],
       "tests": [],
       "anchors": [
-        "biz.capabilities",
-        "biz.rules",
-        "biz.entities"
+        "dev.config",
+        "dev.debug"
       ],
-      "notes": "Changes in the backend affect persistence of rules, glossary terms, and API availability."
+      "notes": "Grounding for glossary, rules, and database-backed API behavior."
     }
   ],
   "fallback": {
     "views": [
-      "business"
+      "development"
     ],
     "anchors": [
       "core.map"
