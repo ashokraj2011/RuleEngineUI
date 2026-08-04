@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-04T14:48:37Z",
+  "repository_commit": "c9680d4f78d1cc34be385f6629b9be0df4b3c31d",
+  "entries": [
+    {
+      "glob": "src/app/components/**",
+      "component_ids": [
+        "ui-console"
+      ],
+      "domains": [],
+      "views": [
+        "business"
+      ],
+      "symbols": [
+        "AppComponent",
+        "RuleSetsComponent",
+        "DecisionTableComponent"
+      ],
+      "tests": [
+        "src/app/kernel/kernel.spec.ts"
+      ],
+      "anchors": [
+        "biz.capabilities",
+        "biz.rules",
+        "biz.entities"
+      ],
+      "notes": "Changes in the UI shell and component tree affect the visible business workflow and the implementation entry points."
+    },
+    {
+      "glob": "src/app/kernel/**",
+      "component_ids": [
+        "rule-kernel"
+      ],
+      "domains": [],
+      "views": [
+        "business"
+      ],
+      "symbols": [
+        "Evaluator",
+        "Linter",
+        "Synthesizer",
+        "computeCoverage"
+      ],
+      "tests": [
+        "src/app/kernel/kernel.spec.ts"
+      ],
+      "anchors": [
+        "biz.capabilities",
+        "biz.rules",
+        "biz.entities"
+      ],
+      "notes": "The kernel is the implementation core for rule evaluation, validation, and coverage."
+    },
+    {
+      "glob": "server/**",
+      "component_ids": [
+        "rule-api"
+      ],
+      "domains": [],
+      "views": [
+        "business"
+      ],
+      "symbols": [
+        "initDb",
+        "app.post",
+        "app.get"
+      ],
+      "tests": [],
+      "anchors": [
+        "biz.capabilities",
+        "biz.rules",
+        "biz.entities"
+      ],
+      "notes": "Changes in the backend affect persistence of rules, glossary terms, and API availability."
+    }
+  ],
+  "fallback": {
+    "views": [
+      "business"
+    ],
+    "anchors": [
+      "core.map"
+    ]
+  }
+}
