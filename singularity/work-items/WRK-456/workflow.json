@@ -636,7 +636,7 @@
     ]
   },
   "status": "in_progress",
-  "currentPhase": "implementation",
+  "currentPhase": "verification",
   "phaseOrder": [
     "intake",
     "implementation",
@@ -764,7 +764,7 @@
       "label": "Implementation",
       "order": 1,
       "defaultAgent": "developer",
-      "status": "awaiting_approval",
+      "status": "approved",
       "requiredArtifact": {
         "path": "artifacts/implementation/implementation-summary.md",
         "kind": "implementation-summary",
@@ -801,8 +801,8 @@
       "qualityCommands": [],
       "startedAt": "2026-08-04T14:59:48.971Z",
       "submittedAt": "2026-08-04T15:25:29.937Z",
-      "approvedAt": null,
-      "approvedBy": null,
+      "approvedAt": "2026-08-04T15:34:09.103Z",
+      "approvedBy": "ashokraj2011",
       "rejectedAt": null,
       "rejectedBy": null,
       "rejectionReason": null,
@@ -843,17 +843,37 @@
           "providerCost": null
         }
       ],
-      "approvals": [],
+      "approvals": [
+        {
+          "decision": "approved",
+          "phase": "implementation",
+          "at": "2026-08-04T15:34:09.103Z",
+          "actor": {
+            "name": "Ashok Raj",
+            "email": "88361104+ashokraj2011@users.noreply.github.com",
+            "login": "ashokraj2011"
+          },
+          "agent": "developer",
+          "authorityGroup": "engineering-reviewers",
+          "identityAssurance": "configured-local",
+          "channel": "terminal",
+          "generation": 1,
+          "reviewPacketSha256": "e1c7c291a2f4a8f5d11696eeedcc31030f6e22641762ca1f3e352ff40d2c1ded",
+          "selfApproval": true
+        }
+      ],
       "artifacts": [
         {
           "path": "singularity/work-items/WRK-456/artifacts/implementation/implementation-summary.md",
           "kind": "document",
-          "status": "pending",
+          "status": "approved",
           "exists": true,
-          "size": 6265,
-          "sha256": "a8d20c5d6bb57142d5776b4f3154bcdc5ccc25c5c4cdda08760c37cf2efd94da",
+          "size": 6826,
+          "sha256": "f591539c257bf99f3cf0bac4aa49de1e456f385c85581421a1b0f60b2131e6d0",
           "registeredAt": "2026-08-04T15:25:15.984Z",
-          "updatedAt": "2026-08-04T15:25:29.939Z"
+          "updatedAt": "2026-08-04T15:25:29.939Z",
+          "approvedAt": "2026-08-04T15:34:09.103Z",
+          "approvedBy": "ashokraj2011"
         }
       ],
       "checks": [],
@@ -874,7 +894,7 @@
       "label": "Verification",
       "order": 2,
       "defaultAgent": "qa",
-      "status": "not_started",
+      "status": "in_progress",
       "requiredArtifact": {
         "path": "artifacts/verification/test-evidence.md",
         "kind": "test-evidence",
@@ -912,7 +932,7 @@
         "allowSelfApproval": true
       },
       "qualityCommands": [],
-      "startedAt": null,
+      "startedAt": "2026-08-04T15:34:09.103Z",
       "submittedAt": null,
       "approvedAt": null,
       "approvedBy": null,
@@ -1120,6 +1140,14 @@
       "event": "phase_submitted",
       "phase": "implementation",
       "detail": "1 artifacts"
+    },
+    {
+      "at": "2026-08-04T15:34:09.103Z",
+      "actor": "ashokraj2011",
+      "agent": "developer",
+      "event": "phase_self_approved",
+      "phase": "implementation",
+      "detail": "threshold reached; advanced to verification"
     }
   ],
   "publicationProjections": [
@@ -1541,6 +1569,76 @@
           "templateSha256": "5d0478b18c8fd14221e14c68e6238b909bccd6802a70262c416005354716c62c"
         },
         "createdAt": "2026-08-04T15:25:30.977Z"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "event": {
+        "schemaVersion": 1,
+        "eventId": "809a9287-6cd0-43c8-827f-1fd07be1a9bd",
+        "type": "phase-approved",
+        "subject": {
+          "kind": "story",
+          "id": "WRK-456",
+          "branch": "WRK-456"
+        },
+        "phaseId": "implementation",
+        "generation": 1,
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "login": "ashokraj2011"
+        },
+        "agent": "developer",
+        "authorityGroup": "engineering-reviewers",
+        "payload": {
+          "decision": "approved",
+          "reviewPacketSha256": "e1c7c291a2f4a8f5d11696eeedcc31030f6e22641762ca1f3e352ff40d2c1ded"
+        },
+        "sourceCommit": null,
+        "idempotencyKey": null,
+        "idempotencyHash": null,
+        "createdAt": "2026-08-04T15:34:09.123Z"
+      },
+      "ledgerIntent": {
+        "schemaVersion": 1,
+        "eventId": "809a9287-6cd0-43c8-827f-1fd07be1a9bd",
+        "eventType": "phase-approved",
+        "capabilityId": "rule-ux",
+        "subject": {
+          "branch": "WRK-456",
+          "generation": 1,
+          "phase": "implementation",
+          "workId": "WRK-456",
+          "workType": "chore"
+        },
+        "actor": {
+          "name": "Ashok Raj",
+          "email": "88361104+ashokraj2011@users.noreply.github.com",
+          "githubLogin": "ashokraj2011",
+          "identityAssurance": "configured-local"
+        },
+        "agent": "developer",
+        "authorityGroup": "engineering-reviewers",
+        "payload": {
+          "capabilityMapSha256": "d16a62d17a34cece530066ed82b2660515ca66db16ff4edc0c06262d6f69d10b",
+          "capabilityPolicy": {
+            "protectedPaths": [],
+            "qualityCommands": [],
+            "requiredAuthorityGroups": [],
+            "requiredChecks": [],
+            "requiredWorldModelViews": []
+          },
+          "configPath": "singularity/workflow.yml",
+          "configSha256": "a76354b372bcb4d094e70c62dd1a22bf283d651d8d7f3ea385b126123fa3dd32",
+          "lifecycleEventId": "809a9287-6cd0-43c8-827f-1fd07be1a9bd",
+          "lifecyclePayload": {
+            "decision": "approved",
+            "reviewPacketSha256": "e1c7c291a2f4a8f5d11696eeedcc31030f6e22641762ca1f3e352ff40d2c1ded"
+          },
+          "templateSha256": "5d0478b18c8fd14221e14c68e6238b909bccd6802a70262c416005354716c62c"
+        },
+        "createdAt": "2026-08-04T15:34:09.129Z"
       }
     }
   ]

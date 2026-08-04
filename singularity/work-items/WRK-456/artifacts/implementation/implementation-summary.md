@@ -31,7 +31,7 @@ Completed the repository-world-model grounding work for this chore without chang
   "workType": "chore",
   "phase": "implementation",
   "generation": 1,
-  "status": "awaiting_approval",
+  "status": "approved",
   "generatedBy": {
     "name": "Ashok Raj",
     "email": "88361104+ashokraj2011@users.noreply.github.com",
@@ -87,8 +87,26 @@ Completed the repository-world-model grounding work for this chore without chang
     }
   ],
   "sequenceOverrides": [],
-  "approvals": [],
-  "selfApproval": false,
+  "approvals": [
+    {
+      "decision": "approved",
+      "phase": "implementation",
+      "at": "2026-08-04T15:34:09.103Z",
+      "actor": {
+        "name": "Ashok Raj",
+        "email": "88361104+ashokraj2011@users.noreply.github.com",
+        "login": "ashokraj2011"
+      },
+      "agent": "developer",
+      "authorityGroup": "engineering-reviewers",
+      "identityAssurance": "configured-local",
+      "channel": "terminal",
+      "generation": 1,
+      "reviewPacketSha256": "e1c7c291a2f4a8f5d11696eeedcc31030f6e22641762ca1f3e352ff40d2c1ded",
+      "selfApproval": true
+    }
+  ],
+  "selfApproval": true,
   "conformanceTree": null
 }
 -->
