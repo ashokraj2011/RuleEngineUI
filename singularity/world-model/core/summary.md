@@ -1,85 +1,72 @@
-> **Grounding** · RuleEngineUI @ `b34c514287ef4436c14ab00b964f233759334871` · view: `core` · tier: `full`
-> **Generated** 4 August 2026 (2026-08-04T15:13:27.439Z) · depth: `standard` · builder `2.0`
+> **Grounding** · RuleEngineUI @ `b4e86974ed427e76afbbd98c7403339e34b6bee9` · view: `core` · tier: `full`
+> **Generated** 4 August 2026 (2026-08-04T15:19:35Z) · depth: `standard` · builder `2.0`
 > **Authoritative for:** file locations, entry points, commands, structural relationships as of the commit above.
 > **Not authoritative for:** current file contents. If this document conflicts with code you have read, trust the code and say so explicitly in your output.
 > **Unknowns are marked.** Do not resolve them by inference. If the repository has changed since the date above, treat locations as hints, not facts.
 
 ## TL;DR {#core.tldr}
-RuleEngineUI is a browser-based rule-authoring and validation console for decision logic, backed by a small Express/Postgres API for glossary and rule persistence. The Angular app centers on data-schema management, a rule designer, decision-table editing, and a validator studio that evaluates rules through a framework-agnostic kernel. The main entry points are `src/main.ts`, `src/app/app.component.ts`, and `server/index.js`. The repo builds with Angular CLI and runs locally, but runtime behavior depends on a reachable Postgres instance and optional Gemini credentials.
+This repository is a mixed Angular and Node.js rule-engine workspace for authoring, validating, and testing business rules. The main surface is a frontend console for schema exploration, rule design, canvas-based flow modeling, and validator studio; the backend exposes REST endpoints for rules and glossary data backed by PostgreSQL. Most implementation work should start in the Angular app for UI and state, in the rule kernel for evaluation logic, and in the Express server for persistence and AI-assisted naming. The working tree is not clean at inspection time, so grounding should be treated as describing the current commit plus local deletions rather than a pristine checkout.
 
 ## Facts {#core.facts}
+
 ```yaml
-repository:
-  name: RuleEngineUI
-  root: .
-  branch: detached-HEAD
-  commit: b34c514287ef4436c14ab00b964f233759334871
-  working_tree_clean: false
-  repository_kind: multi-service
-  languages: [TypeScript, JavaScript, HTML, CSS]
-  package_roots: [., server]
-components:
-  - { id: frontend-app, name: Angular rule-console, kind: frontend, paths: [src/, src/app/] }
-  - { id: rule-kernel, name: Pure rule evaluation kernel, kind: library, paths: [src/app/kernel/] }
-  - { id: backend-api, name: Express glossary and rule API, kind: service, paths: [server/] }
+repository_name: RuleEngineUI
+repository_kind: mixed
+languages: [TypeScript, JavaScript, HTML, CSS]
+package_roots: [., server]
+components: [frontend-app, kernel-engine, validator-studio, backend-service]
 entrypoints:
-  - { id: angular-bootstrap, path: src/main.ts:1-6, invocation: "npm start" }
-  - { id: app-shell, path: src/app/app.component.ts:27-150, invocation: "Angular app root" }
-  - { id: api-server, path: server/index.js:7-204, invocation: "node server/index.js" }
+  - { id: ui-entry, path: src/main.ts, invocation: "npm start" }
+  - { id: backend-entry, path: server/index.js, invocation: "node server/index.js" }
 standard_commands:
-  - { command: "npm start", purpose: "start the Angular dev server", source: package.json:4-9 }
-  - { command: "npm run build", purpose: "build the Angular application", source: package.json:4-9 }
-  - { command: "npm test -- --watch=false --browsers=ChromeHeadless", purpose: "run the Karma suite", source: package.json:4-9 }
+  - { command: "npm run build", purpose: "build Angular application" }
+  - { command: "npm test", purpose: "run Angular unit tests" }
+  - { command: "node server/index.js", purpose: "launch Express API server" }
+working_tree_clean: false
 ```
 
+Evidence IDs: e1, e2, e4.
+
 ## Repository purpose {#core.purpose}
-This repository is a rule-engine console for authoring decision policies, testing them, and inspecting their execution history. The product experience is a single-page Angular application that mixes schema design, rule composition, and validator workflows, while a small backend exposes persistence and AI-assisted rule naming.
+The repository is a rule-authoring and rule-validation console for business logic workflows. The visible app concepts are decision rules, data glossary fields, validator test cases, and flow-canvas nodes used to model selection and routing logic. From the code, the repository appears to target fraud, compliance, or transaction-routing scenarios rather than a generic CRUD application. The sample data and initial UI labels point to transaction and customer attributes, but the code does not define a production domain boundary beyond those examples.
 
 ## Repository type and languages {#core.type}
-The repo is a hybrid web application: a TypeScript-based Angular frontend with a separate Node.js/Express service. The codebase uses TypeScript for the UI and kernel, JavaScript for the server, and HTML/CSS for templates and styling.
+The repo is a mixed-codebase application with an Angular frontend and an Express server. The frontend is TypeScript-based and uses Angular 17 with standalone components, Tailwind-style utility classes, and Karma/Jasmine for tests. The backend is JavaScript/Node.js with Express, PostgreSQL via `pg`, and optional Gemini API integration for rule-name generation. The root package manifests are `package.json` and `server/package.json`.
 
-## Main applications, packages, or services {#core.components}
-- `frontend-app`: the main Angular UI, implemented under `src/app/` and bootstrapped by `src/main.ts`.
-- `rule-kernel`: a framework-agnostic rule engine and validation suite under `src/app/kernel/`, consumed by Angular services.
-- `backend-api`: an Express API under `server/` that serves rules/glossary data from PostgreSQL and optionally generates names with Gemini.
+## Main applications and services {#core.components}
+The primary user-facing application is the Angular UI under `src/app`, which mixes several sub-surfaces: a schema explorer, rule designer, flow canvas, configuration panel, functions library, history logs, and validator studio. The `src/app/kernel` subtree is a framework-agnostic engine for rule evaluation, linting, synthesis, and branch-coverage analysis; it is intentionally decoupled from Angular. The Express service in `server/` stores rules and glossary rows in PostgreSQL, serves them over REST, and provides a health endpoint. The repo therefore behaves like a local product prototype rather than a production backend with a fully split microservice topology.
 
 ## High-level component map {#core.map}
-The Angular app renders a sidebar-driven console with tabs for schema, rules, validator studio, functions, and history. The rule-engine service bridges Angular components to the kernel; the store service persists test cases, fixtures, suites, and run history locally; the backend provides glossary data from Postgres and can be reached from the browser at `http://localhost:65421/api/glossary` by the current app bootstrap logic.
+- `src/main.ts` bootstraps the Angular app.
+- `src/app/app.component.ts` hosts the top-level console and wires the UI to the rule store and engine services.
+- `src/app/services/rule-store.service.ts` holds validator state, persistence, and seeded demo test cases.
+- `src/app/services/rule-engine.service.ts` is the Angular facade over the kernel.
+- `src/app/kernel/*` implements evaluation, logical operators, type-aware comparisons, synthesis, linting, and coverage.
+- `server/index.js` and `server/db.js` implement REST endpoints and PostgreSQL schema initialization.
 
 ## Main entry points {#core.entrypoints}
-- `src/main.ts`: bootstraps the Angular app.
-- `src/app/app.component.ts`: composes the top-level UI and loads glossary data on initialization.
-- `src/app/services/rule-engine.service.ts`: exposes the rule engine facade used by the UI.
-- `server/index.js`: starts the Express API and defines REST endpoints for rules, glossary, and health checks.
+The primary browser entry point is `src/main.ts`, which bootstraps `AppComponent`. For runtime behavior, the app fetches glossary data from the backend at `http://localhost:65421/api/glossary` during startup, so the UI expects the server to be running. The backend server entry point is `server/index.js`; it listens on `process.env.PORT || 3000` and exposes `/api/health`, `/api/rules`, `/api/glossary`, and `/api/generate-name`. The kernel entry point is `src/app/kernel/index.ts`, which re-exports the engine modules that the Angular services depend on.
 
 ## Primary technologies {#core.tech}
-- Angular 17, standalone components, and Angular router.
-- TypeScript, RxJS, and Zone.js for the client runtime.
-- Express, CORS, dotenv, pg, and the Google Generative AI SDK for the backend.
-- Tailwind-style utility classes and Lucide icons in the UI.
+Angular 17, TypeScript, RxJS, Zone.js, and standalone Angular components form the frontend. The rule engine uses plain TypeScript with explicit AST-like terms, three-valued logic, and a schema registry. The backend uses Express, `pg`, `dotenv`, and optional Gemini generation. Local persistence for the validator experience is browser `localStorage`, not a remote database.
 
 ## Standard build and test commands {#core.commands}
-- `npm start` starts the Angular dev server.
-- `npm run build` produces the production bundle under `dist/logic-engine`.
-- `npm test -- --watch=false --browsers=ChromeHeadless` runs the Karma suite.
-- `node server/index.js` starts the backend service, assuming the database and environment variables are available.
+Use the root package scripts for the UI: `npm run build` and `npm test` from the repo root. The server package exposes `npm start` in `server/`. The Angular test suite is configured through Karma in `angular.json`, and the kernel has a dedicated Jasmine spec at `src/app/kernel/kernel.spec.ts`. The repository does not appear to define a single end-to-end test pipeline beyond the Angular/Karma setup.
 
 ## Important risks {#core.risks}
-- The frontend currently expects a backend at `http://localhost:65421` and a PostgreSQL database; without those, glossary loading and persistence-backed features degrade.
-- The backend uses environment-driven PostgreSQL and Gemini configuration, so local development depends on `.env` values being present.
-- The Angular build emits a large initial bundle and already shows Tailwind-related build warnings in this environment.
+- The frontend and backend are loosely wired: the app assumes the backend is running locally and hard-codes a development URL for glossary fetches.
+- The server uses a PostgreSQL connection with a default local database and a placeholder Gemini API key fallback; local runtime behavior depends on environment configuration.
+- The rule engine is central to behavior but is not a full formal rules engine; its semantics are embedded in TypeScript modules and validated mainly by unit tests.
 
 ## Important unknowns {#core.unknowns}
-- There is no deployment manifest or CI/CD workflow in the inspected tree, so release automation is not grounded from source.
-- The repository does not show a production database schema or migration strategy beyond the server-side `CREATE TABLE IF NOT EXISTS` statements.
-- The app appears to be a demo/console experience rather than a deployed rule-service; runtime integrations beyond the local UI and backend are not evidenced here.
+- The repository does not include production deployment manifests or a complete release pipeline beyond the Angular build/test setup.
+- No explicit domain model or API contract document was found for the business rules beyond the demo data and initial glossary seeds.
+- The backend is not clearly wired to a production auth or secrets management setup in the checked-in files.
 
 ## Commit, generation date, and freshness warning {#core.freshness}
-Inspected commit: `b34c514287ef4436c14ab00b964f233759334871`.
-Generated at `2026-08-04T15:13:27.439Z` on 4 August 2026.
-This output is grounded to that commit and the current worktree state; the repository was not clean at inspection time because tracked files under `singularity/` were already missing from the worktree.
+Inspected commit: `b4e86974ed427e76afbbd98c7403339e34b6bee9` on branch `HEAD`. Generated on 4 August 2026 at 2026-08-04T15:19:35Z. The working tree is not clean because the isolated analysis copy removed generated `singularity/world-model` and `singularity/work-items` artifacts from the checkout; treat this grounding as a snapshot of the inspected commit plus that local deletion state.
 
 ## Recommended next view for each common task {#core.routing}
-- Implementing or debugging rule logic: `views/development.md`.
-- Adding or changing validator workflows: `views/development.md`.
-- Reviewing business-facing behavior or domain vocabulary: start with `views/development.md` and then ask for a business view if needed.
+- Implementing or debugging rules: `views/development.md`.
+- Designing a new UI surface: `views/development.md` with attention to `src/app/app.component.ts` and the relevant component under `src/app/components/`.
+- Changing persistence or API contract behavior: `views/development.md` plus `server/index.js` and `server/db.js`.

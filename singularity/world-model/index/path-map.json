@@ -1,21 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-08-04T15:13:27.439Z",
-  "repository_commit": "b34c514287ef4436c14ab00b964f233759334871",
+  "generated_at": "2026-08-04T15:19:35Z",
+  "repository_commit": "b4e86974ed427e76afbbd98c7403339e34b6bee9",
   "entries": [
     {
       "glob": "src/app/kernel/**",
       "component_ids": [
-        "rule-kernel"
+        "kernel-engine"
       ],
       "domains": [],
       "views": [
         "development"
       ],
       "symbols": [
-        "RuleEngineService",
-        "SchemaRegistry",
-        "SAMPLE_SCHEMA"
+        "Evaluator",
+        "Linter",
+        "Synthesizer",
+        "computeCoverage"
       ],
       "tests": [
         "src/app/kernel/kernel.spec.ts"
@@ -24,11 +25,12 @@
         "dev.impact",
         "dev.hotspots"
       ],
-      "notes": "Rule semantics, linting, synthesis, and coverage all live in the kernel and should be reviewed together."
+      "notes": "Changes here affect rule evaluation, linting, coverage, and synthesized test data."
     },
     {
       "glob": "src/app/services/**",
       "component_ids": [
+        "validator-studio",
         "frontend-app"
       ],
       "domains": [],
@@ -37,7 +39,8 @@
       ],
       "symbols": [
         "RuleStoreService",
-        "RuleEngineService"
+        "RuleEngineService",
+        "LocalStoragePort"
       ],
       "tests": [
         "src/app/kernel/kernel.spec.ts"
@@ -46,10 +49,10 @@
         "dev.start",
         "dev.impact"
       ],
-      "notes": "Service-layer changes affect the validator workflow and the Angular facade around the kernel."
+      "notes": "Service-layer changes modify validator state, persistence, and the Angular facade over the kernel."
     },
     {
-      "glob": "src/app/components/validator/**",
+      "glob": "src/app/components/rule-canvas/**",
       "component_ids": [
         "frontend-app"
       ],
@@ -58,35 +61,35 @@
         "development"
       ],
       "symbols": [
-        "ShellComponent"
+        "RuleCanvasComponent"
       ],
-      "tests": [
-        "src/app/kernel/kernel.spec.ts"
-      ],
+      "tests": [],
       "anchors": [
         "dev.start",
-        "dev.impact"
+        "dev.hotspots"
       ],
-      "notes": "Validator UI changes often require updates in the store and shell component wiring."
+      "notes": "Canvas-editor changes affect the visual flow designer and the node/edge model used by the UI."
     },
     {
       "glob": "server/**",
       "component_ids": [
-        "backend-api"
+        "backend-service"
       ],
       "domains": [],
       "views": [
         "development"
       ],
       "symbols": [
-        "initDb"
+        "initDb",
+        "/api/rules",
+        "/api/glossary"
       ],
       "tests": [],
       "anchors": [
-        "dev.config",
+        "dev.start",
         "dev.hotspots"
       ],
-      "notes": "Backend changes affect persistence initialization and the API contract used by the frontend."
+      "notes": "Server changes affect rule persistence, glossary seeding, and API behavior."
     }
   ],
   "fallback": {
