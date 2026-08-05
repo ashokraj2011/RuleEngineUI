@@ -1,70 +1,66 @@
-> **Grounding** · logic-engine @ `c9680d4f78d1cc34be385f6629b9be0df4b3c31d` · view: `business` · tier: `full`
-> **Generated** 04 August 2026 (2026-08-04T14:48:37Z) · depth: `quick` · builder `2.0`
+> **Grounding** · RuleEngineUI @ `ceed449863d693f203efab6d44259d8dc4655d68` · view: `{view_id}` · tier: `{tier}`
+> **Generated** 05 August 2026 (2026-08-05T13:52:52Z) · depth: `quick` · builder `2.0`
 > **Authoritative for:** file locations, entry points, commands, structural relationships as of the commit above.
 > **Not authoritative for:** current file contents. If this document conflicts with code you have read, trust the code and say so explicitly in your output.
 > **Unknowns are marked.** Do not resolve them by inference. If the repository has changed since the date above, treat locations as hints, not facts.
 
 ## TL;DR {#biz.tldr}
-This repository supports a business-facing workflow for authoring, validating, and reviewing decision rules. The observable domain is transaction/risk/fraud logic, with sample rules, sample data, execution logs, and glossary terms that model user context, account state, and KYC or fraud checks. The main business value is not a generic web app but a rule-testing studio where analysts and engineers can define rules, inspect outcomes, and review failure cases before deployment. Start with `src/app/data.ts`, `src/app/services/rule-store.service.ts`, and `server/db.js`.
+This view explains the repository’s business-facing capabilities without diving into implementation details. The checked-in product surface is a rule-authoring console for decision logic and validation, with sample content around transaction review, fraud/risk decisions, and rule governance. The main user roles appear to be rule authors/operators, reviewers, and administrators. The strongest business signals are in the UI labels, sample rules, and glossary terms such as customer, account, fraud, and loyalty. The biggest uncertainty is the exact domain of WRK-999; the code suggests a general rule-engine platform rather than a single product-specific workflow.
 
 ## Facts {#biz.facts}
+
 ```yaml
 capabilities:
-  - { id: rule-authoring, evidence: "src/app/app.component.ts:27-150" }
-  - { id: rule-validation, evidence: "src/app/services/rule-store.service.ts:140-363" }
-  - { id: glossary-management, evidence: "server/index.js:151-195" }
+  - { id: rule-authoring, evidence: "src/app/app.component.ts:46-151" }
+  - { id: rule-validation, evidence: "src/app/components/sidebar/sidebar.component.ts:57-196" }
+  - { id: rule-persistence, evidence: "server/index.js:72-204" }
 actors:
-  - { role: rule author, evidence: "src/app/app.component.html:13-184" }
-  - { role: validator or reviewer, evidence: "src/app/services/rule-store.service.ts:140-363" }
-  - { role: support operator, evidence: "src/app/app.component.html:172-183" }
-workflow_examples:
-  - { name: create and test a decision rule, evidence: "src/app/data.ts:1-40" }
-  - { name: inspect execution history, evidence: "src/app/data.ts:237-371" }
+  - { role: rule author, evidence: "src/app/components/sidebar/sidebar.component.ts:26-35" }
+  - { role: reviewer or operator, evidence: "src/app/components/sidebar/sidebar.component.ts:57-196" }
+  - { role: admin or support user, evidence: "src/app/components/sidebar/sidebar.component.ts:112-125" }
+workflow_terms: [rule, glossary, schema, validator, history, publish]
 ```
 
 ## Capability map {#biz.capabilities}
-The repository exposes three business capabilities that are visible in the code:
-- Rule authoring and configuration: the UI includes schema definition, rule sets, decision-table editing, and rule configuration screens `src/app/app.component.html:113-152` and `src/app/data.ts:1-40`.
-- Rule validation and test management: the validator studio can generate system cases, save fixtures, group cases into suites, run cases, track coverage, and inspect regression diffs `src/app/services/rule-store.service.ts:140-363`.
-- Rule and glossary persistence: the backend stores rule metadata and glossary terms so the UI can load them from a database `server/index.js:72-195`.
+The repository’s visible capabilities are centered on decision-rule lifecycle management:
+- Authoring: the main console provides rule, schema, functions, and history surfaces. The UI is designed for creating and managing decision rules rather than just viewing static contents.
+- Validation: the validator studio includes dashboard, test-data, generated cases, evaluate, coverage, validate, and library tabs, suggesting a workflow for testing and reviewing rules before release.
+- Publication and governance: the UI includes a publish action and a “Drafts / Staging / Production” model, which implies a staged rule lifecycle even though the current code is mostly UI-driven.
+- Persistence and glossary management: the backend exposes CRUD endpoints for rules and glossary entries, so the platform is not purely a static demo.
 
-## Actors and user archetypes {#biz.actors}
-The code indicates at least three human roles:
-- Rule authors or policy designers who create or adjust rules and schema fields. The main UI tabs and actions support this workflow `src/app/app.component.ts:102-150`.
-- Validators or reviewers who execute test cases, inspect coverage, and compare results against expectations `src/app/services/rule-store.service.ts:273-320`.
-- Support or operations staff who can open incident-style support views or review execution history `src/app/app.component.html:172-183` and `src/app/data.ts:237-371`.
+## Actors and workflow map {#biz.workflows}
+The code makes the following actors visible:
+- Rule authors or business analysts: they can create or edit rules, schema fields, and decision structures.
+- Validation reviewers: they can generate test cases, run evaluations, inspect coverage, and review history logs.
+- Administrators or support users: the sidebar and support console imply an operational role for configuration, support escalation, and workflow management.
+The business workflow that is most visible is: define a schema, author a rule, validate it against scenarios, publish it to a lifecycle stage, and review execution history. The shipped sample data also suggests a review/approval and fraud-risk decision context.
 
-## Business workflows {#biz.workflows}
-The most visible workflow is “define rule -> test rule -> review outcome -> publish/record.” In the sample data, the app models rules such as Block, Review, and Approve responses for transaction-risk scenarios `src/app/data.ts:1-40`. The validator workflow seeds sample cases, records run history, and can classify mismatches as matches, bugs, or data drift `src/app/services/rule-store.service.ts:108-126` and `src/app/services/rule-store.service.ts:273-320`. The backend workflow stores rule and glossary entries and serves them back to the UI `server/index.js:72-195`.
-
-## Entities and vocabulary {#biz.entities}
-The business vocabulary is centered on rules, schemas, test cases, fixtures, suites, and execution logs. Observed entities include user context, customer account, transaction data, KYC status, device velocity, and fraud risk score names in the glossary and sample data `server/db.js:47-83` and `src/app/data.ts:42-50`. The rule language uses terms such as `rulemetadata`, `session`, `customer`, `account`, and `kyc_service` as namespaces `server/db.js:47-83`.
+## Business entities and vocabulary {#biz.entities}
+The repository vocabulary is mostly rule-engine language, but it is grounded in business-oriented terms. Observed domain words include transaction, risk score, device velocity, geo match, account, customer, fraud, loyalty, review, approve, block, and rule metadata. The glossary seeding in `server/db.js` explicitly includes `customer`, `account`, `session`, `fraud_check`, and `kyc_service` concepts, which indicates that the platform is intended to support policies that connect customer/account context with business decisions.
 
 ## Business rules and policy locations {#biz.rules}
-Business logic appears in three places:
-- Sample decision rules and outcomes live in `src/app/data.ts:1-40`, where rule responses include Block, Review, and Approve actions.
-- The glossary and backend seed data encode business-facing concepts such as customer age, country, tier, account balance, verification status, and fraud risk score `server/db.js:47-83`.
-- The execution logs show operational policy signals such as “manual review”, “decline”, and “geo-enrichment timeout” for decision outcomes `src/app/data.ts:237-371`.
+The code shows policy-like logic in three places:
+- Sample rules and initial decision rules in `src/app/data.ts` model approval or review actions, such as blocks, reviews, and approvals based on user type, spend thresholds, and region.
+- The server glossary in `server/db.js` defines business-oriented attributes like `tier`, `balance`, `verification_status`, and `risk_score` that act as policy inputs.
+- The validator and kernel layers in `src/app/kernel/` implement the semantics of rule evaluation, including contradiction detection, coverage analysis, and typed comparison.
 
 ## User-visible failure behavior {#biz.failures}
-The user-visible failure pattern is a structured alert and a persisted run result rather than a silent crash. The app can show notifications for publish or settings actions and the execution logs record errors such as enrichment timeout and declined outcomes `src/app/app.component.ts:67-75` and `src/app/data.ts:237-371`. The backend also returns explicit API errors for malformed or missing payloads `server/index.js:17-69`.
+The UI uses notifications for important system actions and includes a support console for runtime incident reporting. The backend exposes health and error responses for rule/glossary operations. In the current code, the main visible failure modes are missing glossary data, failed API calls, or rule evaluation results that fail tests. The app also has a support workflow for reporting exceptions or schema conflicts, which is relevant for business operations.
 
-## Compliance or data-sensitivity indicators {#biz.compliance}
-The code explicitly surfaces sensitive data categories such as `user_id`, `ip_address`, `balance`, `risk_score`, `account_age_days`, `country`, and KYC/geo checks `server/db.js:47-83` and `src/app/data.ts:42-50`. No explicit compliance framework was found, so this should be treated as a data-sensitive rule-testing domain rather than a proven regulated-product implementation.
+## Compliance or data sensitivity indicators {#biz.sensitivity}
+The repository includes customer/account/session attributes and a glossary around KYC and fraud assessment, which indicates a potentially sensitive domain. The code does not expose personal data values in the sample rules, but it does use business-sensitive concepts such as balance, risk score, and verification status. The backend uses a Gemini API key placeholder and PostgreSQL connection settings, so secret handling and environment configuration matter for production use.
 
-## Business-impact map {#biz.impact}
-Changing this repository can affect at least three business outcomes: how rules are authored, how validation coverage is measured, and how operational incidents are surfaced. A change to rule vocabulary or schema semantics can alter business decisions; a change to the validator workflow can change confidence in rule deployments; a change to the backend persistence layer can affect how rules and glossary entries survive restarts or deployments.
-
-## Unknown business assumptions {#biz.unknowns}
-The repository does not state the target industry, deployment environment, or change-approval process. The sample rules resemble fraud/risk decisioning, but the product owner should confirm whether the intended business domain is fraud prevention, underwriting, pricing, or something else.
+## Business impact and uncertainty {#biz.impact}
+The greatest business impact is likely in the quality and safety of decision automation: incorrect rules could misroute approvals, block legitimate transactions, or fail to detect risk. The product’s current implementation suggests a general-purpose rules platform, but the precise business processes for WRK-999 are not defined in the checked-in code. The repository leaves several important business questions open, including which policy domain WRK-999 serves, which parties own the rules, and which external systems must integrate with the glossary.
 
 ## Suggested questions for domain owners {#biz.questions}
-- Which business policies should be considered authoritative: the sample rules, the glossary, or an external policy repository?
-- What approvals or release gates should accompany a rule change?
-- Which data fields are considered sensitive or regulated in the target environment?
+- Which specific business domain does WRK-999 represent: fraud, underwriting, loyalty, compliance, or something else?
+- Which roles should be allowed to author, validate, publish, and approve rules?
+- Which external systems supply the glossary data and which fields are authoritative?
+- What are the expected service-level and audit requirements for rule publishing?
 
 ## Where to start {#biz.start}
-For business review, begin with `src/app/data.ts` to see the example decision rules and outcomes, then read `server/db.js` for the vocabulary and `src/app/services/rule-store.service.ts` for how rules are validated and tracked.
+For intake or business review, start with `src/app/app.component.ts`, `src/app/data.ts`, and `server/db.js`. These files provide the clearest business-facing signals without requiring a full read of the kernel internals.
 
 ## Questions this view does not answer {#biz.limits}
-This view does not describe implementation details of the kernel, low-level test harness mechanics, or deployment topology. It also does not prove that all business rules in a real production environment are represented in the sample data.
+This view does not define the full production architecture, deployment topology, security posture, or the exact intended workflow for a WRK-999 feature. It also does not claim the rules are production-ready; it only documents the repository’s visible business behavior and vocabulary.
