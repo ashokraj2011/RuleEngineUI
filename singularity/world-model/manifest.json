@@ -1,0 +1,182 @@
+{
+  "schema_version": "2.0",
+  "repository_commit": "ceed449863d693f203efab6d44259d8dc4655d68",
+  "repository_branch": "WRK-999",
+  "working_tree_clean": false,
+  "generated_at": "2026-08-05T13:47:30.817Z",
+  "generated_date": "5 August 2026",
+  "builder_version": "2.0",
+  "builder_prompt_sha256": "d607ed17ba7e0ad45acd142b62b57c32272e21dfec50866d4bee5105f2fd9169",
+  "analysis_depth": "quick",
+  "core": {
+    "summary": "core/summary.md",
+    "brief": "core/summary.brief.md",
+    "model": "core/model.json",
+    "anchors": [
+      "core.tldr",
+      "core.facts",
+      "core.purpose",
+      "core.type",
+      "core.components",
+      "core.map",
+      "core.entrypoints",
+      "core.tech",
+      "core.commands",
+      "core.risks",
+      "core.unknowns",
+      "core.freshness",
+      "core.routing"
+    ],
+    "bytes": {
+      "summary": 6498,
+      "brief": 1214
+    },
+    "recommended_for_all_agents": true
+  },
+  "views": {
+    "business": {
+      "path": "views/business.md",
+      "brief_path": "views/business.brief.md",
+      "generated": true,
+      "bytes": {
+        "full": 7478,
+        "brief": 1179
+      },
+      "anchors": [
+        "biz.tldr",
+        "biz.facts",
+        "biz.capabilities",
+        "biz.workflows",
+        "biz.entities",
+        "biz.rules",
+        "biz.failures",
+        "biz.sensitivity",
+        "biz.impact",
+        "biz.questions",
+        "biz.start",
+        "biz.limits"
+      ],
+      "load_when": [
+        "business capability analysis",
+        "product behavior analysis",
+        "business impact assessment"
+      ]
+    }
+  },
+  "phase_map": {
+    "intake": {
+      "views": [
+        "business"
+      ],
+      "tier": "brief"
+    },
+    "requirements": {
+      "views": [
+        "business"
+      ],
+      "tier": "full"
+    }
+  },
+  "agent_map": {
+    "product-owner": {
+      "views": [
+        "business"
+      ],
+      "tier": "brief"
+    },
+    "business-analyst": {
+      "views": [
+        "business"
+      ],
+      "tier": "full"
+    }
+  },
+  "path_index": {
+    "path": "index/path-map.json"
+  },
+  "domains": [
+    {
+      "id": "rule-engine",
+      "path": "domains/rule-engine.md",
+      "summary": "Rule-authoring and validation domain covering rules, glossary data, and rule evaluation workflows.",
+      "relevant_views": [
+        "business"
+      ],
+      "keywords": [
+        "rule",
+        "glossary",
+        "schema",
+        "validator"
+      ],
+      "anchors": [
+        "domain.rule-engine.tldr"
+      ]
+    }
+  ],
+  "task_guides": [
+    {
+      "id": "wrk-999-intake",
+      "path": "task-guides/wrk-999-intake.md",
+      "task": "Advance the WRK-999 feature through intake",
+      "required_views": [
+        "business"
+      ],
+      "required_domains": [
+        "rule-engine"
+      ]
+    }
+  ],
+  "evidence": {
+    "path": "evidence/evidence.jsonl",
+    "load_only_when_verification_is_needed": true
+  },
+  "recommended_loading_rules": [
+    {
+      "agent_type": "business",
+      "load": [
+        "core/summary.brief.md",
+        "views/business.md"
+      ]
+    },
+    {
+      "agent_type": "intake",
+      "load": [
+        "core/summary.brief.md",
+        "views/business.md",
+        "task-guides/wrk-999-intake.md"
+      ]
+    }
+  ],
+  "budget_hints": {
+    "orientation_only": [
+      "core/summary.brief.md"
+    ],
+    "single_phase_typical": [
+      "core/summary.brief.md",
+      "views/business.md"
+    ],
+    "deep_investigation": [
+      "core/summary.md",
+      "views/business.md",
+      "domains/rule-engine.md",
+      "evidence/evidence.jsonl"
+    ]
+  },
+  "views_generated": [
+    "business"
+  ],
+  "source_tree_sha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "generation": {
+    "parallel": false,
+    "strategy": "view",
+    "max_workers": 1,
+    "discovery_views": [],
+    "degraded_views": [],
+    "resumed_views": [],
+    "pending_views_at_start": []
+  },
+  "generated_for_phase": "intake",
+  "requested_views": [
+    "business"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-05T13:52:52Z",
+  "repository_commit": "ceed449863d693f203efab6d44259d8dc4655d68",
+  "entries": [
+    {
+      "glob": "src/app/**",
+      "component_ids": [
+        "frontend-console"
+      ],
+      "domains": [
+        "rule-engine"
+      ],
+      "views": [
+        "business"
+      ],
+      "symbols": [
+        "AppComponent",
+        "RuleEngineService",
+        "RuleStoreService"
+      ],
+      "tests": [
+        "src/app/kernel/kernel.spec.ts"
+      ],
+      "anchors": [
+        "biz.capabilities",
+        "biz.workflows",
+        "domain.rule-engine.purpose"
+      ],
+      "notes": "Covers the visible product surface and rule lifecycle interactions."
+    },
+    {
+      "glob": "server/**",
+      "component_ids": [
+        "rule-api"
+      ],
+      "domains": [
+        "rule-engine"
+      ],
+      "views": [
+        "business"
+      ],
+      "symbols": [
+        "initDb",
+        "/api/rules",
+        "/api/glossary"
+      ],
+      "tests": [],
+      "anchors": [
+        "biz.rules",
+        "domain.rule-engine.components"
+      ],
+      "notes": "Covers the persistence and glossary layer that feeds the UI."
+    }
+  ],
+  "fallback": {
+    "views": [
+      "business"
+    ],
+    "anchors": [
+      "core.map"
+    ]
+  }
+}

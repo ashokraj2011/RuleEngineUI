@@ -1,0 +1,138 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-08-05T13:52:52Z",
+  "generated_date": "05 August 2026",
+  "builder_version": "2.0",
+  "builder_prompt_sha256": "unknown",
+  "analysis_depth": "quick",
+  "repository": {
+    "name": "RuleEngineUI",
+    "root": "/private/var/folders/_j/yp8zv9w91rd44ymrzfpd_kcw0000gn/T/singularity-flow-world-model-CdTbCh/repository",
+    "branch": "HEAD",
+    "commit": "ceed449863d693f203efab6d44259d8dc4655d68",
+    "working_tree_clean": false,
+    "repository_kind": "mixed",
+    "languages": [
+      "TypeScript",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "package_roots": [
+      ".",
+      "server"
+    ]
+  },
+  "purpose": {
+    "summary": "A mixed Angular + Express workspace for authoring, validating, and persisting decision rules.",
+    "status": "observed",
+    "confidence": "high",
+    "evidence_ids": [
+      "repo-purpose",
+      "ui-capabilities"
+    ]
+  },
+  "components": [
+    {
+      "id": "frontend-console",
+      "name": "Angular rule console",
+      "kind": "frontend",
+      "purpose": "Provides the main UI for schema management, rule authoring, validation, and history.",
+      "paths": [
+        "src/app/"
+      ],
+      "depends_on": [
+        "rule-engine-kernel"
+      ],
+      "entrypoint_ids": [
+        "frontend-entry"
+      ],
+      "confidence": "high",
+      "evidence_ids": [
+        "ui-capabilities"
+      ]
+    },
+    {
+      "id": "rule-engine-kernel",
+      "name": "Rule engine kernel",
+      "kind": "library",
+      "purpose": "Evaluates rules, lints them, and synthesizes test data.",
+      "paths": [
+        "src/app/kernel/",
+        "src/app/services/rule-engine.service.ts"
+      ],
+      "depends_on": [],
+      "entrypoint_ids": [],
+      "confidence": "high",
+      "evidence_ids": [
+        "rule-kernel"
+      ]
+    },
+    {
+      "id": "rule-api",
+      "name": "Express rule API",
+      "kind": "service",
+      "purpose": "Stores rules and glossary data in PostgreSQL and exposes health routes.",
+      "paths": [
+        "server/"
+      ],
+      "depends_on": [],
+      "entrypoint_ids": [
+        "backend-entry"
+      ],
+      "confidence": "high",
+      "evidence_ids": [
+        "backend-persistence"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "id": "frontend-entry",
+      "name": "Angular bootstrap",
+      "kind": "frontend",
+      "location": "src/main.ts:1-6",
+      "invocation": "npm start",
+      "component_id": "frontend-console",
+      "evidence_ids": [
+        "repo-purpose"
+      ]
+    },
+    {
+      "id": "backend-entry",
+      "name": "Express API server",
+      "kind": "server",
+      "location": "server/index.js:1-204",
+      "invocation": "node server/index.js",
+      "component_id": "rule-api",
+      "evidence_ids": [
+        "backend-persistence"
+      ]
+    }
+  ],
+  "standard_commands": [
+    {
+      "command": "npm run build",
+      "purpose": "Build the Angular application",
+      "source": "package.json:3-9"
+    },
+    {
+      "command": "npm run test -- --watch=false --browsers=ChromeHeadless",
+      "purpose": "Run the existing Karma test suite",
+      "source": "package.json:3-9"
+    }
+  ],
+  "risks": [
+    "Runtime behavior depends on PostgreSQL and optional Gemini credentials.",
+    "The Angular build toolchain required legacy peer-deps installation because of a Tailwind compatibility conflict.",
+    "The current worktree is not clean."
+  ],
+  "unknowns": [
+    "The exact business scope of WRK-999 is not defined in the repository.",
+    "Production deployment topology is not described in the repository."
+  ],
+  "available_views": [
+    "core",
+    "business"
+  ]
+}
