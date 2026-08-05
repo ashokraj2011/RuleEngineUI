@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "workId": "WRK-999",
+  "phase": "intake",
+  "generation": 1,
+  "agent": "product-owner",
+  "modelCommit": "faf28e79a7debd3994b9ec276226b1a5c39ca7c3",
+  "matchedRules": 0,
+  "mode": "append",
+  "applied": false,
+  "depth": "standard",
+  "evidence": false,
+  "requiredViews": [
+    "business"
+  ],
+  "task": "Change the color black left panel",
+  "modelSourceTreeSha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "composedSourceTreeSha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "worldModelCommit": "faf28e79a7debd3994b9ec276226b1a5c39ca7c3",
+  "manifestSha256": "0170b9a64d37ac5c312bbe2cfbd52f7e53e4e625f06f252129a16bd4b90eae82",
+  "fresh": true,
+  "renderedSha256": "b7ebe39c8ec048db458392a7c4b7d71424c5315c41a95041d4e0640fe9631d99",
+  "promptPath": "singularity/work-items/WRK-999/context/prompts/intake-gen1.md",
+  "files": [
+    {
+      "path": "singularity/world-model/core/summary.md",
+      "sha256": "9464d189fb52ebd1c259acf2d7ca4f5daf6f27fff52df6a99417684487880310",
+      "bytes": 5098,
+      "injectedBytes": 5098,
+      "truncated": false,
+      "category": "required",
+      "level": 0,
+      "reason": "shared repository core"
+    },
+    {
+      "path": "singularity/world-model/views/business.md",
+      "sha256": "c54c582e873fed33b515c3919c159aa38e169764df3d8859d724bbde3d3be6cf",
+      "bytes": 7018,
+      "injectedBytes": 7018,
+      "truncated": false,
+      "category": "required",
+      "level": 1,
+      "reason": "intake view: business"
+    },
+    {
+      "path": "singularity/world-model/domains/ui-theming.md",
+      "sha256": "5ce707805c7403c1538ab61183abe3cd6e74abd37465d92368d5cd803cd538b1",
+      "bytes": 3568,
+      "injectedBytes": 3568,
+      "truncated": false,
+      "category": "required",
+      "level": 2,
+      "reason": "domain: ui-theming"
+    },
+    {
+      "path": "singularity/world-model/task-guides/change-color-black-left-panel.md",
+      "sha256": "b3f40bb56d434c97db505db4922f2d97e9c5ca010a4b7b5150490eb30e6729ab",
+      "bytes": 4429,
+      "injectedBytes": 4429,
+      "truncated": false,
+      "category": "required",
+      "level": 2,
+      "reason": "task guide: change-color-black-left-panel"
+    }
+  ],
+  "injectedAt": "2026-08-05T14:49:26.357Z"
+}

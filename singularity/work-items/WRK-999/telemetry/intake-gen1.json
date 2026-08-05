@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "workId": "WRK-999",
+  "workType": "feature",
+  "phase": "intake",
+  "generation": 1,
+  "capturedAt": "2026-08-05T14:49:54.942Z",
+  "source": "copilot-otel",
+  "rawTraceCommitted": false,
+  "spanCount": 0,
+  "rawBytesRead": 0,
+  "startedAt": "2026-08-05T08:46:58.199Z",
+  "completedAt": "2026-08-05T14:49:54.936Z",
+  "pending": true,
+  "warnings": [
+    "Copilot telemetry file is unavailable.",
+    "The active Copilot turn has not been exported yet; telemetry will be reconciled automatically before submission."
+  ],
+  "usage": [
+    {
+      "status": "unavailable",
+      "source": "copilot-otel-unavailable",
+      "provider": null,
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "totalTokens": null,
+      "providerCost": null,
+      "costStatus": "unavailable",
+      "spans": null,
+      "startedAt": "2026-08-05T14:49:54.937Z",
+      "completedAt": "2026-08-05T14:49:54.937Z",
+      "agent": "product-owner",
+      "generation": 1
+    }
+  ]
+}
