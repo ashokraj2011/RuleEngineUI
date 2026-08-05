@@ -1,17 +1,17 @@
 {
   "schema_version": "2.0",
-  "generated_at": "2026-08-05T13:52:52Z",
-  "generated_date": "05 August 2026",
+  "generated_at": "2026-08-05T14:45:35Z",
+  "generated_date": "5 August 2026",
   "builder_version": "2.0",
   "builder_prompt_sha256": "unknown",
   "analysis_depth": "quick",
   "repository": {
     "name": "RuleEngineUI",
-    "root": "/private/var/folders/_j/yp8zv9w91rd44ymrzfpd_kcw0000gn/T/singularity-flow-world-model-CdTbCh/repository",
-    "branch": "HEAD",
-    "commit": "ceed449863d693f203efab6d44259d8dc4655d68",
+    "root": "/private/var/folders/_j/yp8zv9w91rd44ymrzfpd_kcw0000gn/T/singularity-flow-world-model-RGeb7j/repository",
+    "branch": "unknown",
+    "commit": "00ebe873dc0c98a71707575ec3fdc374b5b54dfc",
     "working_tree_clean": false,
-    "repository_kind": "mixed",
+    "repository_kind": "application",
     "languages": [
       "TypeScript",
       "JavaScript",
@@ -24,114 +24,159 @@
     ]
   },
   "purpose": {
-    "summary": "A mixed Angular + Express workspace for authoring, validating, and persisting decision rules.",
+    "summary": "A browser-based rule authoring and validation console for decision rules with an Express backend for persistence and glossary management.",
     "status": "observed",
     "confidence": "high",
     "evidence_ids": [
-      "repo-purpose",
-      "ui-capabilities"
+      "e-core-purpose",
+      "e-rule-authoring-capability"
     ]
   },
   "components": [
     {
-      "id": "frontend-console",
-      "name": "Angular rule console",
+      "id": "web-ui",
+      "name": "Angular web UI",
       "kind": "frontend",
-      "purpose": "Provides the main UI for schema management, rule authoring, validation, and history.",
+      "purpose": "Hosts schema editing, rule authoring, validator studio, and execution-history views.",
       "paths": [
-        "src/app/"
+        "src/"
       ],
       "depends_on": [
-        "rule-engine-kernel"
+        "rule-kernel",
+        "api-backend"
       ],
       "entrypoint_ids": [
-        "frontend-entry"
+        "entry-angular",
+        "entry-app-shell"
       ],
       "confidence": "high",
       "evidence_ids": [
-        "ui-capabilities"
+        "e-rule-authoring-capability",
+        "e-sidebar-location"
       ]
     },
     {
-      "id": "rule-engine-kernel",
+      "id": "rule-kernel",
       "name": "Rule engine kernel",
       "kind": "library",
-      "purpose": "Evaluates rules, lints them, and synthesizes test data.",
+      "purpose": "Evaluates, lints, synthesizes, and computes coverage for decision rules.",
       "paths": [
-        "src/app/kernel/",
-        "src/app/services/rule-engine.service.ts"
+        "src/app/kernel/"
       ],
       "depends_on": [],
       "entrypoint_ids": [],
       "confidence": "high",
       "evidence_ids": [
-        "rule-kernel"
+        "e-rule-kernel"
       ]
     },
     {
-      "id": "rule-api",
-      "name": "Express rule API",
+      "id": "api-backend",
+      "name": "Express API backend",
       "kind": "service",
-      "purpose": "Stores rules and glossary data in PostgreSQL and exposes health routes.",
+      "purpose": "Persists rules and glossary metadata and exposes health and CRUD endpoints.",
       "paths": [
         "server/"
       ],
       "depends_on": [],
       "entrypoint_ids": [
-        "backend-entry"
+        "entry-api"
       ],
       "confidence": "high",
       "evidence_ids": [
-        "backend-persistence"
+        "e-backend-glossary"
+      ]
+    },
+    {
+      "id": "ui-sidebar",
+      "name": "Left navigation shell",
+      "kind": "frontend",
+      "purpose": "Provides the persistent left navigation and the switcher for the main application views.",
+      "paths": [
+        "src/app/components/sidebar/"
+      ],
+      "depends_on": [
+        "web-ui"
+      ],
+      "entrypoint_ids": [],
+      "confidence": "high",
+      "evidence_ids": [
+        "e-sidebar-location"
       ]
     }
   ],
   "entrypoints": [
     {
-      "id": "frontend-entry",
+      "id": "entry-angular",
       "name": "Angular bootstrap",
       "kind": "frontend",
       "location": "src/main.ts:1-6",
       "invocation": "npm start",
-      "component_id": "frontend-console",
+      "component_id": "web-ui",
       "evidence_ids": [
-        "repo-purpose"
+        "e-core-purpose"
       ]
     },
     {
-      "id": "backend-entry",
+      "id": "entry-app-shell",
+      "name": "App shell",
+      "kind": "frontend",
+      "location": "src/app/app.component.ts:46-150",
+      "invocation": "Angular route-like shell state",
+      "component_id": "web-ui",
+      "evidence_ids": [
+        "e-rule-authoring-capability"
+      ]
+    },
+    {
+      "id": "entry-api",
       "name": "Express API server",
       "kind": "server",
       "location": "server/index.js:1-204",
       "invocation": "node server/index.js",
-      "component_id": "rule-api",
+      "component_id": "api-backend",
       "evidence_ids": [
-        "backend-persistence"
+        "e-backend-glossary"
       ]
     }
   ],
   "standard_commands": [
     {
-      "command": "npm run build",
-      "purpose": "Build the Angular application",
-      "source": "package.json:3-9"
+      "command": "npm start",
+      "purpose": "Run the Angular development UI",
+      "source": "package.json:1-42"
     },
     {
-      "command": "npm run test -- --watch=false --browsers=ChromeHeadless",
-      "purpose": "Run the existing Karma test suite",
-      "source": "package.json:3-9"
+      "command": "npm run build",
+      "purpose": "Build the Angular frontend",
+      "source": "package.json:1-42"
+    },
+    {
+      "command": "npm test",
+      "purpose": "Run the test suite",
+      "source": "package.json:1-42"
+    },
+    {
+      "command": "node server/index.js",
+      "purpose": "Start the Express API server",
+      "source": "server/package.json:1-16"
     }
   ],
   "risks": [
-    "Runtime behavior depends on PostgreSQL and optional Gemini credentials.",
-    "The Angular build toolchain required legacy peer-deps installation because of a Tailwind compatibility conflict.",
-    "The current worktree is not clean."
+    "The backend depends on PostgreSQL and local environment configuration.",
+    "The repository currently has an unclean working tree and detached HEAD metadata.",
+    "The UI includes simulated publish behavior rather than a fully wired release workflow."
   ],
   "unknowns": [
-    "The exact business scope of WRK-999 is not defined in the repository.",
-    "Production deployment topology is not described in the repository."
+    "No production deployment manifest was found.",
+    "No browser-level test suite was found in this snapshot.",
+    "The branch name is unavailable because the repository is detached at the inspected commit."
   ],
   "available_views": [
+    "core",
+    "business"
+  ],
+  "views_generated": [
     "core",
     "business"
   ]

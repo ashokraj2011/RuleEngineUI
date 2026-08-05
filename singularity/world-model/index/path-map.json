@@ -1,56 +1,69 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-08-05T13:52:52Z",
-  "repository_commit": "ceed449863d693f203efab6d44259d8dc4655d68",
+  "generated_at": "2026-08-05T14:45:35Z",
+  "repository_commit": "00ebe873dc0c98a71707575ec3fdc374b5b54dfc",
   "entries": [
     {
-      "glob": "src/app/**",
+      "glob": "src/app/components/sidebar/**",
       "component_ids": [
-        "frontend-console"
+        "ui-sidebar"
       ],
       "domains": [
-        "rule-engine"
+        "ui-theming"
       ],
       "views": [
         "business"
       ],
       "symbols": [
-        "AppComponent",
-        "RuleEngineService",
-        "RuleStoreService"
+        "SidebarComponent"
       ],
-      "tests": [
-        "src/app/kernel/kernel.spec.ts"
-      ],
+      "tests": [],
       "anchors": [
         "biz.capabilities",
-        "biz.workflows",
-        "domain.rule-engine.purpose"
+        "biz.actors",
+        "domain.ui-theming.purpose"
       ],
-      "notes": "Covers the visible product surface and rule lifecycle interactions."
+      "notes": "The sidebar is the primary visual shell for the left panel and the app navigation experience."
+    },
+    {
+      "glob": "src/app/app.component.ts",
+      "component_ids": [
+        "web-ui"
+      ],
+      "domains": [
+        "ui-theming"
+      ],
+      "views": [
+        "business"
+      ],
+      "symbols": [
+        "AppComponent"
+      ],
+      "tests": [],
+      "anchors": [
+        "biz.capabilities",
+        "biz.workflows"
+      ],
+      "notes": "AppComponent coordinates the visible workflows and swaps between the main application tabs."
     },
     {
       "glob": "server/**",
       "component_ids": [
-        "rule-api"
+        "api-backend"
       ],
-      "domains": [
-        "rule-engine"
-      ],
+      "domains": [],
       "views": [
         "business"
       ],
       "symbols": [
-        "initDb",
-        "/api/rules",
-        "/api/glossary"
+        "initDb"
       ],
       "tests": [],
       "anchors": [
-        "biz.rules",
-        "domain.rule-engine.components"
+        "biz.entities",
+        "biz.rules"
       ],
-      "notes": "Covers the persistence and glossary layer that feeds the UI."
+      "notes": "The backend persists rules and glossary terms that shape the business-facing rule catalog."
     }
   ],
   "fallback": {

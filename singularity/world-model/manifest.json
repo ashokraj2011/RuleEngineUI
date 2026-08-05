@@ -1,9 +1,9 @@
 {
   "schema_version": "2.0",
-  "repository_commit": "ceed449863d693f203efab6d44259d8dc4655d68",
+  "repository_commit": "00ebe873dc0c98a71707575ec3fdc374b5b54dfc",
   "repository_branch": "WRK-999",
   "working_tree_clean": false,
-  "generated_at": "2026-08-05T13:47:30.817Z",
+  "generated_at": "2026-08-05T14:42:02.624Z",
   "generated_date": "5 August 2026",
   "builder_version": "2.0",
   "builder_prompt_sha256": "d607ed17ba7e0ad45acd142b62b57c32272e21dfec50866d4bee5105f2fd9169",
@@ -14,7 +14,6 @@
     "model": "core/model.json",
     "anchors": [
       "core.tldr",
-      "core.facts",
       "core.purpose",
       "core.type",
       "core.components",
@@ -28,8 +27,8 @@
       "core.routing"
     ],
     "bytes": {
-      "summary": 6498,
-      "brief": 1214
+      "summary": 5098,
+      "brief": 1353
     },
     "recommended_for_all_agents": true
   },
@@ -39,27 +38,89 @@
       "brief_path": "views/business.brief.md",
       "generated": true,
       "bytes": {
-        "full": 7478,
-        "brief": 1179
+        "full": 7018,
+        "brief": 1296
       },
       "anchors": [
         "biz.tldr",
         "biz.facts",
+        "biz.start",
         "biz.capabilities",
-        "biz.workflows",
+        "biz.actors",
         "biz.entities",
         "biz.rules",
-        "biz.failures",
-        "biz.sensitivity",
+        "biz.failure",
+        "biz.compliance",
         "biz.impact",
+        "biz.unknowns",
         "biz.questions",
-        "biz.start",
-        "biz.limits"
+        "biz.limits",
+        "biz.brief"
       ],
       "load_when": [
         "business capability analysis",
         "product behavior analysis",
         "business impact assessment"
+      ]
+    },
+    "architecture": {
+      "path": "views/architecture.md",
+      "brief_path": "views/architecture.brief.md",
+      "generated": false,
+      "load_when": [
+        "system design",
+        "dependency analysis",
+        "cross-component change"
+      ]
+    },
+    "development": {
+      "path": "views/development.md",
+      "brief_path": "views/development.brief.md",
+      "generated": false,
+      "load_when": [
+        "implementation",
+        "debugging",
+        "refactoring",
+        "code review"
+      ]
+    },
+    "testing": {
+      "path": "views/testing.md",
+      "brief_path": "views/testing.brief.md",
+      "generated": false,
+      "load_when": [
+        "test creation",
+        "regression analysis",
+        "quality validation"
+      ]
+    },
+    "release": {
+      "path": "views/release.md",
+      "brief_path": "views/release.brief.md",
+      "generated": false,
+      "load_when": [
+        "build",
+        "packaging",
+        "deployment",
+        "rollback"
+      ]
+    },
+    "operations": {
+      "path": "views/operations.md",
+      "brief_path": "views/operations.brief.md",
+      "generated": false,
+      "load_when": [
+        "runtime diagnosis",
+        "monitoring and incident response"
+      ]
+    },
+    "security": {
+      "path": "views/security.md",
+      "brief_path": "views/security.brief.md",
+      "generated": false,
+      "load_when": [
+        "threat analysis",
+        "authentication or authorization change"
       ]
     }
   },
@@ -75,6 +136,38 @@
         "business"
       ],
       "tier": "full"
+    },
+    "design": {
+      "views": [
+        "architecture"
+      ],
+      "tier": "full"
+    },
+    "implementation-spec": {
+      "views": [
+        "architecture",
+        "development"
+      ],
+      "tier": "full"
+    },
+    "implementation": {
+      "views": [
+        "development"
+      ],
+      "tier": "full"
+    },
+    "verification": {
+      "views": [
+        "testing"
+      ],
+      "tier": "full"
+    },
+    "conformance": {
+      "views": [
+        "testing",
+        "security"
+      ],
+      "tier": "brief"
     }
   },
   "agent_map": {
@@ -89,6 +182,43 @@
         "business"
       ],
       "tier": "full"
+    },
+    "architect": {
+      "views": [
+        "architecture",
+        "security"
+      ],
+      "tier": "full"
+    },
+    "developer": {
+      "views": [
+        "development"
+      ],
+      "tier": "full"
+    },
+    "qa": {
+      "views": [
+        "testing"
+      ],
+      "tier": "full"
+    },
+    "security": {
+      "views": [
+        "security"
+      ],
+      "tier": "full"
+    },
+    "operations": {
+      "views": [
+        "operations"
+      ],
+      "tier": "full"
+    },
+    "delivery-manager": {
+      "views": [
+        "release"
+      ],
+      "tier": "brief"
     }
   },
   "path_index": {
@@ -96,33 +226,32 @@
   },
   "domains": [
     {
-      "id": "rule-engine",
-      "path": "domains/rule-engine.md",
-      "summary": "Rule-authoring and validation domain covering rules, glossary data, and rule evaluation workflows.",
+      "id": "ui-theming",
+      "path": "domains/ui-theming.md",
+      "summary": "The presentation layer for the left navigation shell and visual state of the application.",
       "relevant_views": [
         "business"
       ],
       "keywords": [
-        "rule",
-        "glossary",
-        "schema",
-        "validator"
+        "sidebar",
+        "theme",
+        "ui"
       ],
       "anchors": [
-        "domain.rule-engine.tldr"
+        "domain.ui-theming.tldr"
       ]
     }
   ],
   "task_guides": [
     {
-      "id": "wrk-999-intake",
-      "path": "task-guides/wrk-999-intake.md",
-      "task": "Advance the WRK-999 feature through intake",
+      "id": "change-color-black-left-panel",
+      "path": "task-guides/change-color-black-left-panel.md",
+      "task": "Change the color black left panel",
       "required_views": [
         "business"
       ],
       "required_domains": [
-        "rule-engine"
+        "ui-theming"
       ]
     }
   ],
@@ -139,11 +268,31 @@
       ]
     },
     {
-      "agent_type": "intake",
+      "agent_type": "architect",
       "load": [
         "core/summary.brief.md",
-        "views/business.md",
-        "task-guides/wrk-999-intake.md"
+        "views/architecture.md"
+      ]
+    },
+    {
+      "agent_type": "developer",
+      "load": [
+        "core/summary.brief.md",
+        "views/development.md"
+      ]
+    },
+    {
+      "agent_type": "tester",
+      "load": [
+        "core/summary.brief.md",
+        "views/testing.md"
+      ]
+    },
+    {
+      "agent_type": "release",
+      "load": [
+        "core/summary.brief.md",
+        "views/release.md"
       ]
     }
   ],
@@ -153,12 +302,12 @@
     ],
     "single_phase_typical": [
       "core/summary.brief.md",
-      "views/business.md"
+      "views/<view>.md"
     ],
     "deep_investigation": [
       "core/summary.md",
-      "views/business.md",
-      "domains/rule-engine.md",
+      "views/<view>.md",
+      "domains/<domain>.md",
       "evidence/evidence.jsonl"
     ]
   },

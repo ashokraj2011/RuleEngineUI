@@ -1,66 +1,95 @@
-> **Grounding** · RuleEngineUI @ `ceed449863d693f203efab6d44259d8dc4655d68` · view: `{view_id}` · tier: `{tier}`
-> **Generated** 05 August 2026 (2026-08-05T13:52:52Z) · depth: `quick` · builder `2.0`
+> **Grounding** · RuleEngineUI @ `00ebe873dc0c98a71707575ec3fdc374b5b54dfc` · view: `business` · tier: `full`
+> **Generated** 5 August 2026 (2026-08-05T14:45:35Z) · depth: `quick` · builder `2.0`
 > **Authoritative for:** file locations, entry points, commands, structural relationships as of the commit above.
 > **Not authoritative for:** current file contents. If this document conflicts with code you have read, trust the code and say so explicitly in your output.
 > **Unknowns are marked.** Do not resolve them by inference. If the repository has changed since the date above, treat locations as hints, not facts.
 
+
 ## TL;DR {#biz.tldr}
-This view explains the repository’s business-facing capabilities without diving into implementation details. The checked-in product surface is a rule-authoring console for decision logic and validation, with sample content around transaction review, fraud/risk decisions, and rule governance. The main user roles appear to be rule authors/operators, reviewers, and administrators. The strongest business signals are in the UI labels, sample rules, and glossary terms such as customer, account, fraud, and loyalty. The biggest uncertainty is the exact domain of WRK-999; the code suggests a general rule-engine platform rather than a single product-specific workflow.
+
+This view captures the business-facing capabilities of the repository, the actors and workflows it implies, and the places where policy or customer-impacting decisions are encoded. The app is best understood as a rule-authoring console for decisioning, testing, and validation rather than a generic CRUD app. Its highest-value business concerns are fraud-risk and policy decisions, schema governance, and safe rollout of rule changes.
 
 ## Facts {#biz.facts}
 
 ```yaml
 capabilities:
-  - { id: rule-authoring, evidence: "src/app/app.component.ts:46-151" }
-  - { id: rule-validation, evidence: "src/app/components/sidebar/sidebar.component.ts:57-196" }
-  - { id: rule-persistence, evidence: "server/index.js:72-204" }
+  - { id: rule-authoring, description: "Create and edit decision rules and schema fields" }
+  - { id: rule-validation, description: "Validate rules, synthesize test cases, and inspect coverage" }
+  - { id: glossary-management, description: "Manage glossary fields that define business entities and data sources" }
 actors:
-  - { role: rule author, evidence: "src/app/components/sidebar/sidebar.component.ts:26-35" }
-  - { role: reviewer or operator, evidence: "src/app/components/sidebar/sidebar.component.ts:57-196" }
-  - { role: admin or support user, evidence: "src/app/components/sidebar/sidebar.component.ts:112-125" }
-workflow_terms: [rule, glossary, schema, validator, history, publish]
+  - { id: rule-author, role: "Creates and tunes rule logic" }
+  - { id: validator, role: "Runs tests and reviews rule outcomes" }
+  - { id: support-analyst, role: "Reviews execution history and investigations" }
+external_systems:
+  - { id: postgres, role: "Stores rules and glossary data", status: observed }
+  - { id: gemini, role: "Optionally generates rule names", status: observed }
+locations:
+  - { path: "src/app/app.component.ts", purpose: "Switches between schema, rules, validator, functions, and history" }
+  - { path: "src/app/components/sidebar/sidebar.component.ts", purpose: "Hosts the left navigation shell for business workflows" }
 ```
 
-## Capability map {#biz.capabilities}
-The repository’s visible capabilities are centered on decision-rule lifecycle management:
-- Authoring: the main console provides rule, schema, functions, and history surfaces. The UI is designed for creating and managing decision rules rather than just viewing static contents.
-- Validation: the validator studio includes dashboard, test-data, generated cases, evaluate, coverage, validate, and library tabs, suggesting a workflow for testing and reviewing rules before release.
-- Publication and governance: the UI includes a publish action and a “Drafts / Staging / Production” model, which implies a staged rule lifecycle even though the current code is mostly UI-driven.
-- Persistence and glossary management: the backend exposes CRUD endpoints for rules and glossary entries, so the platform is not purely a static demo.
+## Where to start {#biz.start}
 
-## Actors and workflow map {#biz.workflows}
-The code makes the following actors visible:
-- Rule authors or business analysts: they can create or edit rules, schema fields, and decision structures.
-- Validation reviewers: they can generate test cases, run evaluations, inspect coverage, and review history logs.
-- Administrators or support users: the sidebar and support console imply an operational role for configuration, support escalation, and workflow management.
-The business workflow that is most visible is: define a schema, author a rule, validate it against scenarios, publish it to a lifecycle stage, and review execution history. The shipped sample data also suggests a review/approval and fraud-risk decision context.
+Use this view when you need to understand the product capabilities, the user archetypes implied by the code, or the likely business impact of a rule change. Start with the rule-authoring, validation, and glossary workflows before reviewing the implementation files.
+
+## Capability map {#biz.capabilities}
+
+- Rule authoring: the UI exposes a ruleset workspace, a decision-table view, and a rule configuration panel. The initial sample rules emphasize fraud and transaction-risk heuristics.
+- Rule validation: the app includes a validator studio with overview, test data, generated cases, test runs, coverage, validation, and library tabs. This is a strong signal that the product is meant to support quality assurance for rules, not just authoring.
+- Glossary and schema governance: the app fetches glossary data from `/api/glossary` and maps it into a schema model, which is the primary mechanism for controlling vocabulary and data-source interpretation.
+
+## Actors and user archetypes {#biz.actors}
+
+- Rule authors or policy analysts: they create or adjust rules and the underlying schema vocabulary.
+- Validation testers: they exercise candidate rules, generate cases, and inspect whether a rule passes or fails.
+- Support or operations analysts: they inspect execution logs and failure traces to understand why a rule behaved unexpectedly.
+- Admin or platform owners: the UI includes a support/settings shell and an admin-like user card, suggesting a role that can manage or review the environment.
+
+## Business workflows {#biz.workflows}
+
+1. Define or import schema fields and glossary terms.
+2. Create or edit a decision rule, often with conditional logic and thresholds.
+3. Validate the rule with synthetic or recorded test data and inspect results.
+4. Review execution traces, coverage, and failure details before promoting or publishing.
+5. Persist the change through the backend so rules and glossary entries can be reused by other sessions.
 
 ## Business entities and vocabulary {#biz.entities}
-The repository vocabulary is mostly rule-engine language, but it is grounded in business-oriented terms. Observed domain words include transaction, risk score, device velocity, geo match, account, customer, fraud, loyalty, review, approve, block, and rule metadata. The glossary seeding in `server/db.js` explicitly includes `customer`, `account`, `session`, `fraud_check`, and `kyc_service` concepts, which indicates that the platform is intended to support policies that connect customer/account context with business decisions.
+
+- `DecisionRule`: a runnable logic rule with action, risk, and return behavior.
+- `SchemaField`: a business attribute or domain field such as `amount_usd` or `geo_match`.
+- `TestCase` and `Fixture`: reusable inputs used to validate a rule.
+- `ExecutionTraceLog`: a record of what happened when a rule ran, including status and error context.
 
 ## Business rules and policy locations {#biz.rules}
-The code shows policy-like logic in three places:
-- Sample rules and initial decision rules in `src/app/data.ts` model approval or review actions, such as blocks, reviews, and approvals based on user type, spend thresholds, and region.
-- The server glossary in `server/db.js` defines business-oriented attributes like `tier`, `balance`, `verification_status`, and `risk_score` that act as policy inputs.
-- The validator and kernel layers in `src/app/kernel/` implement the semantics of rule evaluation, including contradiction detection, coverage analysis, and typed comparison.
 
-## User-visible failure behavior {#biz.failures}
-The UI uses notifications for important system actions and includes a support console for runtime incident reporting. The backend exposes health and error responses for rule/glossary operations. In the current code, the main visible failure modes are missing glossary data, failed API calls, or rule evaluation results that fail tests. The app also has a support workflow for reporting exceptions or schema conflicts, which is relevant for business operations.
+The most concrete business rules visible in the repository live in `src/app/data.ts`. The initial decision rules encode simple policy patterns for fraud handling: user type, transaction spend thresholds, regions, risk score, and allow/deny outcomes. The engine in `src/app/kernel/` and `src/app/services/rule-engine.service.ts` then evaluates those rules against test data and exposes linting and coverage.
 
-## Compliance or data sensitivity indicators {#biz.sensitivity}
-The repository includes customer/account/session attributes and a glossary around KYC and fraud assessment, which indicates a potentially sensitive domain. The code does not expose personal data values in the sample rules, but it does use business-sensitive concepts such as balance, risk score, and verification status. The backend uses a Gemini API key placeholder and PostgreSQL connection settings, so secret handling and environment configuration matter for production use.
+## User-visible failure behavior {#biz.failure}
 
-## Business impact and uncertainty {#biz.impact}
-The greatest business impact is likely in the quality and safety of decision automation: incorrect rules could misroute approvals, block legitimate transactions, or fail to detect risk. The product’s current implementation suggests a general-purpose rules platform, but the precise business processes for WRK-999 are not defined in the checked-in code. The repository leaves several important business questions open, including which policy domain WRK-999 serves, which parties own the rules, and which external systems must integrate with the glossary.
+The repository has explicit failure representations. Execution logs include outcomes such as timeout, manual review, decline, and approved states. The UI also surfaces a global toast alert for system operations, showing that the user experience is expected to communicate policy or runtime failures clearly.
+
+## Compliance and data sensitivity {#biz.compliance}
+
+The code clearly operates on sensitive concepts such as user identifiers, transaction amounts, KYC status, device velocity, and geolocation-related fields. The repository does not define a retention, encryption, or access-control policy, so this should be treated as a gap rather than a claim of compliance.
+
+## Business-impact map {#biz.impact}
+
+- Rule logic changes can alter approval, review, or decline outcomes and therefore affect fraud controls and customer experience.
+- Schema or glossary changes can change how rules are interpreted and can cause silent behavior shifts.
+- UI changes such as the left-panel color are low-risk for policy decisions but high-impact for usability and adoption.
+
+## Unknown business assumptions {#biz.unknowns}
+
+- The repository does not identify the owning business team or the intended regulated domain beyond the sample fraud-risk vocabulary.
+- The exact rollout or publication workflow for real rules is not implemented in the checked-in code.
+- The repository does not document the legal or regulatory obligations that the rules are meant to satisfy.
 
 ## Suggested questions for domain owners {#biz.questions}
-- Which specific business domain does WRK-999 represent: fraud, underwriting, loyalty, compliance, or something else?
-- Which roles should be allowed to author, validate, publish, and approve rules?
-- Which external systems supply the glossary data and which fields are authoritative?
-- What are the expected service-level and audit requirements for rule publishing?
 
-## Where to start {#biz.start}
-For intake or business review, start with `src/app/app.component.ts`, `src/app/data.ts`, and `server/db.js`. These files provide the clearest business-facing signals without requiring a full read of the kernel internals.
+- Which business policy should be treated as authoritative when a rule and its glossary disagree?
+- Which workflows require human approval before changes are made live?
+- Which data fields are considered sensitive and should be masked in the UI or logs?
 
 ## Questions this view does not answer {#biz.limits}
-This view does not define the full production architecture, deployment topology, security posture, or the exact intended workflow for a WRK-999 feature. It also does not claim the rules are production-ready; it only documents the repository’s visible business behavior and vocabulary.
+
+This view does not describe class-by-class implementation, deployment details, or the full test inventory. It also does not attempt to resolve which business team owns the rules in the sample data.
