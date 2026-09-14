@@ -15,10 +15,10 @@ import { ActiveTab } from '../../models/types';
       <div class="p-5 border-b border-outline-variant shrink-0">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-serif text-lg font-bold">
-            U
+            R
           </div>
           <div>
-            <h1 class="font-serif text-lg font-bold text-primary leading-tight">Logic Engine</h1>
+            <h1 class="font-serif text-lg font-bold text-primary leading-tight">Rule Engine</h1>
             <p class="text-[11px] text-on-surface-variant uppercase tracking-wider font-semibold">
               Enterprise v4.2
             </p>

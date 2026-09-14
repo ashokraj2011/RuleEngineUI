@@ -44,7 +44,7 @@ import { DecisionRule, SchemaField, CanvasNode, CanvasConnection } from './types
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Logic Engine Console';
+  title = 'Rule Engine Console';
 
   // Navigation & view states
   activeTab: string = 'rulesets'; // Default to Rules tab
@@ -136,7 +136,7 @@ export class AppComponent {
       case 'history':
         return 'Execution History logs';
       default:
-        return 'Logic Engine Console';
+        return 'Rule Engine Console';
     }
   }
 

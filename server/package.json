@@ -1,7 +1,7 @@
 {
   "name": "rule-engine-backend",
   "version": "1.0.0",
-  "description": "Express API server with PostgreSQL connection for Logic Engine",
+  "description": "Express API server with PostgreSQL connection for Rule Engine",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
