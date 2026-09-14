@@ -11,3 +11,12 @@ capabilities:
     repository: ruleengineui
     teams:
       - PZN
+  rule-ui:
+    name: RuleUI
+    kind: delivery
+    parent: null
+    repository: ruleengineui
+    jira:
+      projectKey: jira
+    teams:
+      - pzn

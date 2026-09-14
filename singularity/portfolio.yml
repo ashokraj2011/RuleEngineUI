@@ -96,7 +96,7 @@ approvalAuthorities:
 #     required: true
 #     jira: { projectKey: MOB }
 #     metadata: { appId: APP-1001, name: Mobile application, owner: Digital }
-repositories: {ruleengineui: {url: https://github.com/ashokraj2011/RuleEngineUI.git, defaultBranch: main, required: true}}
+repositories: {ruleengineui: {url: https://github.com/ashokraj2011/RuleEngineUI.git, defaultBranch: main, required: true, clone: {mode: blobless, filter: blob:none, sparseCone: [], fallback: refuse}}}
 
 repositoryMetadata:
   requiredKeys: []
