@@ -342,17 +342,18 @@ noModel:
   unknownExternalCommands: warn
 phases:
   component-mapping:
-    approval:
-      authorities:
-        - architecture-reviewers
-      minimum: 1
-      rejectTo:
-        - design-inventory
-        - component-mapping
+    label: Mobile component mapping
+    defaultTemplate: figma-mobile/component-mapping.md
     artifact:
       path: artifacts/component-mapping/component-mapping.md
       kind: component-mapping
       minimumBytes: 500
+    worldModel:
+      views:
+        - architecture
+        - development
+        - security
+      depth: deep
     clarification:
       mode: required
       maxQuestions: 5
@@ -362,27 +363,17 @@ phases:
         - state
         - data contracts
         - accessibility
-    defaultTemplate: figma-mobile/component-mapping.md
-    label: Mobile component mapping
-    worldModel:
-      views:
-        - architecture
-        - development
-        - security
-      depth: deep
     writeScope: artifact-only
-  conformance:
     approval:
       authorities:
-        - quality-reviewers
         - architecture-reviewers
       minimum: 1
       rejectTo:
-        - implementation-spec
-        - fix-spec
-        - implementation
-        - verification
-        - conformance
+        - design-inventory
+        - component-mapping
+  conformance:
+    label: Spec-to-code conformance
+    defaultTemplate: common/conformance.md
     artifact:
       path: artifacts/conformance/spec-code-comparison.md
       kind: conformance-report
@@ -394,6 +385,15 @@ phases:
         - approved deviations
         - missing evidence
         - unplanned work
+    worldModel:
+      views:
+        - architecture
+        - development
+        - testing
+        - security
+      depth: deep
+      evidence: true
+    writeScope: artifact-only
     comparison:
       identifiers:
         - acceptance-criteria
@@ -405,17 +405,17 @@ phases:
         - deviated
         - unplanned
       exactFileLineEvidence: true
-    defaultTemplate: common/conformance.md
-    label: Spec-to-code conformance
-    worldModel:
-      views:
-        - architecture
-        - development
-        - testing
-        - security
-      depth: deep
-      evidence: true
-    writeScope: artifact-only
+    approval:
+      authorities:
+        - quality-reviewers
+        - architecture-reviewers
+      minimum: 1
+      rejectTo:
+        - implementation-spec
+        - fix-spec
+        - implementation
+        - verification
+        - conformance
   convergence:
     label: Convergence
     defaultTemplate: spec-driven/convergence.md
@@ -439,17 +439,17 @@ phases:
       rejectTo:
         - implementation
   design:
-    approval:
-      authorities:
-        - architecture-reviewers
-      minimum: 1
-      rejectTo:
-        - requirements
-        - design
+    label: Architecture and design
+    defaultTemplate: feature/design.md
     artifact:
       path: artifacts/design/design.md
       kind: design
       minimumBytes: 300
+    worldModel:
+      views:
+        - architecture
+        - security
+      depth: standard
     clarification:
       mode: required
       maxQuestions: 5
@@ -459,25 +459,26 @@ phases:
         - failure behavior
         - security
         - migration
-    defaultTemplate: feature/design.md
-    label: Architecture and design
-    worldModel:
-      views:
-        - architecture
-        - security
-      depth: standard
     writeScope: artifact-only
-  design-intake:
     approval:
       authorities:
-        - design-reviewers
+        - architecture-reviewers
       minimum: 1
       rejectTo:
-        - design-intake
+        - requirements
+        - design
+  design-intake:
+    label: Design package intake
+    defaultTemplate: figma-mobile/design-intake.md
     artifact:
       path: artifacts/design-intake/design-package-intake.md
       kind: design-intake
       minimumBytes: 350
+    worldModel:
+      views:
+        - business
+        - architecture
+      depth: standard
     clarification:
       mode: required
       maxQuestions: 5
@@ -487,26 +488,25 @@ phases:
         - interactions
         - accessibility
         - design constraints
-    defaultTemplate: figma-mobile/design-intake.md
-    label: Design package intake
-    worldModel:
-      views:
-        - business
-        - architecture
-      depth: standard
     writeScope: artifact-only
-  design-inventory:
     approval:
       authorities:
         - design-reviewers
       minimum: 1
       rejectTo:
         - design-intake
-        - design-inventory
+  design-inventory:
+    label: Screen and design inventory
+    defaultTemplate: figma-mobile/design-inventory.md
     artifact:
       path: artifacts/design-inventory/design-inventory.md
       kind: design-inventory
       minimumBytes: 500
+    worldModel:
+      views:
+        - business
+        - architecture
+      depth: standard
     clarification:
       mode: required
       maxQuestions: 5
@@ -516,26 +516,27 @@ phases:
         - assets
         - responsive behavior
         - evidence gaps
-    defaultTemplate: figma-mobile/design-inventory.md
-    label: Screen and design inventory
-    worldModel:
-      views:
-        - business
-        - architecture
-      depth: standard
     writeScope: artifact-only
-  fix-design:
     approval:
       authorities:
-        - architecture-reviewers
+        - design-reviewers
       minimum: 1
       rejectTo:
-        - reproduction
-        - fix-design
+        - design-intake
+        - design-inventory
+  fix-design:
+    label: Fix design
+    defaultTemplate: bugfix/fix-design.md
     artifact:
       path: artifacts/fix-design/fix-design.md
       kind: fix-design
       minimumBytes: 250
+    worldModel:
+      views:
+        - architecture
+        - development
+        - security
+      depth: standard
     clarification:
       mode: required
       maxQuestions: 5
@@ -545,16 +546,7 @@ phases:
         - regression risk
         - compatibility
         - rollback
-    defaultTemplate: bugfix/fix-design.md
-    label: Fix design
-    worldModel:
-      views:
-        - architecture
-        - development
-        - security
-      depth: standard
     writeScope: artifact-only
-  fix-spec:
     approval:
       authorities:
         - architecture-reviewers
@@ -562,11 +554,19 @@ phases:
       rejectTo:
         - reproduction
         - fix-design
-        - fix-spec
+  fix-spec:
+    label: Fix specification
+    defaultTemplate: bugfix/fix-spec.md
     artifact:
       path: artifacts/fix-spec/fix-spec.md
       kind: implementation-spec
       minimumBytes: 300
+    worldModel:
+      views:
+        - development
+        - testing
+        - security
+      depth: standard
     clarification:
       mode: required
       maxQuestions: 5
@@ -576,15 +576,15 @@ phases:
         - compatibility
         - failure behavior
         - rollback
-    defaultTemplate: bugfix/fix-spec.md
-    label: Fix specification
-    worldModel:
-      views:
-        - development
-        - testing
-        - security
-      depth: standard
     writeScope: artifact-only
+    approval:
+      authorities:
+        - architecture-reviewers
+      minimum: 1
+      rejectTo:
+        - reproduction
+        - fix-design
+        - fix-spec
   implement:
     label: Implement
     defaultTemplate: quick-fix/implement.md
@@ -604,46 +604,47 @@ phases:
     approval: none
     qualityCommands: []
   implementation:
-    approval:
-      authorities:
-        - engineering-reviewers
-      minimum: 1
-      rejectTo:
-        - implementation
+    label: Implementation
+    defaultTemplate: common/implementation.md
     artifact:
       path: artifacts/implementation/implementation-summary.md
       kind: implementation-summary
       minimumBytes: 250
+    worldModel:
+      views:
+        - development
+        - testing
+      depth: standard
     clarification:
       mode: when-needed
       maxQuestions: 3
       topics:
         - approved deviations
         - implementation blockers
-    defaultTemplate: common/implementation.md
     generation:
       task: code
-    label: Implementation
-    qualityCommands: []
-    worldModel:
-      views:
-        - development
-        - testing
-      depth: standard
     writeScope: source-and-artifact
-  implementation-spec:
     approval:
       authorities:
-        - architecture-reviewers
+        - engineering-reviewers
       minimum: 1
       rejectTo:
-        - requirements
-        - design
-        - implementation-spec
+        - implementation
+    qualityCommands: []
+  implementation-spec:
+    label: Implementation specification
+    defaultTemplate: feature/implementation-spec.md
     artifact:
       path: artifacts/implementation-spec/implementation-spec.md
       kind: implementation-spec
       minimumBytes: 400
+    worldModel:
+      views:
+        - architecture
+        - development
+        - testing
+        - security
+      depth: deep
     clarification:
       mode: required
       maxQuestions: 5
@@ -654,27 +655,26 @@ phases:
         - observability
         - migration
         - tests
-    defaultTemplate: feature/implementation-spec.md
-    label: Implementation specification
-    worldModel:
-      views:
-        - architecture
-        - development
-        - testing
-        - security
-      depth: deep
     writeScope: artifact-only
-  intake:
     approval:
       authorities:
-        - product-approvers
+        - architecture-reviewers
       minimum: 1
       rejectTo:
-        - intake
+        - requirements
+        - design
+        - implementation-spec
+  intake:
+    label: Intake
+    defaultTemplate: common/intake.md
     artifact:
       path: artifacts/intake/intake.md
       kind: intake
       minimumBytes: 200
+    worldModel:
+      views:
+        - business
+      depth: quick
     clarification:
       mode: required
       maxQuestions: 5
@@ -684,26 +684,27 @@ phases:
         - users
         - scope
         - constraints
-    defaultTemplate: common/intake.md
-    label: Intake
-    worldModel:
-      views:
-        - business
-      depth: quick
     writeScope: artifact-only
-  mobile-spec:
     approval:
       authorities:
-        - architecture-reviewers
+        - product-approvers
       minimum: 1
       rejectTo:
-        - design-inventory
-        - component-mapping
-        - mobile-spec
+        - intake
+  mobile-spec:
+    label: Mobile implementation specification
+    defaultTemplate: figma-mobile/mobile-spec.md
     artifact:
       path: artifacts/mobile-spec/mobile-spec.md
       kind: implementation-spec
       minimumBytes: 700
+    worldModel:
+      views:
+        - architecture
+        - development
+        - testing
+        - security
+      depth: deep
     clarification:
       mode: required
       maxQuestions: 5
@@ -713,16 +714,15 @@ phases:
         - failure states
         - analytics
         - testing
-    defaultTemplate: figma-mobile/mobile-spec.md
-    label: Mobile implementation specification
-    worldModel:
-      views:
-        - architecture
-        - development
-        - testing
-        - security
-      depth: deep
     writeScope: artifact-only
+    approval:
+      authorities:
+        - architecture-reviewers
+      minimum: 1
+      rejectTo:
+        - design-inventory
+        - component-mapping
+        - mobile-spec
   planning:
     label: Planning
     defaultTemplate: spec-driven/plan.md
@@ -1196,17 +1196,17 @@ phases:
         - verification
         - release
   reproduction:
-    approval:
-      authorities:
-        - quality-reviewers
-      minimum: 1
-      rejectTo:
-        - intake
-        - reproduction
+    label: Reproduction
+    defaultTemplate: bugfix/reproduction.md
     artifact:
       path: artifacts/reproduction/reproduction.md
       kind: reproduction
       minimumBytes: 250
+    worldModel:
+      views:
+        - development
+        - testing
+      depth: standard
     clarification:
       mode: required
       maxQuestions: 5
@@ -1216,26 +1216,25 @@ phases:
         - reproduction
         - environment
         - impact
-    defaultTemplate: bugfix/reproduction.md
-    label: Reproduction
-    worldModel:
-      views:
-        - development
-        - testing
-      depth: standard
     writeScope: artifact-only
-  requirements:
     approval:
       authorities:
-        - product-approvers
+        - quality-reviewers
       minimum: 1
       rejectTo:
         - intake
-        - requirements
+        - reproduction
+  requirements:
+    label: Requirements
+    defaultTemplate: feature/requirements.md
     artifact:
       path: artifacts/requirements/requirements.md
       kind: requirements
       minimumBytes: 300
+    worldModel:
+      views:
+        - business
+      depth: standard
     clarification:
       mode: required
       maxQuestions: 5
@@ -1245,13 +1244,14 @@ phases:
         - dependencies
         - constraints
         - risks
-    defaultTemplate: feature/requirements.md
-    label: Requirements
-    worldModel:
-      views:
-        - business
-      depth: standard
     writeScope: artifact-only
+    approval:
+      authorities:
+        - product-approvers
+      minimum: 1
+      rejectTo:
+        - intake
+        - requirements
   specification:
     label: Specification
     defaultTemplate: spec-driven/spec.md
@@ -1317,17 +1317,19 @@ phases:
         - testing
     qualityCommands: []
   verification:
-    approval:
-      authorities:
-        - quality-reviewers
-      minimum: 1
-      rejectTo:
-        - implementation
-        - verification
+    label: Verification
+    defaultTemplate: common/verification.md
     artifact:
       path: artifacts/verification/test-evidence.md
       kind: test-evidence
       minimumBytes: 300
+    worldModel:
+      views:
+        - testing
+        - development
+        - security
+      depth: standard
+      evidence: true
     clarification:
       mode: when-needed
       maxQuestions: 3
@@ -1336,17 +1338,15 @@ phases:
         - environment
         - evidence
         - deviations
-    defaultTemplate: common/verification.md
-    label: Verification
-    qualityCommands: []
-    worldModel:
-      views:
-        - testing
-        - development
-        - security
-      depth: standard
-      evidence: true
     writeScope: source-and-artifact
+    approval:
+      authorities:
+        - quality-reviewers
+      minimum: 1
+      rejectTo:
+        - implementation
+        - verification
+    qualityCommands: []
   verify:
     label: Verify
     defaultTemplate: quick-fix/verify.md
@@ -1422,9 +1422,9 @@ planning:
 repositoryReadiness:
   requiredBeforeStory: false
   dependencyHydration: when-detected
-  build: when-detected
+  build: off
   structuredTests: required-for-code
-  applicationStart: when-detected
+  applicationStart: off
   receiptScope: git-private-exact-base
 sequenceGates:
   default: soft
@@ -1658,6 +1658,25 @@ workTypes:
             - conformance
   bugfix:
     label: Bug fix
+    phases:
+      - intake
+      - reproduction
+      - fix-design
+      - fix-spec
+      - implementation
+      - verification
+      - conformance
+    plannedClaims:
+      mode: required
+      clausePhases:
+        - fix-spec
+      owners:
+        implementation: fix-spec
+    templateOverrides:
+      intake: bugfix/intake.md
+      reproduction: bugfix/reproduction.md
+      fix-design: bugfix/fix-design.md
+      fix-spec: bugfix/fix-spec.md
     phaseOverrides:
       reproduction:
         inputs:
@@ -1681,40 +1700,8 @@ workTypes:
           - fix-spec
           - implementation
           - verification
-    phases:
-      - intake
-      - reproduction
-      - fix-design
-      - fix-spec
-      - implementation
-      - verification
-      - conformance
-    plannedClaims:
-      mode: required
-      clausePhases:
-        - fix-spec
-      owners:
-        implementation: fix-spec
-    templateOverrides:
-      intake: bugfix/intake.md
-      reproduction: bugfix/reproduction.md
-      fix-design: bugfix/fix-design.md
-      fix-spec: bugfix/fix-spec.md
   chore:
     label: Chore
-    phaseOverrides:
-      conformance:
-        inputs:
-          - implementation
-          - verification
-      implementation:
-        generation:
-          task: analyze
-        inputs:
-          - intake
-      verification:
-        inputs:
-          - implementation
     phases:
       - intake
       - implementation
@@ -1722,6 +1709,93 @@ workTypes:
       - conformance
     templateOverrides:
       intake: chore/intake.md
+    phaseOverrides:
+      implementation:
+        inputs:
+          - intake
+        generation:
+          task: analyze
+      verification:
+        inputs:
+          - implementation
+      conformance:
+        inputs:
+          - implementation
+          - verification
+  classic-delivery:
+    label: Classic delivery
+    description: Intake, code, testing, and code checking with passing
+      repository-native test receipts committed to the Story branch.
+    phases:
+      - intake
+      - implementation
+      - testing
+      - conformance
+    plannedClaims:
+      mode: required
+      clausePhases:
+        - intake
+      owners:
+        implementation: intake
+    templateOverrides:
+      intake: classic-delivery/intake.md
+      testing: classic-delivery/testing.md
+      conformance: classic-delivery/code-checking.md
+    phaseOverrides:
+      intake:
+        artifact:
+          kind: requirements
+        clarification:
+          mode: required
+          maxQuestions: 5
+          topics:
+            - problem
+            - outcome
+            - scope
+            - acceptance criteria
+            - tests
+      implementation:
+        label: Code
+        inputs:
+          - intake
+        approval:
+          authorities:
+            - engineering-reviewers
+          minimum: 1
+          rejectTo:
+            - intake
+            - implementation
+      testing:
+        label: Testing
+        inputs:
+          - intake
+          - implementation
+        writeScope: artifact-only
+        testEvidenceFrom: implementation
+        approval:
+          authorities:
+            - quality-reviewers
+          minimum: 1
+          rejectTo:
+            - implementation
+            - testing
+      conformance:
+        label: Code checking
+        inputs:
+          - intake
+          - implementation
+          - testing
+        testEvidenceFrom: implementation
+        approval:
+          authorities:
+            - quality-reviewers
+            - engineering-reviewers
+          minimum: 1
+          rejectTo:
+            - intake
+            - implementation
+            - testing
+            - conformance
   feature:
     label: Feature
     phaseOverrides:
@@ -2152,11 +2226,11 @@ workTypes:
             fallback: block
 worldModel:
   generation:
+    parallel: true
     maxWorkers: 4
+    strategy: view
     maximumDiscoveryPacketBytes: 24576
     maximumSynthesisInputTokens: 24000
-    parallel: true
-    strategy: view
     synthesisOverflow: summarize-or-refuse
   grounding: enforce
   historyDir: singularity/world-model-history
