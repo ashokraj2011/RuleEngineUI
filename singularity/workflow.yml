@@ -2378,7 +2378,7 @@ worldModel:
     - dev.impact@4
   format: registered-v4
   v4:
-    composer: deterministic
+    composer: model-required
     consumer: developer
     cachePolicy: reuse-valid
     legacyAssignments: inherit-configured
