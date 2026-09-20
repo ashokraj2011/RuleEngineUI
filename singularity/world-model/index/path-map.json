@@ -1,77 +1,72 @@
 {
-  "schema_version": "1.0",
-  "generated_at": "2026-08-05T14:45:35Z",
-  "repository_commit": "00ebe873dc0c98a71707575ec3fdc374b5b54dfc",
-  "entries": [
-    {
-      "glob": "src/app/components/sidebar/**",
-      "component_ids": [
-        "ui-sidebar"
-      ],
-      "domains": [
-        "ui-theming"
-      ],
-      "views": [
-        "business"
-      ],
-      "symbols": [
-        "SidebarComponent"
-      ],
-      "tests": [],
-      "anchors": [
-        "biz.capabilities",
-        "biz.actors",
-        "domain.ui-theming.purpose"
-      ],
-      "notes": "The sidebar is the primary visual shell for the left panel and the app navigation experience."
-    },
-    {
-      "glob": "src/app/app.component.ts",
-      "component_ids": [
-        "web-ui"
-      ],
-      "domains": [
-        "ui-theming"
-      ],
-      "views": [
-        "business"
-      ],
-      "symbols": [
-        "AppComponent"
-      ],
-      "tests": [],
-      "anchors": [
-        "biz.capabilities",
-        "biz.workflows"
-      ],
-      "notes": "AppComponent coordinates the visible workflows and swaps between the main application tabs."
-    },
-    {
-      "glob": "server/**",
-      "component_ids": [
-        "api-backend"
-      ],
-      "domains": [],
-      "views": [
-        "business"
-      ],
-      "symbols": [
-        "initDb"
-      ],
-      "tests": [],
-      "anchors": [
-        "biz.entities",
-        "biz.rules"
-      ],
-      "notes": "The backend persists rules and glossary terms that shape the business-facing rule catalog."
-    }
+  "schemaVersion": 1,
+  "mode": "bounded-light-index",
+  "totalPaths": 101,
+  "representativePaths": [
+    "README.md",
+    "package.json",
+    "postcss.config.js",
+    "react-backup/README.md",
+    "react-backup/package.json",
+    "react-backup/src/App.tsx",
+    "react-backup/src/components/DataSchema.tsx",
+    "react-backup/src/components/DecisionTable.tsx",
+    "react-backup/src/components/Functions.tsx",
+    "react-backup/src/components/HistoryLogs.tsx",
+    "react-backup/src/components/RuleCanvas.tsx",
+    "react-backup/src/components/RuleConfig.tsx",
+    "react-backup/src/components/RuleSets.tsx",
+    "react-backup/src/components/Sidebar.tsx",
+    "react-backup/src/components/TopNavBar.tsx",
+    "react-backup/src/data.ts",
+    "react-backup/src/main.tsx",
+    "react-backup/src/types.ts",
+    "react-backup/vite.config.ts",
+    "server/db.js",
+    "server/index.js",
+    "server/package.json",
+    "src/app/app.component.ts",
+    "src/app/app.config.ts",
+    "src/app/components/data-schema/data-schema.component.ts",
+    "src/app/components/decision-table/decision-table.component.ts",
+    "src/app/components/functions/functions.component.ts",
+    "src/app/components/history-logs/history-logs.component.ts",
+    "src/app/components/rule-canvas/rule-canvas.component.ts",
+    "src/app/components/rule-config/rule-config.component.ts",
+    "src/app/components/rule-sets/rule-sets.component.ts",
+    "src/app/components/sidebar/sidebar.component.ts",
+    "src/app/components/top-nav-bar/top-nav-bar.component.ts",
+    "src/app/components/validator/coverage-tab/coverage-tab.component.ts",
+    "src/app/components/validator/eval-node/eval-node.component.ts",
+    "src/app/components/validator/generated-tests-tab/generated-tests-tab.component.ts",
+    "src/app/components/validator/library-tab/library-tab.component.ts",
+    "src/app/components/validator/overview-tab/overview-tab.component.ts",
+    "src/app/components/validator/shell/shell.component.ts",
+    "src/app/components/validator/test-data-tab/test-data-tab.component.ts",
+    "src/app/components/validator/test-runs-tab/test-runs-tab.component.ts",
+    "src/app/components/validator/validate-tab/validate-tab.component.ts",
+    "src/app/data.ts",
+    "src/app/kernel/ast.ts",
+    "src/app/kernel/compare.ts",
+    "src/app/kernel/coverage.ts",
+    "src/app/kernel/diff.ts",
+    "src/app/kernel/evaluate.ts",
+    "src/app/kernel/index.ts",
+    "src/app/kernel/kernel.spec.ts",
+    "src/app/kernel/lint.ts",
+    "src/app/kernel/logic.ts",
+    "src/app/kernel/schema.ts",
+    "src/app/kernel/synthesize.ts",
+    "src/app/models/types.ts",
+    "src/app/services/mock-db.service.ts",
+    "src/app/services/persistence.ts",
+    "src/app/services/rule-engine.service.ts",
+    "src/app/services/rule-store.service.ts",
+    "src/app/types.ts",
+    "src/app/validator-data/sample-rules.ts",
+    "src/app/validator-data/sample-test-cases.ts",
+    "src/main.ts",
+    "tsconfig.spec.json"
   ],
-  "fallback": {
-    "views": [
-      "business"
-    ],
-    "anchors": [
-      "core.map"
-    ]
-  }
+  "omittedPathCount": 37
 }

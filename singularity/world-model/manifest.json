@@ -1,331 +1,242 @@
 {
-  "schema_version": "2.0",
-  "repository_commit": "00ebe873dc0c98a71707575ec3fdc374b5b54dfc",
-  "repository_branch": "WRK-999",
-  "working_tree_clean": false,
-  "generated_at": "2026-08-05T14:42:02.624Z",
-  "generated_date": "5 August 2026",
-  "builder_version": "2.0",
-  "builder_prompt_sha256": "d607ed17ba7e0ad45acd142b62b57c32272e21dfec50866d4bee5105f2fd9169",
-  "analysis_depth": "quick",
+  "schema_version": "3.0",
+  "generated_at": "2026-09-20T16:27:34.961Z",
+  "generated_date": "20 September 2026",
+  "builder_version": "2.1-light",
+  "builder_prompt_sha256": "511654826223e40b93c54f48f9b773f155e3364326d41aa98108dea7217d75cd",
+  "repository_commit": "3a3590272ef1a1ce748e3effd42946c076fe9c70",
+  "repository_branch": "main",
+  "working_tree_clean": true,
+  "generated_for_phase": null,
+  "analysis_depth": "light",
+  "source_tree_sha256": "sha256:b56ef106635594dec07a137e501553bc1b6adbbfd1e6d1a2e2ce418d8124ce87",
+  "generator": {
+    "type": "deterministic-local",
+    "model": null,
+    "model_tokens": 0
+  },
   "core": {
-    "summary": "core/summary.md",
     "brief": "core/summary.brief.md",
-    "model": "core/model.json",
-    "anchors": [
-      "core.tldr",
-      "core.purpose",
-      "core.type",
-      "core.components",
-      "core.map",
-      "core.entrypoints",
-      "core.tech",
-      "core.commands",
-      "core.risks",
-      "core.unknowns",
-      "core.freshness",
-      "core.routing"
-    ],
-    "bytes": {
-      "summary": 5098,
-      "brief": 1353
+    "summary": "core/summary.md",
+    "model": {
+      "path": "core/model.json"
     },
-    "recommended_for_all_agents": true
+    "tiers": {
+      "brief": {
+        "status": "ready",
+        "path": "core/summary.brief.md",
+        "bytes": 738,
+        "sha256": "5e395468e4094913454d92476c87c29e994e073bd394e03b64f2dbed2362005b"
+      },
+      "full": {
+        "status": "ready",
+        "path": "core/summary.md",
+        "bytes": 4506,
+        "sha256": "7e2d25cc48fbb2c239042f1f742bc2434b3051d558c8140d6babec5da4bae12f"
+      }
+    }
+  },
+  "path_index": {
+    "path": "index/path-map.json",
+    "bytes": 2986,
+    "sha256": "aa73e9314bdb8d3a3a95bbc4b775a58025b7db95871c04f477cf61dfe5371ff1"
   },
   "views": {
+    "architecture": {
+      "path": "views/architecture.md",
+      "brief_path": "views/architecture.brief.md",
+      "generated": true,
+      "tiers": {
+        "brief": {
+          "status": "ready",
+          "path": "views/architecture.brief.md",
+          "bytes": 293,
+          "sha256": "f921d6bdde424609578afa7fa4c95b9f4ce59964c1859a7d961ea16a3ebce9a1"
+        },
+        "full": {
+          "status": "missing",
+          "path": "views/architecture.md",
+          "bytes": 0,
+          "sha256": null
+        }
+      }
+    },
     "business": {
       "path": "views/business.md",
       "brief_path": "views/business.brief.md",
       "generated": true,
-      "bytes": {
-        "full": 7018,
-        "brief": 1296
-      },
-      "anchors": [
-        "biz.tldr",
-        "biz.facts",
-        "biz.start",
-        "biz.capabilities",
-        "biz.actors",
-        "biz.entities",
-        "biz.rules",
-        "biz.failure",
-        "biz.compliance",
-        "biz.impact",
-        "biz.unknowns",
-        "biz.questions",
-        "biz.limits",
-        "biz.brief"
-      ],
-      "load_when": [
-        "business capability analysis",
-        "product behavior analysis",
-        "business impact assessment"
-      ]
-    },
-    "architecture": {
-      "path": "views/architecture.md",
-      "brief_path": "views/architecture.brief.md",
-      "generated": false,
-      "load_when": [
-        "system design",
-        "dependency analysis",
-        "cross-component change"
-      ]
+      "tiers": {
+        "brief": {
+          "status": "ready",
+          "path": "views/business.brief.md",
+          "bytes": 294,
+          "sha256": "c2b21d161d4f19d69e8c260c0f2f68fbc5b79180eff85b42e912424a2b33cde0"
+        },
+        "full": {
+          "status": "missing",
+          "path": "views/business.md",
+          "bytes": 0,
+          "sha256": null
+        }
+      }
     },
     "development": {
       "path": "views/development.md",
       "brief_path": "views/development.brief.md",
-      "generated": false,
-      "load_when": [
-        "implementation",
-        "debugging",
-        "refactoring",
-        "code review"
-      ]
-    },
-    "testing": {
-      "path": "views/testing.md",
-      "brief_path": "views/testing.brief.md",
-      "generated": false,
-      "load_when": [
-        "test creation",
-        "regression analysis",
-        "quality validation"
-      ]
-    },
-    "release": {
-      "path": "views/release.md",
-      "brief_path": "views/release.brief.md",
-      "generated": false,
-      "load_when": [
-        "build",
-        "packaging",
-        "deployment",
-        "rollback"
-      ]
+      "generated": true,
+      "tiers": {
+        "brief": {
+          "status": "ready",
+          "path": "views/development.brief.md",
+          "bytes": 325,
+          "sha256": "20e6978930032a11e0bfd4f1dd81e7be8323015d77a216906c7275006c146c37"
+        },
+        "full": {
+          "status": "missing",
+          "path": "views/development.md",
+          "bytes": 0,
+          "sha256": null
+        }
+      }
     },
     "operations": {
       "path": "views/operations.md",
       "brief_path": "views/operations.brief.md",
-      "generated": false,
-      "load_when": [
-        "runtime diagnosis",
-        "monitoring and incident response"
-      ]
+      "generated": true,
+      "tiers": {
+        "brief": {
+          "status": "ready",
+          "path": "views/operations.brief.md",
+          "bytes": 291,
+          "sha256": "c87725a7571526a8c9eb763b55c9a42cc16fd08aaf71b72460d31cbee1f9b9f5"
+        },
+        "full": {
+          "status": "missing",
+          "path": "views/operations.md",
+          "bytes": 0,
+          "sha256": null
+        }
+      }
+    },
+    "release": {
+      "path": "views/release.md",
+      "brief_path": "views/release.brief.md",
+      "generated": true,
+      "tiers": {
+        "brief": {
+          "status": "ready",
+          "path": "views/release.brief.md",
+          "bytes": 302,
+          "sha256": "00b6c2b316ca2cce926c84ab2acc2df890a3571fab805728abc616ce8e85e83c"
+        },
+        "full": {
+          "status": "missing",
+          "path": "views/release.md",
+          "bytes": 0,
+          "sha256": null
+        }
+      }
     },
     "security": {
       "path": "views/security.md",
       "brief_path": "views/security.brief.md",
-      "generated": false,
-      "load_when": [
-        "threat analysis",
-        "authentication or authorization change"
-      ]
+      "generated": true,
+      "tiers": {
+        "brief": {
+          "status": "ready",
+          "path": "views/security.brief.md",
+          "bytes": 289,
+          "sha256": "90e567c77824da664b764a1fdbdc729d705c0ee4396b82aa4c181d90cfc0f0c2"
+        },
+        "full": {
+          "status": "missing",
+          "path": "views/security.md",
+          "bytes": 0,
+          "sha256": null
+        }
+      }
+    },
+    "testing": {
+      "path": "views/testing.md",
+      "brief_path": "views/testing.brief.md",
+      "generated": true,
+      "tiers": {
+        "brief": {
+          "status": "ready",
+          "path": "views/testing.brief.md",
+          "bytes": 302,
+          "sha256": "fc7ab8b4b7fdf4351c2781eceb45c8b31ec3f24732f07ae2cac699a468bf9017"
+        },
+        "full": {
+          "status": "missing",
+          "path": "views/testing.md",
+          "bytes": 0,
+          "sha256": null
+        }
+      }
     }
-  },
-  "phase_map": {
-    "intake": {
-      "views": [
-        "business"
-      ],
-      "tier": "brief"
-    },
-    "requirements": {
-      "views": [
-        "business"
-      ],
-      "tier": "full"
-    },
-    "design": {
-      "views": [
-        "architecture"
-      ],
-      "tier": "full"
-    },
-    "implementation-spec": {
-      "views": [
-        "architecture",
-        "development"
-      ],
-      "tier": "full"
-    },
-    "implementation": {
-      "views": [
-        "development"
-      ],
-      "tier": "full"
-    },
-    "verification": {
-      "views": [
-        "testing"
-      ],
-      "tier": "full"
-    },
-    "conformance": {
-      "views": [
-        "testing",
-        "security"
-      ],
-      "tier": "brief"
-    }
-  },
-  "agent_map": {
-    "product-owner": {
-      "views": [
-        "business"
-      ],
-      "tier": "brief"
-    },
-    "business-analyst": {
-      "views": [
-        "business"
-      ],
-      "tier": "full"
-    },
-    "architect": {
-      "views": [
-        "architecture",
-        "security"
-      ],
-      "tier": "full"
-    },
-    "developer": {
-      "views": [
-        "development"
-      ],
-      "tier": "full"
-    },
-    "qa": {
-      "views": [
-        "testing"
-      ],
-      "tier": "full"
-    },
-    "security": {
-      "views": [
-        "security"
-      ],
-      "tier": "full"
-    },
-    "operations": {
-      "views": [
-        "operations"
-      ],
-      "tier": "full"
-    },
-    "delivery-manager": {
-      "views": [
-        "release"
-      ],
-      "tier": "brief"
-    }
-  },
-  "path_index": {
-    "path": "index/path-map.json"
-  },
-  "domains": [
-    {
-      "id": "ui-theming",
-      "path": "domains/ui-theming.md",
-      "summary": "The presentation layer for the left navigation shell and visual state of the application.",
-      "relevant_views": [
-        "business"
-      ],
-      "keywords": [
-        "sidebar",
-        "theme",
-        "ui"
-      ],
-      "anchors": [
-        "domain.ui-theming.tldr"
-      ]
-    }
-  ],
-  "task_guides": [
-    {
-      "id": "change-color-black-left-panel",
-      "path": "task-guides/change-color-black-left-panel.md",
-      "task": "Change the color black left panel",
-      "required_views": [
-        "business"
-      ],
-      "required_domains": [
-        "ui-theming"
-      ]
-    }
-  ],
-  "evidence": {
-    "path": "evidence/evidence.jsonl",
-    "load_only_when_verification_is_needed": true
-  },
-  "recommended_loading_rules": [
-    {
-      "agent_type": "business",
-      "load": [
-        "core/summary.brief.md",
-        "views/business.md"
-      ]
-    },
-    {
-      "agent_type": "architect",
-      "load": [
-        "core/summary.brief.md",
-        "views/architecture.md"
-      ]
-    },
-    {
-      "agent_type": "developer",
-      "load": [
-        "core/summary.brief.md",
-        "views/development.md"
-      ]
-    },
-    {
-      "agent_type": "tester",
-      "load": [
-        "core/summary.brief.md",
-        "views/testing.md"
-      ]
-    },
-    {
-      "agent_type": "release",
-      "load": [
-        "core/summary.brief.md",
-        "views/release.md"
-      ]
-    }
-  ],
-  "budget_hints": {
-    "orientation_only": [
-      "core/summary.brief.md"
-    ],
-    "single_phase_typical": [
-      "core/summary.brief.md",
-      "views/<view>.md"
-    ],
-    "deep_investigation": [
-      "core/summary.md",
-      "views/<view>.md",
-      "domains/<domain>.md",
-      "evidence/evidence.jsonl"
-    ]
   },
   "views_generated": [
-    "business"
+    "architecture",
+    "business",
+    "development",
+    "operations",
+    "release",
+    "security",
+    "testing"
   ],
-  "source_tree_sha256": "sha256:5710b8707d377a530bf42d9b0dad932c37b47ed2c544560e81e5570f5b822e4e",
+  "requested_views": [
+    "architecture",
+    "business",
+    "development",
+    "operations",
+    "release",
+    "security",
+    "testing"
+  ],
+  "domains": [],
+  "task_guides": [],
+  "evidence": {
+    "path": "evidence/evidence.jsonl",
+    "bytes": 399,
+    "sha256": "ebf0358bf5c23840f8e611bf6c7c05d9eb1818a47a971b0b8631b24c2f2cefa4"
+  },
   "generation": {
     "parallel": false,
-    "strategy": "view",
-    "max_workers": 1,
+    "strategy": "deterministic-light",
+    "max_workers": 0,
     "discovery_views": [],
     "degraded_views": [],
     "resumed_views": [],
     "pending_views_at_start": []
   },
-  "generated_for_phase": "intake",
-  "requested_views": [
-    "business"
+  "materializations": [
+    {
+      "id": "light-1789921656927",
+      "generated_at": "2026-09-20T16:27:34.961Z",
+      "source_tree_sha256": "sha256:b56ef106635594dec07a137e501553bc1b6adbbfd1e6d1a2e2ce418d8124ce87",
+      "provider": null,
+      "requested": [
+        "architecture/brief",
+        "business/brief",
+        "core/brief",
+        "development/brief",
+        "operations/brief",
+        "release/brief",
+        "security/brief",
+        "testing/brief"
+      ],
+      "produced": [
+        "architecture/brief",
+        "business/brief",
+        "core/brief",
+        "development/brief",
+        "operations/brief",
+        "release/brief",
+        "security/brief",
+        "testing/brief"
+      ],
+      "reused": []
+    }
   ]
 }

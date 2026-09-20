@@ -1,10 +1,10 @@
-> **Grounding** · RuleEngineUI @ `00ebe873dc0c98a71707575ec3fdc374b5b54dfc` · view: `core.brief` · tier: `brief`
-> **Generated** 5 August 2026 (2026-08-05T14:45:35Z) · depth: `quick` · builder `2.0`
-> **Authoritative for:** file locations, entry points, commands, structural relationships as of the commit above.
-> **Not authoritative for:** current file contents. If this document conflicts with code you have read, trust the code and say so explicitly in your output.
-> **Unknowns are marked.** Do not resolve them by inference. If the repository has changed since the date above, treat locations as hints, not facts.
+# logic-engine — light repository brief
 
+> Generated 20 September 2026 · zero model tokens · source `3a3590272ef1`
 
-## Repository snapshot {#core.brief}
+- Files indexed: 101
+- Languages: TypeScript (55), JavaScript (3)
+- Likely entry points: `react-backup/src/App.tsx`, `react-backup/src/main.tsx`, `server/index.js`, `src/app/kernel/index.ts`, `src/main.ts`
+- Validation commands: `npm run build`, `npm run clean`, `npm run client`, `npm run dev`
 
-This repository is a rule-engine authoring experience built around an Angular frontend and an Express backend. The frontend exposes a schema explorer, visual rule designer, validator studio, and execution history; the backend stores rules and glossary data in PostgreSQL and can optionally generate rule names via Gemini. The core engine logic lives in `src/app/kernel/`, with the main UI entry point in `src/main.ts` and the API entry point in `server/index.js`. The standard local workflow is `npm start` for the UI plus `node server/index.js` for the API. The main risk is that the repo depends on local services and configuration that are not fully described in the checked-in files.
+This model was generated locally and consumed **zero model tokens**. It records only deterministic repository metadata. It does not claim runtime behavior, business meaning, ownership, security, test coverage, or architectural intent. Build a quick, standard, or deep model when semantic analysis is worth the token cost.
