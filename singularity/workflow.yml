@@ -2372,10 +2372,16 @@ worldModel:
   staleness: warn
   stateFetchTimeoutMs: 10000
   views:
-    - business
-    - architecture
-    - development
-    - testing
-    - release
-    - operations
-    - security
+    - arch.contracts@4
+    - biz.rules@4
+    - dev.hotspots@4
+    - dev.impact@4
+  format: registered-v4
+  v4:
+    composer: deterministic
+    consumer: developer
+    cachePolicy: reuse-valid
+    legacyAssignments: inherit-configured
+    totalMaximumOutputTokens: 5600
+  sourceRoots: []
+  sharedRoots: []
