@@ -2096,8 +2096,11 @@ workTypes:
   spec-code-test-loop:
     label: Spec → code → Playwright review
     description: A specification-first Story with Code publication, governed
-      Playwright browser observations, and bounded human-directed rework; MCP
-      observations never replace structured test receipts or approval.
+      Playwright browser observations, and bounded human-directed rework. The
+      optional BRL foundation can inspect or plan the exact retained Code
+      Candidate, but runs fail closed without its approved runner; MCP or BRL
+      observations never replace structured test receipts, Testing, publication,
+      or approval.
     phases:
       - specification
       - implementation
@@ -2334,6 +2337,7 @@ workTypes:
             expansion: hash-bound-reference
             fallback: block
 worldModel:
+  format: registered-v4
   generation:
     parallel: true
     maxWorkers: 4
@@ -2369,19 +2373,18 @@ worldModel:
         includeFlows: true
         includeExternalDependencies: direct-architecture-only
   promptSource: singularity/prompts/worldmodel-builder.md
+  sharedRoots: []
+  sourceRoots: []
   staleness: warn
   stateFetchTimeoutMs: 10000
-  views:
-    - arch.contracts@4
-    - biz.rules@4
-    - dev.hotspots@4
-    - dev.impact@4
-  format: registered-v4
   v4:
     composer: model-required
     consumer: developer
     cachePolicy: reuse-valid
     legacyAssignments: inherit-configured
     totalMaximumOutputTokens: 5600
-  sourceRoots: []
-  sharedRoots: []
+  views:
+    - arch.contracts@4
+    - biz.rules@4
+    - dev.hotspots@4
+    - dev.impact@4
