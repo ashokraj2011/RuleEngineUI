@@ -2226,6 +2226,7 @@ workTypes:
     label: Spec-Driven Standard
     spec:
       mode: enforce
+      coverage: enforce
     plannedClaims:
       mode: required
       clausePhases:
@@ -2266,9 +2267,15 @@ workTypes:
           - phase: specification
             projection: approved-summary
             preserve:
+              - Actors
+              - User scenarios
+              - Failure and empty states
+              - Permissions
+              - Boundary conditions
               - Requirements
               - Non-functional requirements
-              - Boundary conditions
+              - Assumptions
+              - Out of scope
             maximumSummaryBytes: 32768
             expansion: hash-bound-reference
             fallback: block
@@ -2277,9 +2284,15 @@ workTypes:
           - phase: specification
             projection: approved-summary
             preserve:
+              - Actors
+              - User scenarios
+              - Failure and empty states
+              - Permissions
+              - Boundary conditions
               - Requirements
               - Non-functional requirements
-              - Boundary conditions
+              - Assumptions
+              - Out of scope
             maximumSummaryBytes: 32768
             expansion: hash-bound-reference
             fallback: block
@@ -2296,9 +2309,15 @@ workTypes:
           - phase: specification
             projection: approved-summary
             preserve:
+              - Actors
+              - User scenarios
+              - Failure and empty states
+              - Permissions
+              - Boundary conditions
               - Requirements
               - Non-functional requirements
-              - Boundary conditions
+              - Assumptions
+              - Out of scope
             maximumSummaryBytes: 32768
             expansion: hash-bound-reference
             fallback: block
@@ -2323,9 +2342,15 @@ workTypes:
           - phase: specification
             projection: approved-summary
             preserve:
+              - Actors
+              - User scenarios
+              - Failure and empty states
+              - Permissions
+              - Boundary conditions
               - Requirements
               - Non-functional requirements
-              - Boundary conditions
+              - Assumptions
+              - Out of scope
             maximumSummaryBytes: 32768
             expansion: hash-bound-reference
             fallback: block
@@ -2356,6 +2381,12 @@ workTypes:
             maximumSummaryBytes: 24576
             expansion: hash-bound-reference
             fallback: block
+    sourceReview:
+      mode: enforce
+      phases:
+        - specification
+        - planning
+      reviewerAgent: sflow-source-reviewer
 worldModel:
   format: registered-v4
   generation:
