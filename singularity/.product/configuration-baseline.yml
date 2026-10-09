@@ -1,7 +1,7 @@
 format: singularity-flow-configuration-baseline/v1
 product:
   version: 0.9.0
-  revision: 054d3fce40008a29abf9f0797765203349c8e759
+  revision: 56a871ea64ef6dbd2b4a946a441b48e5d3b95016
 workflow:
   version: 2
   inputsMode: enforce
@@ -3576,7 +3576,6 @@ ownership:
     singularity/impact.yml: framework
     singularity/modelTiers.yml: framework
     singularity/prompts/copilot-planning.md: framework
-    singularity/prompts/worldmodel-builder.md: repository
     singularity/skill-library/attachments.yml: framework
     singularity/skill-library/demo-acceptance-intake/SKILL.md: framework
     singularity/skill-library/demo-code-acceptance-check/SKILL.md: framework
