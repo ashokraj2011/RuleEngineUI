@@ -3576,7 +3576,6 @@ ownership:
     singularity/impact.yml: framework
     singularity/modelTiers.yml: framework
     singularity/prompts/copilot-planning.md: framework
-    singularity/prompts/worldmodel-builder.md: repository
     singularity/skill-library/attachments.yml: framework
     singularity/skill-library/demo-acceptance-intake/SKILL.md: framework
     singularity/skill-library/demo-code-acceptance-check/SKILL.md: framework
