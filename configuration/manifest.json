@@ -3,15 +3,15 @@
   "layout": "canonical-paths",
   "source": {
     "branch": "sflow/config",
-    "commit": "4e877f270dcc50b64ce2dd5e3a5b0a0182131922"
+    "commit": "280050a94315d1401ecaf560f954a6d78241de6f"
   },
   "history": {
-    "branch": "sflow/config-history/4e877f270dcc50b64ce2dd5e3a5b0a0182131922",
-    "commit": "4e877f270dcc50b64ce2dd5e3a5b0a0182131922"
+    "branch": "sflow/config-history/280050a94315d1401ecaf560f954a6d78241de6f",
+    "commit": "280050a94315d1401ecaf560f954a6d78241de6f"
   },
   "product": {
     "version": "0.9.0",
-    "revision": "d5f769d9fc9caf4b7143a3bcc2b8870139464875"
+    "revision": "5f368a057d56a54408d045ced6d51c6bf8bd6346"
   },
   "files": {
     ".github/agents/architect.agent.md": "41052a47c867dfe1eaae3f0ab8686912efc3ae00e42cb0c9198131a19dc5bc88",
@@ -168,15 +168,15 @@
     "singularity/templates/quick-fix/intake.md": "a1dae2da960302a152df2c87c90673222a9a8a671752ef38d13fe75e94598950",
     "singularity/templates/quick-fix/verify.md": "a21900d99d044d35de501f0e43888a8a3ebcfe860e702a5d1b3eec61fdd06f27",
     "singularity/templates/spec-code-test-loop/conformance.md": "b22de4f73720b8bf645faef0e2484031838d511fe4ea06810c6bf9b16c8bae1a",
-    "singularity/templates/spec-code-test-loop/specification.md": "28e2b5462c1fc7bc77cfea42c875b69e3f9eb1f9c3374cf37a2a5aa2aeba2547",
+    "singularity/templates/spec-code-test-loop/specification.md": "df84e819635791295f1fd6e30e42f8233959966bbac5c3b4f1a52eeba8ceb41c",
     "singularity/templates/spec-code-test-loop/testing.md": "eef65b164a45b3df7843d76ef071e9d9932304ec9861c8ed19c646db105f9284",
     "singularity/templates/spec-driven/convergence.md": "eb257477afca0229ed858875499736c57498015aaee0a527b714356819a9dde2",
     "singularity/templates/spec-driven/plan.md": "b953f12ef6b7162f71af438e5af18c9e37aac265e15d2fe73f9cf23aff0a182c",
     "singularity/templates/spec-driven/release.md": "3d6717eace80085585d04c9c3f5c67f10d7a2e9c4e535a862c8b5aa900d556fe",
-    "singularity/templates/spec-driven/spec.md": "b370347adeca20bb560827843acb2330e90e9fa875e760611ef752ee38765cab",
+    "singularity/templates/spec-driven/spec.md": "8845017e5a12bf3b59ea955324f999f9b51f4a6a6606c3808f7e516adf1d2cce",
     "singularity/templates/starter-packs/skp-team-notes/draft-input.json": "fbc136911e7dfecf14be06091b6d759770fa72c133c39de74710511bfee57410",
     "singularity/templates/starter-packs/skp-team-notes/README.md": "ab3e66d1654df81922a6022c491ac85868cb3b644e0eace77c4f9089c4f599ea",
-    "singularity/workflow.yml": "9654e018849e8bcfa9fca8403eb56386dae2550b08349e34e7f7bf7c3bf955c1"
+    "singularity/workflow.yml": "94b2286571143b94a53237e1b704e2feaa75e40a974ff428b3a0cc80935528ad"
   },
   "assets": {
     ".github/agents/architect.agent.md": {
@@ -950,8 +950,8 @@
       "mode": "100644"
     },
     "singularity/templates/spec-code-test-loop/specification.md": {
-      "sha256": "28e2b5462c1fc7bc77cfea42c875b69e3f9eb1f9c3374cf37a2a5aa2aeba2547",
-      "object": "a6e1ef26e3c6127bdff8676ccc5d2101add54347",
+      "sha256": "df84e819635791295f1fd6e30e42f8233959966bbac5c3b4f1a52eeba8ceb41c",
+      "object": "2abc164a7ce4c7e34f54c5fcf01e54932bead060",
       "mode": "100644"
     },
     "singularity/templates/spec-code-test-loop/testing.md": {
@@ -975,8 +975,8 @@
       "mode": "100644"
     },
     "singularity/templates/spec-driven/spec.md": {
-      "sha256": "b370347adeca20bb560827843acb2330e90e9fa875e760611ef752ee38765cab",
-      "object": "16092ab10d61801d80c088f561f945a6d95d3933",
+      "sha256": "8845017e5a12bf3b59ea955324f999f9b51f4a6a6606c3808f7e516adf1d2cce",
+      "object": "09bf71a835d841551017d202237560271a74605e",
       "mode": "100644"
     },
     "singularity/templates/starter-packs/skp-team-notes/draft-input.json": {
@@ -990,8 +990,8 @@
       "mode": "100644"
     },
     "singularity/workflow.yml": {
-      "sha256": "9654e018849e8bcfa9fca8403eb56386dae2550b08349e34e7f7bf7c3bf955c1",
-      "object": "78924caea7a51b66658ed68c2ba8e1cd77d15d59",
+      "sha256": "94b2286571143b94a53237e1b704e2feaa75e40a974ff428b3a0cc80935528ad",
+      "object": "aaa08dbd18439afaa8f66cdd6d0010fcf0391ad0",
       "mode": "100644"
     }
   }
