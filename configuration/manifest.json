@@ -3,15 +3,15 @@
   "layout": "canonical-paths",
   "source": {
     "branch": "sflow/config",
-    "commit": "446ab519bf4f74356ff941b7c375abfb19431120"
+    "commit": "1faa9dcbc530ede4cb7c771d72ee170051c343ab"
   },
   "history": {
-    "branch": "sflow/config-history/446ab519bf4f74356ff941b7c375abfb19431120",
-    "commit": "446ab519bf4f74356ff941b7c375abfb19431120"
+    "branch": "sflow/config-history/1faa9dcbc530ede4cb7c771d72ee170051c343ab",
+    "commit": "1faa9dcbc530ede4cb7c771d72ee170051c343ab"
   },
   "product": {
     "version": "0.9.0",
-    "revision": "a66b488b2763d27cce09ff69434cf01fcecb47ad"
+    "revision": "94249ea2457584926e047f406f6caa3724871af5"
   },
   "files": {
     ".github/agents/architect.agent.md": "8770e647612b0c805ad583e7615f2ebe7fbb79b93bab2c1f3ad9237da5ff3d69",
@@ -78,7 +78,7 @@
     "singularity/templates/classic-delivery/intake.md": "8e60e4d8551c8a84056ac4e8e30f6d7b95c1639408f65668a55e3ae3ae6b0bb9",
     "singularity/templates/classic-delivery/testing.md": "d84b65e54ff4210a7fab6cc1af3a2ea45bbba61fbee383a1ef985f31848ff177",
     "singularity/templates/common/conformance.md": "fd9ee36f53342f21e71d408bc17141894fbb56315f7dbd14a0db53b2ea5a1b14",
-    "singularity/templates/common/implementation.md": "cf46a21cdcb12035defbb5b6a74c7acd6c6d1e751556964f416f27bb5acb5482",
+    "singularity/templates/common/implementation.md": "f1be0acd9f9a81812cb8703f90046512a1519c0c7cebccd676367c41f037bbde",
     "singularity/templates/common/intake.md": "e16cd8b47f472973823a1a53294c77ac6551285c4df75e916c739611c3bc1d23",
     "singularity/templates/common/verification.md": "ced4ce8d532e509658558f5bf848bd6df1a03d6c278c84ed8512ac667095fd98",
     "singularity/templates/demo-check-repair-close/check.md": "cbde6d2812b782f32589db7f95f33c44586ce6e552ce636541326e912c3a1663",
@@ -500,8 +500,8 @@
       "mode": "100644"
     },
     "singularity/templates/common/implementation.md": {
-      "sha256": "cf46a21cdcb12035defbb5b6a74c7acd6c6d1e751556964f416f27bb5acb5482",
-      "object": "262f55a2c6e848b7f49a40bbb1d63d26798636d5",
+      "sha256": "f1be0acd9f9a81812cb8703f90046512a1519c0c7cebccd676367c41f037bbde",
+      "object": "6e2827e2c47b99efeeb176f83164176e1b9c3c60",
       "mode": "100644"
     },
     "singularity/templates/common/intake.md": {
